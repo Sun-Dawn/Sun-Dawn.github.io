@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>关于c++模板的思考 | Dawn&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. 如何使用模板提高效率？模板应该是一类题型的通解，但是模板可能会根据题目要求的不同而做出改变，所以当遇到模板题的时候可以直接把背过的模板套上，从而达到快速解题的效果，所以我们需要了解每一种模板的应用范围以及模板中每个变量所代表的含义，了解了这些我们就可以根据题目的变化来修改我们模板中与题目有出入的地方。所以这就需要把我们一些常见题型的模板烂熟于心。 2. 模板有没有分类？模板应该是有分类的，根">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于c++模板的思考">
+<meta property="og:url" content="https://sun-dawn.github.io/2021/05/17/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/index.html">
+<meta property="og:site_name" content="Dawn&#39;s Blog">
+<meta property="og:description" content="1. 如何使用模板提高效率？模板应该是一类题型的通解，但是模板可能会根据题目要求的不同而做出改变，所以当遇到模板题的时候可以直接把背过的模板套上，从而达到快速解题的效果，所以我们需要了解每一种模板的应用范围以及模板中每个变量所代表的含义，了解了这些我们就可以根据题目的变化来修改我们模板中与题目有出入的地方。所以这就需要把我们一些常见题型的模板烂熟于心。 2. 模板有没有分类？模板应该是有分类的，根">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-17T12:44:56.000Z">
+<meta property="article:modified_time" content="2021-05-17T12:46:56.842Z">
+<meta property="article:author" content="Sun-Dawn">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Dawn's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Dawn&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Sun-Dawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-关于c++模板的思考" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/17/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/" class="article-date">
+  <time class="dt-published" datetime="2021-05-17T12:44:56.000Z" itemprop="datePublished">2021-05-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>►<a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      关于c++模板的思考
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="1-如何使用模板提高效率？"><a href="#1-如何使用模板提高效率？" class="headerlink" title="1. 如何使用模板提高效率？"></a>1. 如何使用模板提高效率？</h3><p>模板应该是一类题型的通解，但是模板可能会根据题目要求的不同而做出改变，所以当遇到模板题的时候可以直接把背过的模板套上，从而达到快速解题的效果，所以我们需要了解每一种模板的应用范围以及模板中每个变量所代表的含义，了解了这些我们就可以根据题目的变化来修改我们模板中与题目有出入的地方。所以这就需要把我们一些常见题型的模板烂熟于心。</p>
+<h3 id="2-模板有没有分类？"><a href="#2-模板有没有分类？" class="headerlink" title="2. 模板有没有分类？"></a>2. 模板有没有分类？</h3><p>模板应该是有分类的，根据算法的不同，模板也不尽相同。</p>
+<h3 id="3-分成几类？"><a href="#3-分成几类？" class="headerlink" title="3. 分成几类？"></a>3. 分成几类？</h3><p>从宏观上来看，我觉得应该分成两类。第一类是c++ STL自带的标准类库里的一些函数或容器，例如：vector、map、set、__gcd()，sprintf(),reverse()………；第二类是我们根据做题经验总结或者背过的代码模板，例如：快速幂模板、快排模板、kmp模板、哈希模板………</p>
+<h3 id="4-每类模板如何使用？"><a href="#4-每类模板如何使用？" class="headerlink" title="4. 每类模板如何使用？"></a>4. 每类模板如何使用？</h3><p>（1）c++ STL里面自带的模板：首先我们应该熟悉c++ STL库里面都有些什么容器或函数，然后最重要的是了解每个容器或函数的相关用法以及他们的特性，了解这些容器或函数在哪个头文件里面，看到问题时想一下STL库里面的容器或函数能不能帮助我们更快速的解决问题。</p>
+<p>（2）根据做题经验总结或者背过的代码模板：虽然网上也有不少算法模板，但是我更倾向于自己写，我在总结代码模板的时候都是在多次做过一类题后写出来的，例如dfs，由于写过很多次，所以脑子里基本有了一个dfs框架，看到题目的时候脑海里会快速闪现出模板，然后按照经验敲出基本的模板结构，最后再根据题目的一些细节要求对代码模板做出润色，以求能够达到解题的目的。</p>
+<p>&nbsp;</p>
+<h3 id="一些常见算法需要掌握的模板："><a href="#一些常见算法需要掌握的模板：" class="headerlink" title="一些常见算法需要掌握的模板："></a>一些常见算法需要掌握的模板：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">基础算法：</span><br><span class="line"><span class="number">1.</span>快速排序</span><br><span class="line"><span class="number">2.</span>归并排序</span><br><span class="line"><span class="number">3.</span>二分</span><br><span class="line"><span class="number">4.</span>高精度</span><br><span class="line"><span class="number">5.</span>前缀和与拆分</span><br><span class="line"><span class="number">6.</span>双指针算法</span><br><span class="line"><span class="number">7.</span>位运算</span><br><span class="line"><span class="number">8.</span>离散化</span><br><span class="line"><span class="number">9.</span>区间合并</span><br><span class="line"></span><br><span class="line">数据结构：</span><br><span class="line"><span class="number">1.</span>单链表</span><br><span class="line"><span class="number">2.</span>双链表</span><br><span class="line"><span class="number">3.</span>栈</span><br><span class="line"><span class="number">4.</span>队列</span><br><span class="line"><span class="number">5.</span>单调队列</span><br><span class="line"><span class="number">6.</span>KMP</span><br><span class="line"><span class="number">7.</span>Trie</span><br><span class="line"><span class="number">8.</span>并查集</span><br><span class="line"><span class="number">9.</span>堆</span><br><span class="line"><span class="number">10.</span>哈希表</span><br><span class="line"></span><br><span class="line">搜索与图论：</span><br><span class="line"><span class="number">1.</span>DFS</span><br><span class="line"><span class="number">2.B</span>FS</span><br><span class="line"><span class="number">3.</span>树与图的深度优先遍历</span><br><span class="line"><span class="number">4.</span>树与图的广度优先遍历</span><br><span class="line"><span class="number">5.</span>拓扑排序</span><br><span class="line"><span class="number">6.</span>Dijkstra</span><br><span class="line"><span class="number">7.b</span>ellman-ford</span><br><span class="line"><span class="number">8.</span>spfa</span><br><span class="line"><span class="number">9.F</span>loyd</span><br><span class="line"><span class="number">10.</span>Prim</span><br><span class="line"><span class="number">11.</span>Kruskal</span><br><span class="line"><span class="number">12.</span>染色法判定二分图</span><br><span class="line"><span class="number">13.</span>匈牙利算法</span><br><span class="line"></span><br><span class="line">数论：</span><br><span class="line"><span class="number">1.</span>质数</span><br><span class="line"><span class="number">2.</span>约数</span><br><span class="line"><span class="number">3.</span>欧拉函数</span><br><span class="line"><span class="number">4.</span>快速幂</span><br><span class="line"><span class="number">5.</span>扩展欧几里得算法</span><br><span class="line"><span class="number">6.</span>中国剩余定理</span><br><span class="line"><span class="number">7.</span>高斯消元</span><br><span class="line"><span class="number">8.</span>求组合数</span><br><span class="line"><span class="number">9.</span>容斥原理</span><br><span class="line"><span class="number">10.</span>博弈论</span><br><span class="line"></span><br><span class="line">动态规划：</span><br><span class="line"><span class="number">1.</span>背包问题</span><br><span class="line"><span class="number">2.</span>线性DP</span><br><span class="line"><span class="number">3.</span>区间DP</span><br><span class="line"><span class="number">4.</span>计数类DP</span><br><span class="line"><span class="number">5.</span>数位统计DP</span><br><span class="line"><span class="number">6.</span>状态压缩DP</span><br><span class="line"><span class="number">7.</span>树形DP</span><br><span class="line"><span class="number">8.</span>记忆化搜索</span><br><span class="line"></span><br><span class="line">贪心：</span><br><span class="line"><span class="number">1.</span>区间问题</span><br><span class="line"><span class="number">2.</span>Huffman树</span><br><span class="line"><span class="number">3.</span>排序不等式</span><br><span class="line"><span class="number">4.</span>绝对值不等式</span><br><span class="line"><span class="number">5.</span>推公式</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/" data-id="ckosm2vny0005tktn2sc89cqp" data-title="关于c++模板的思考" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/17/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          python中整除与取整的区别
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/17/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E4%BA%8C%E5%8F%89%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数组模拟二叉树</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/17/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/">python中整除与取整的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/">关于c++模板的思考</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E4%BA%8C%E5%8F%89%E6%A0%91/">数组模拟二叉树</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/%E6%A8%A1%E6%9D%BF/">模板</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/%E7%94%B1%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4%E5%8F%8D%E6%8E%A8%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%BB%A5%E5%8F%8A%E7%AE%97%E6%B3%95%E5%86%85%E5%AE%B9/">由数据范围反推算法复杂度以及算法内容</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Sun-Dawn<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

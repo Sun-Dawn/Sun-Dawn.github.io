@@ -71,6 +71,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-从起始点到目标点的最短步数（BFS）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/18/%E4%BB%8E%E8%B5%B7%E5%A7%8B%E7%82%B9%E5%88%B0%E7%9B%AE%E6%A0%87%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E6%AD%A5%E6%95%B0%EF%BC%88BFS%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2021-05-18T13:35:33.000Z" itemprop="datePublished">2021-05-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/BFS/">BFS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/18/%E4%BB%8E%E8%B5%B7%E5%A7%8B%E7%82%B9%E5%88%B0%E7%9B%AE%E6%A0%87%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E6%AD%A5%E6%95%B0%EF%BC%88BFS%EF%BC%89/">从起始点到目标点的最短步数（BFS）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><em>Problem Description</em></p>
+<p>在古老的魔兽传说中，有两个军团，一个叫天灾，一个叫近卫。在他们所在的地域，有n个隘口，编号为1…n，某些隘口之间是有通道连接的。其中近卫军团在1号隘口，天灾军团在n号隘口。某一天，天灾军团的领袖巫妖王决定派兵攻打近卫军团，天灾军团的部队如此庞大，甚至可以填江过河。但是巫妖王不想付出不必要的代价，他想知道在不修建任何通道的前提下，部队是否可以通过隘口及其相关通道到达近卫军团展开攻击；如果可以的话，最少需要经过多少通道。由于n的值比较大（n&lt;=1000），于是巫妖王找到了擅长编程的你 =_=，请你帮他解决这个问题，否则就把你吃掉变成他的魔法。为了拯救自己，赶紧想办法吧。</p>
+<p><em>Input</em></p>
+<p>输入包含多组，每组格式如下。<br>第一行包含两个整数n,m（分别代表n个隘口，这些隘口之间有m个通道）。<br>下面m行每行包含两个整数a，b；表示从a出发有一条通道到达b隘口（注意：通道是单向的）。</p>
+<p><em>Output</em></p>
+<p>如果天灾军团可以不修建任何通道就到达1号隘口，那么输出最少经过多少通道，否则输出NO。</p>
+<p><em>Sample Input</em></p>
+<p>2 1</p>
+<p>1 2</p>
+<p>2 1</p>
+<p>2 1</p>
+<p><em>Sample Output</em></p>
+<p>NO</p>
+<p>1</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> n,m,a[<span class="number">1010</span>][<span class="number">1010</span>],flag;</span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">1010</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">int</span> sum;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> step)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> head=<span class="number">1</span>,tail=<span class="number">1</span>,cur;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> <span class="title">que</span>[1010];</span></span><br><span class="line">    que[tail].num=step;</span><br><span class="line">    que[tail].sum=<span class="number">0</span>;</span><br><span class="line">    tail++;</span><br><span class="line">    <span class="keyword">while</span>(head&lt;tail)</span><br><span class="line">    &#123;</span><br><span class="line">        cur=que[head].num;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(book[i]==<span class="number">0</span>&amp;&amp;a[cur][i]==<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                que[tail].num=i;</span><br><span class="line">                que[tail].sum=que[head].sum+<span class="number">1</span>;</span><br><span class="line">                tail++;</span><br><span class="line">                book[i]=<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(i==<span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,que[tail<span class="number">-1</span>].sum);</span><br><span class="line">                    flag=<span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag==<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        head++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(flag==<span class="number">0</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;n,&amp;m)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(a));</span><br><span class="line">        <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">        flag=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;x,&amp;y);</span><br><span class="line">            a[x][y]=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        book[n]=<span class="number">1</span>;</span><br><span class="line">        <span class="built_in">bfs</span>(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/18/%E4%BB%8E%E8%B5%B7%E5%A7%8B%E7%82%B9%E5%88%B0%E7%9B%AE%E6%A0%87%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E6%AD%A5%E6%95%B0%EF%BC%88BFS%EF%BC%89/" data-id="ckou37ump0007o8tn9pbzdteh" data-title="从起始点到目标点的最短步数（BFS）" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-python中整除与取整的区别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/05/17/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
@@ -107,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="ckosmb7z2000278tnhaww7dft" data-title="python中整除与取整的区别" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="ckou37umh0002o8tn7i4i2ero" data-title="python中整除与取整的区别" class="article-share-link">Share</a>
       
       
       
@@ -155,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/" data-id="ckosmb7z7000578tn84z31gj4" data-title="关于c++模板的思考" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/" data-id="ckou37uml0005o8tnbf3y2ru3" data-title="关于c++模板的思考" class="article-share-link">Share</a>
       
       
       
@@ -199,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E4%BA%8C%E5%8F%89%E6%A0%91/" data-id="ckosmb7zg000b78tn2h9m3t9t" data-title="数组模拟二叉树" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E4%BA%8C%E5%8F%89%E6%A0%91/" data-id="ckou37ums000ao8tn7mnuczk2" data-title="数组模拟二叉树" class="article-share-link">Share</a>
       
       
       
@@ -325,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-id="ckosmb7zn000h78tnct9742nd" data-title="面向对象开发笔记" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-id="ckou37un2000jo8tnffnl5aim" data-title="面向对象开发笔记" class="article-share-link">Share</a>
       
       
       
@@ -383,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%A8%A1%E6%9D%BF/" data-id="ckosmb7zj000d78tn81s01wsp" data-title="模板" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%A8%A1%E6%9D%BF/" data-id="ckou37umw000do8tnblspaae2" data-title="模板" class="article-share-link">Share</a>
       
       
       
@@ -426,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E7%94%B1%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4%E5%8F%8D%E6%8E%A8%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%BB%A5%E5%8F%8A%E7%AE%97%E6%B3%95%E5%86%85%E5%AE%B9/" data-id="ckosmb7zk000e78tnf38eegek" data-title="由数据范围反推算法复杂度以及算法内容" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E7%94%B1%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4%E5%8F%8D%E6%8E%A8%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%BB%A5%E5%8F%8A%E7%AE%97%E6%B3%95%E5%86%85%E5%AE%B9/" data-id="ckou37umx000eo8tn0ftr9u2x" data-title="由数据范围反推算法复杂度以及算法内容" class="article-share-link">Share</a>
       
       
       
@@ -477,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E4%B8%A4%E7%A7%8D%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E5%BB%BA%E5%B0%8F%E6%A0%B9%E5%A0%86%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/" data-id="ckosmb7z6000478tndqh0c0fi" data-title="两种数组模拟建小根堆方法比较" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E4%B8%A4%E7%A7%8D%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E5%BB%BA%E5%B0%8F%E6%A0%B9%E5%A0%86%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/" data-id="ckou37umk0004o8tn4dsmhqv0" data-title="两种数组模拟建小根堆方法比较" class="article-share-link">Share</a>
       
       
       
@@ -524,7 +580,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E5%88%A9%E7%94%A8^%EF%BC%88%E5%BC%82%E6%88%96%EF%BC%89%E5%8E%BB%E9%87%8D/" data-id="ckosmb7zb000778tnhoei9lgj" data-title="利用^（异或）去重" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E5%88%A9%E7%94%A8^%EF%BC%88%E5%BC%82%E6%88%96%EF%BC%89%E5%8E%BB%E9%87%8D/" data-id="ckou37umq0008o8tncpon4kx6" data-title="利用^（异或）去重" class="article-share-link">Share</a>
       
       
       
@@ -609,54 +665,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-java/" data-id="ckosmb7zc000878tngpw62wtk" data-title="数组列表+多维数组列表(java)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-VJ组队赛赛后总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/17/VJ%E7%BB%84%E9%98%9F%E8%B5%9B%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2021-05-17T11:15:14.000Z" itemprop="datePublished">2021-05-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/17/VJ%E7%BB%84%E9%98%9F%E8%B5%9B%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/">VJ组队赛赛后总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><h4 id="首先说一下我的个人感想吧，首先这次比赛是团队形式（3人）的，所以更注重和队友的沟通与配合，我们组的情况是1个人敲代码，1个人先找一些比较简单的题，1个人分析题意。分析题意的人把题目用简短的语言概括出来-发到群里，然后敲代码的人构建思路和具体实行。当然这样的分工不是一成不变的，我们每个人的任务也会根据情况改变，对于一些比较难解释题意的题，分析题意的人也可以直接写代码，从而保证时间和效率。"><a href="#首先说一下我的个人感想吧，首先这次比赛是团队形式（3人）的，所以更注重和队友的沟通与配合，我们组的情况是1个人敲代码，1个人先找一些比较简单的题，1个人分析题意。分析题意的人把题目用简短的语言概括出来-发到群里，然后敲代码的人构建思路和具体实行。当然这样的分工不是一成不变的，我们每个人的任务也会根据情况改变，对于一些比较难解释题意的题，分析题意的人也可以直接写代码，从而保证时间和效率。" class="headerlink" title="首先说一下我的个人感想吧，首先这次比赛是团队形式（3人）的，所以更注重和队友的沟通与配合，我们组的情况是1个人敲代码，1个人先找一些比较简单的题，1个人分析题意。分析题意的人把题目用简短的语言概括出来 发到群里，然后敲代码的人构建思路和具体实行。当然这样的分工不是一成不变的，我们每个人的任务也会根据情况改变，对于一些比较难解释题意的题，分析题意的人也可以直接写代码，从而保证时间和效率。"></a>首先说一下我的个人感想吧，首先这次比赛是团队形式（3人）的，所以更注重和队友的沟通与配合，我们组的情况是1个人敲代码，1个人先找一些比较简单的题，1个人分析题意。分析题意的人把题目用简短的语言概括出来 发到群里，然后敲代码的人构建思路和具体实行。当然这样的分工不是一成不变的，我们每个人的任务也会根据情况改变，对于一些比较难解释题意的题，分析题意的人也可以直接写代码，从而保证时间和效率。</h4></li>
-<li><h4 id="还有就是从这次比赛中我又一次深刻的认识到了英语的重大作用，英文题目是硬伤，很多题目都读不太明白，这导致我们前期做完几个题后，后期基本都读不懂剩下题的题意，严重影响了ac的题数；"><a href="#还有就是从这次比赛中我又一次深刻的认识到了英语的重大作用，英文题目是硬伤，很多题目都读不太明白，这导致我们前期做完几个题后，后期基本都读不懂剩下题的题意，严重影响了ac的题数；" class="headerlink" title="还有就是从这次比赛中我又一次深刻的认识到了英语的重大作用，英文题目是硬伤，很多题目都读不太明白，这导致我们前期做完几个题后，后期基本都读不懂剩下题的题意，严重影响了ac的题数；"></a>还有就是从这次比赛中我又一次深刻的认识到了英语的重大作用，英文题目是硬伤，很多题目都读不太明白，这导致我们前期做完几个题后，后期基本都读不懂剩下题的题意，严重影响了ac的题数；</h4></li>
-<li><h4 id="还有就是认真审题吧，这次题目需要用文件输入输出，刚开始我没有看到这一点，wa了三四次（罚时太可怕了），后来才发现问题。"><a href="#还有就是认真审题吧，这次题目需要用文件输入输出，刚开始我没有看到这一点，wa了三四次（罚时太可怕了），后来才发现问题。" class="headerlink" title="还有就是认真审题吧，这次题目需要用文件输入输出，刚开始我没有看到这一点，wa了三四次（罚时太可怕了），后来才发现问题。"></a>还有就是认真审题吧，这次题目需要用文件输入输出，刚开始我没有看到这一点，wa了三四次（罚时太可怕了），后来才发现问题。</h4></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/VJ%E7%BB%84%E9%98%9F%E8%B5%9B%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/" data-id="ckosmb7yz000178tnhl860shv" data-title="VJ组队赛赛后总结" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-java/" data-id="ckou37un0000ho8tnh6n07bck" data-title="数组列表+多维数组列表(java)" class="article-share-link">Share</a>
       
       
       
@@ -683,7 +692,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
     </div>
   </div>
 
@@ -711,6 +720,10 @@
       <ul>
         
           <li>
+            <a href="/2021/05/18/%E4%BB%8E%E8%B5%B7%E5%A7%8B%E7%82%B9%E5%88%B0%E7%9B%AE%E6%A0%87%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E6%AD%A5%E6%95%B0%EF%BC%88BFS%EF%BC%89/">从起始点到目标点的最短步数（BFS）</a>
+          </li>
+        
+          <li>
             <a href="/2021/05/17/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/">python中整除与取整的区别</a>
           </li>
         
@@ -724,10 +737,6 @@
         
           <li>
             <a href="/2021/05/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">面向对象开发笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/17/%E6%A8%A1%E6%9D%BF/">模板</a>
           </li>
         
       </ul>

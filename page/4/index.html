@@ -71,6 +71,185 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-利用^（异或）去重" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/17/%E5%88%A9%E7%94%A8%5E%EF%BC%88%E5%BC%82%E6%88%96%EF%BC%89%E5%8E%BB%E9%87%8D/" class="article-date">
+  <time class="dt-published" datetime="2021-05-17T11:54:13.000Z" itemprop="datePublished">2021-05-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>►<a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/17/%E5%88%A9%E7%94%A8%5E%EF%BC%88%E5%BC%82%E6%88%96%EF%BC%89%E5%8E%BB%E9%87%8D/">利用^（异或）去重</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">9</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        a[<span class="number">0</span>] ^= a[i];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, a[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="输出结果：4"><a href="#输出结果：4" class="headerlink" title="输出结果：4"></a>输出结果：4</h3><p>&nbsp;</p>
+<p><strong>原理</strong>：异或满足交换律，两个数字相同的话经过异或运算那么就会变成0，例如3^5^6^3^5=3^3^5^5^6=6(交换律）</p>
+<p>利用^我们可以在很低的时间复杂度下去重，应用的地方有很多，例如有的题给出我们一堆筷子，然后问我们哪根筷子是单独的，没有配对的</p>
+<p>另外很多面试题中也有问这个问题</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E5%88%A9%E7%94%A8^%EF%BC%88%E5%BC%82%E6%88%96%EF%BC%89%E5%8E%BB%E9%87%8D/" data-id="ckovhqpb1001fnotn1m8ydk2w" data-title="利用^（异或）去重" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-数组列表-多维数组列表-java" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/17/%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-java/" class="article-date">
+  <time class="dt-published" datetime="2021-05-17T11:34:09.000Z" itemprop="datePublished">2021-05-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>►<a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/17/%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-java/">数组列表+多维数组列表(java)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Array-list-数组列表"><a href="#Array-list-数组列表" class="headerlink" title="Array list(数组列表)"></a>Array list(数组列表)</h1><h3 id="数组列表在英文中的解释是："><a href="#数组列表在英文中的解释是：" class="headerlink" title="数组列表在英文中的解释是："></a>数组列表在英文中的解释是：</h3><blockquote>
+<p><strong>similar to an array but an ArrayList object’s size is automatically</strong><br><strong>adjusted to accommodate the number of items being stored.</strong></p>
+</blockquote>
+<h3 id="翻译过来就是：类似于数组，但ArrayList对象的大小会自动调整以适应存储的项目数"><a href="#翻译过来就是：类似于数组，但ArrayList对象的大小会自动调整以适应存储的项目数" class="headerlink" title="翻译过来就是：类似于数组，但ArrayList对象的大小会自动调整以适应存储的项目数."></a>翻译过来就是：类似于数组，但ArrayList对象的大小会自动调整以适应存储的项目数.</h3><p>&nbsp;</p>
+<h3 id="由此可知这是一个类似数组的东西，但是它是动态存储，有点像c语言中的链表，但与链表不同的是它可以根据数组下标直接找到对应元素，不必像链表一样遍历。"><a href="#由此可知这是一个类似数组的东西，但是它是动态存储，有点像c语言中的链表，但与链表不同的是它可以根据数组下标直接找到对应元素，不必像链表一样遍历。" class="headerlink" title="由此可知这是一个类似数组的东西，但是它是动态存储，有点像c语言中的链表，但与链表不同的是它可以根据数组下标直接找到对应元素，不必像链表一样遍历。"></a>由此可知这是一个类似数组的东西，但是它是动态存储，有点像c语言中的链表，但与链表不同的是它可以根据数组下标直接找到对应元素，不必像链表一样遍历。</h3><h3 id="Array-list-数组列表-包含在java-util-package中"><a href="#Array-list-数组列表-包含在java-util-package中" class="headerlink" title="Array list(数组列表)包含在java.util package中"></a>Array list(数组列表)包含在java.util package中</h3><p>&nbsp;</p>
+<h2 id="接下来说一下数组列表的一些有关方法："><a href="#接下来说一下数组列表的一些有关方法：" class="headerlink" title="接下来说一下数组列表的一些有关方法："></a>接下来说一下数组列表的一些有关方法：</h2><ul>
+<li><h3 id="ArrayList-aList-new-ArrayList-这是数组列表的一个声明"><a href="#ArrayList-aList-new-ArrayList-这是数组列表的一个声明" class="headerlink" title="ArrayList aList = new ArrayList(); 这是数组列表的一个声明"></a>ArrayList aList = new ArrayList(); 这是数组列表的一个声明</h3></li>
+<li><h3 id="add-items-next-item-or-at-a-particular-position-添加数据"><a href="#add-items-next-item-or-at-a-particular-position-添加数据" class="headerlink" title="add items (next item or at a particular position)//添加数据"></a>add items (next item or at a particular position)//添加数据</h3>例如：aList.add(“apple”); //如果插入的前方没有数字，则默认插入到数组列表的尾端。<br>aList.add(1, “pear”);//表示在下标为1的地方插入字符串“pear”，同时后面的元素依次后移。</li>
+<li><h3 id="get-an-item-at-a-particular-position-读取数据"><a href="#get-an-item-at-a-particular-position-读取数据" class="headerlink" title="get an item at a particular position//读取数据"></a>get an item at a particular position//读取数据</h3>例如：aList.get(0); //读取下标为0的元素<br>aList.get(1);//读取下标为1的元素</li>
+<li><h3 id="get-the-size-of-the-list-获取数组长度"><a href="#get-the-size-of-the-list-获取数组长度" class="headerlink" title="get the size of the list//获取数组长度"></a>get the size of the list//获取数组长度</h3>例如：aList.size();//这里的size()还有一个妙用，我会在下面进行说明</li>
+<li><h3 id="write-out-the-entire-list-without-having-to-visit-each-element"><a href="#write-out-the-entire-list-without-having-to-visit-each-element" class="headerlink" title="write out the entire list without having to visit each element"></a>write out the entire list without having to visit each element</h3>例如：System.out.print(aList);//将列表中值全部输出，这里不需要像数组一样用for循环逐一输出，这也是数组列表的一个优点。</li>
+</ul>
+<p>&nbsp;</p>
+<h3 id="下面是一个实例，可以帮助大家理解数组列表动态的过程："><a href="#下面是一个实例，可以帮助大家理解数组列表动态的过程：" class="headerlink" title="下面是一个实例，可以帮助大家理解数组列表动态的过程："></a>下面是一个实例，可以帮助大家理解数组列表动态的过程：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JOptionPane;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task2</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		ArrayList&lt;String&gt; aList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		<span class="comment">//不同类型的数组列表需要加上不同的类型名称，如果是int型我们则需要：ArrayList&lt;Integer&gt;aList = new ArrayList&lt;Integer&gt;();来表示</span></span><br><span class="line">         aList.add(<span class="string">&quot;blue&quot;</span>);</span><br><span class="line">         aList.add(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">         aList.add(<span class="string">&quot;red&quot;</span>);</span><br><span class="line">         aList.add(<span class="number">1</span>, <span class="string">&quot;yellow&quot;</span>);</span><br><span class="line">         aList.add((aList.size() - <span class="number">1</span>), <span class="string">&quot;green&quot;</span>);</span><br><span class="line">		 System.out.println(aList);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="输出结果：-blue-yellow-black-green-red"><a href="#输出结果：-blue-yellow-black-green-red" class="headerlink" title="输出结果：[blue, yellow, black, green, red]"></a>输出结果：[blue, yellow, black, green, red]</h3><h3 id="过程讲解："><a href="#过程讲解：" class="headerlink" title="过程讲解："></a>过程讲解：</h3><ol>
+<li>首先我们在这个列表中插入了一个”blue”，这时候列表只有唯一一个元素：blue</li>
+<li>我们再次插入了一个”black”在列表尾端，此时列表元素为：blue、black.</li>
+<li>再次在尾端插入”red”，此时列表元素为:blue、black、red.</li>
+<li>在下标为1的地方插入一个”yellow”，此时列表元素为：blue、yellow、black、red.//值得注意的是：列表是以下标0为开始，所以yellow会插入到第2位，同时后面的元素依次后移一位。</li>
+<li>此时列表中共有4个元素，所以(aList.size() - 1)=3，也就是在下标为3的地方插入”green”，由于列表下表从0开始，所以下表为3的地方也就是元素”red”的位置，此时我们会将”green“插入到原本”red“的位置，同时将”red“后移一位，所以最有也就形成了[blue, yellow, black, green, red]的输出。</li>
+</ol>
+<p>&nbsp;</p>
+<h3 id="其实数组列表还有很多方法在这里就不一一详细讲解了："><a href="#其实数组列表还有很多方法在这里就不一一详细讲解了：" class="headerlink" title="其实数组列表还有很多方法在这里就不一一详细讲解了："></a>其实数组列表还有很多方法在这里就不一一详细讲解了：</h3><ul>
+<li><h3 id="aList-remove-1-删除数据"><a href="#aList-remove-1-删除数据" class="headerlink" title="aList.remove(1); //删除数据"></a>aList.remove(1); //删除数据</h3></li>
+<li><h3 id="aList-clear-删除所有元素"><a href="#aList-clear-删除所有元素" class="headerlink" title="aList.clear(); //删除所有元素"></a>aList.clear(); //删除所有元素</h3></li>
+<li><h3 id="aList-set-1-“pink”-修改"><a href="#aList-set-1-“pink”-修改" class="headerlink" title="aList.set(1, “pink”);//修改"></a>aList.set(1, “pink”);//修改</h3></li>
+<li><h3 id="System-out-println-aList-contains-“red”-查找"><a href="#System-out-println-aList-contains-“red”-查找" class="headerlink" title="System.out.println(aList.contains(“red”));//查找"></a>System.out.println(aList.contains(“red”));//查找</h3></li>
+<li><h3 id="System-out-println-aList-indexOf-“black”-返回表中第一个匹配元素的下标"><a href="#System-out-println-aList-indexOf-“black”-返回表中第一个匹配元素的下标" class="headerlink" title="System.out.println(aList.indexOf(“black”));//返回表中第一个匹配元素的下标"></a>System.out.println(aList.indexOf(“black”));//返回表中第一个匹配元素的下标</h3></li>
+<li><h3 id="System-out-println-aList-lastIndexOf-“red”-返回最后一个匹配的元素的下标"><a href="#System-out-println-aList-lastIndexOf-“red”-返回最后一个匹配的元素的下标" class="headerlink" title="System.out.println(aList.lastIndexOf(“red”));//返回最后一个匹配的元素的下标"></a>System.out.println(aList.lastIndexOf(“red”));//返回最后一个匹配的元素的下标</h3></li>
+<li><h3 id="contains-“red”-如果此列表中包含指定的元素，则返回true"><a href="#contains-“red”-如果此列表中包含指定的元素，则返回true" class="headerlink" title="contains(“red”);//如果此列表中包含指定的元素，则返回true"></a>contains(“red”);//如果此列表中包含指定的元素，则返回true</h3></li>
+<li><h3 id="indexOf-“black”-返回此列表中首次出现的指定元素的索引，或如果此列表不包含元素，则返回-1"><a href="#indexOf-“black”-返回此列表中首次出现的指定元素的索引，或如果此列表不包含元素，则返回-1" class="headerlink" title="indexOf(“black”);//返回此列表中首次出现的指定元素的索引，或如果此列表不包含元素，则返回-1"></a>indexOf(“black”);//返回此列表中首次出现的指定元素的索引，或如果此列表不包含元素，则返回-1</h3></li>
+<li><h3 id="lastIndexOf-“red”-返回此列表中最后一次出现的指定元素的索引，或如果此列表不包含索引，则返回-1"><a href="#lastIndexOf-“red”-返回此列表中最后一次出现的指定元素的索引，或如果此列表不包含索引，则返回-1" class="headerlink" title="lastIndexOf(“red”);//返回此列表中最后一次出现的指定元素的索引，或如果此列表不包含索引，则返回-1"></a>lastIndexOf(“red”);//返回此列表中最后一次出现的指定元素的索引，或如果此列表不包含索引，则返回-1</h3></li>
+<li><h3 id="isEmpty-如果此列表中没有元素，则返回true-。这里也可以用size-，如果size-0则也代表列表中没有元素"><a href="#isEmpty-如果此列表中没有元素，则返回true-。这里也可以用size-，如果size-0则也代表列表中没有元素" class="headerlink" title="isEmpty();//如果此列表中没有元素，则返回true 。这里也可以用size()，如果size()=0则也代表列表中没有元素"></a>isEmpty();//如果此列表中没有元素，则返回true 。这里也可以用size()，如果size()=0则也代表列表中没有元素</h3></li>
+<li><h3 id="System-out-print-aList-输出"><a href="#System-out-print-aList-输出" class="headerlink" title="System.out.print(aList);//输出"></a>System.out.print(aList);//输出</h3></li>
+<li><h3 id="for-int-i-0-i-lt-aList-size-i-输出"><a href="#for-int-i-0-i-lt-aList-size-i-输出" class="headerlink" title="for (int i = 0; i &lt; aList.size(); i++) //输出"></a>for (int i = 0; i &lt; aList.size(); i++) //输出</h3><h3 id="emsp-emsp-emsp-System-out-println-aList-get-i"><a href="#emsp-emsp-emsp-System-out-println-aList-get-i" class="headerlink" title="&emsp;&emsp;&emsp;System.out.println(aList.get(i));"></a>&emsp;&emsp;&emsp;System.out.println(aList.get(i));</h3>&nbsp;<h3 id="下面附上几个程序希望能够帮助更好的理解这些方法。"><a href="#下面附上几个程序希望能够帮助更好的理解这些方法。" class="headerlink" title="下面附上几个程序希望能够帮助更好的理解这些方法。"></a>下面附上几个程序希望能够帮助更好的理解这些方法。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList3</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    ArrayList&lt;String&gt; aList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    aList.add(<span class="string">&quot;blue&quot;</span>);		</span><br><span class="line">    aList.add(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">    aList.add(<span class="string">&quot;red&quot;</span>);		</span><br><span class="line">    aList.add(<span class="number">1</span>, <span class="string">&quot;yellow&quot;</span>);</span><br><span class="line">    aList.add((aList.size() - <span class="number">1</span>), <span class="string">&quot;green&quot;</span>);    </span><br><span class="line">    aList.remove(<span class="number">1</span>);</span><br><span class="line">    aList.set(<span class="number">1</span>, <span class="string">&quot;pink&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; aList.size(); i++)</span><br><span class="line">      System.out.print(aList.get(i) + <span class="string">&quot;\t&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="输出结果：blue-pink-green-red"><a href="#输出结果：blue-pink-green-red" class="headerlink" title="输出结果：blue pink green red"></a>输出结果：blue pink green red</h3>&nbsp;<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList4</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    ArrayList&lt;String&gt; aList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="keyword">int</span> position;	aList.add(<span class="string">&quot;blue&quot;</span>);	aList.clear();	</span><br><span class="line">    System.out.println(aList.isEmpty());</span><br><span class="line">    aList.add(<span class="string">&quot;black&quot;</span>);	aList.add(<span class="string">&quot;red&quot;</span>);</span><br><span class="line">    System.out.println(aList.contains(<span class="string">&quot;red&quot;</span>));</span><br><span class="line">    position = aList.indexOf(<span class="string">&quot;black&quot;</span>);    </span><br><span class="line">    System.out.println(position);</span><br><span class="line">    position = aList.lastIndexOf(<span class="string">&quot;red&quot;</span>);    </span><br><span class="line">    System.out.println(position); </span><br><span class="line">    System.out.println(aList);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="输出结果："><a href="#输出结果：" class="headerlink" title="输出结果："></a>输出结果：</h3><h3 id="true"><a href="#true" class="headerlink" title="true"></a>true</h3><h3 id="true-1"><a href="#true-1" class="headerlink" title="true"></a>true</h3><h3 id="0"><a href="#0" class="headerlink" title="0"></a>0</h3><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><h3 id="black-red"><a href="#black-red" class="headerlink" title="[black, red]"></a>[black, red]</h3>&nbsp;<h1 id="Multi-Dimensional-Array-List-多维数组列表"><a href="#Multi-Dimensional-Array-List-多维数组列表" class="headerlink" title="Multi Dimensional Array List(多维数组列表)"></a>Multi Dimensional Array List(多维数组列表)</h1></li>
+<li><h3 id="public-static-ArrayList-contactsList-多维数组列表的声明"><a href="#public-static-ArrayList-contactsList-多维数组列表的声明" class="headerlink" title="public static ArrayList contactsList;//多维数组列表的声明"></a>public static ArrayList<ArrayList> contactsList;//多维数组列表的声明</h3></li>
+<li><h3 id="多维数组列表创建-，该函数会创建一个n列的多维数组列表，每一列可以看做一个单独的数组列表"><a href="#多维数组列表创建-，该函数会创建一个n列的多维数组列表，每一列可以看做一个单独的数组列表" class="headerlink" title="多维数组列表创建 ，该函数会创建一个n列的多维数组列表，每一列可以看做一个单独的数组列表"></a>多维数组列表创建 ，该函数会创建一个n列的多维数组列表，每一列可以看做一个单独的数组列表</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createArrayList</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> numberOfSubLists = n;  </span><br><span class="line">    contactsList = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;String&gt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= numberOfSubLists; i++)</span><br><span class="line">	contactsList.add(i, <span class="keyword">new</span> ArrayList&lt;String&gt;());</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="contactsList-get-i-add-0-“yellow”-提取第i列数组列表，并在下标为0的位置添加”yellow”元素"><a href="#contactsList-get-i-add-0-“yellow”-提取第i列数组列表，并在下标为0的位置添加”yellow”元素" class="headerlink" title="contactsList.get(i).add(0, “yellow”);//提取第i列数组列表，并在下标为0的位置添加”yellow”元素"></a>contactsList.get(i).add(0, “yellow”);//提取第i列数组列表，并在下标为0的位置添加”yellow”元素</h3></li>
+<li><h3 id="if-contactsList-get-i-size-0-可以用来判断第i列数组列表是否为空列表"><a href="#if-contactsList-get-i-size-0-可以用来判断第i列数组列表是否为空列表" class="headerlink" title="if (contactsList.get(i).size() == 0)//可以用来判断第i列数组列表是否为空列表"></a>if (contactsList.get(i).size() == 0)//可以用来判断第i列数组列表是否为空列表</h3></li>
+<li><h3 id="result-contactsList-get-n-get-m-提取第n列数组列表中下标为m的元素，并把该元素赋值给result"><a href="#result-contactsList-get-n-get-m-提取第n列数组列表中下标为m的元素，并把该元素赋值给result" class="headerlink" title="result=contactsList.get(n).get(m)//提取第n列数组列表中下标为m的元素，并把该元素赋值给result"></a>result=contactsList.get(n).get(m)//提取第n列数组列表中下标为m的元素，并把该元素赋值给result</h3></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-java/" data-id="ckovhqpb5001knotn8dcd1br5" data-title="数组列表+多维数组列表(java)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-VJ组队赛赛后总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/17/VJ%E7%BB%84%E9%98%9F%E8%B5%9B%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2021-05-17T11:15:14.000Z" itemprop="datePublished">2021-05-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/17/VJ%E7%BB%84%E9%98%9F%E8%B5%9B%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/">VJ组队赛赛后总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><h4 id="首先说一下我的个人感想吧，首先这次比赛是团队形式（3人）的，所以更注重和队友的沟通与配合，我们组的情况是1个人敲代码，1个人先找一些比较简单的题，1个人分析题意。分析题意的人把题目用简短的语言概括出来-发到群里，然后敲代码的人构建思路和具体实行。当然这样的分工不是一成不变的，我们每个人的任务也会根据情况改变，对于一些比较难解释题意的题，分析题意的人也可以直接写代码，从而保证时间和效率。"><a href="#首先说一下我的个人感想吧，首先这次比赛是团队形式（3人）的，所以更注重和队友的沟通与配合，我们组的情况是1个人敲代码，1个人先找一些比较简单的题，1个人分析题意。分析题意的人把题目用简短的语言概括出来-发到群里，然后敲代码的人构建思路和具体实行。当然这样的分工不是一成不变的，我们每个人的任务也会根据情况改变，对于一些比较难解释题意的题，分析题意的人也可以直接写代码，从而保证时间和效率。" class="headerlink" title="首先说一下我的个人感想吧，首先这次比赛是团队形式（3人）的，所以更注重和队友的沟通与配合，我们组的情况是1个人敲代码，1个人先找一些比较简单的题，1个人分析题意。分析题意的人把题目用简短的语言概括出来 发到群里，然后敲代码的人构建思路和具体实行。当然这样的分工不是一成不变的，我们每个人的任务也会根据情况改变，对于一些比较难解释题意的题，分析题意的人也可以直接写代码，从而保证时间和效率。"></a>首先说一下我的个人感想吧，首先这次比赛是团队形式（3人）的，所以更注重和队友的沟通与配合，我们组的情况是1个人敲代码，1个人先找一些比较简单的题，1个人分析题意。分析题意的人把题目用简短的语言概括出来 发到群里，然后敲代码的人构建思路和具体实行。当然这样的分工不是一成不变的，我们每个人的任务也会根据情况改变，对于一些比较难解释题意的题，分析题意的人也可以直接写代码，从而保证时间和效率。</h4></li>
+<li><h4 id="还有就是从这次比赛中我又一次深刻的认识到了英语的重大作用，英文题目是硬伤，很多题目都读不太明白，这导致我们前期做完几个题后，后期基本都读不懂剩下题的题意，严重影响了ac的题数；"><a href="#还有就是从这次比赛中我又一次深刻的认识到了英语的重大作用，英文题目是硬伤，很多题目都读不太明白，这导致我们前期做完几个题后，后期基本都读不懂剩下题的题意，严重影响了ac的题数；" class="headerlink" title="还有就是从这次比赛中我又一次深刻的认识到了英语的重大作用，英文题目是硬伤，很多题目都读不太明白，这导致我们前期做完几个题后，后期基本都读不懂剩下题的题意，严重影响了ac的题数；"></a>还有就是从这次比赛中我又一次深刻的认识到了英语的重大作用，英文题目是硬伤，很多题目都读不太明白，这导致我们前期做完几个题后，后期基本都读不懂剩下题的题意，严重影响了ac的题数；</h4></li>
+<li><h4 id="还有就是认真审题吧，这次题目需要用文件输入输出，刚开始我没有看到这一点，wa了三四次（罚时太可怕了），后来才发现问题。"><a href="#还有就是认真审题吧，这次题目需要用文件输入输出，刚开始我没有看到这一点，wa了三四次（罚时太可怕了），后来才发现问题。" class="headerlink" title="还有就是认真审题吧，这次题目需要用文件输入输出，刚开始我没有看到这一点，wa了三四次（罚时太可怕了），后来才发现问题。"></a>还有就是认真审题吧，这次题目需要用文件输入输出，刚开始我没有看到这一点，wa了三四次（罚时太可怕了），后来才发现问题。</h4></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/17/VJ%E7%BB%84%E9%98%9F%E8%B5%9B%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/" data-id="ckovhqpar0010notn72xgavuz" data-title="VJ组队赛赛后总结" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2020年sdutacm暑假集训总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/05/17/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" class="article-date">
@@ -101,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" data-id="ckovgw4h10000cstnhuc49hxx" data-title="2020年sdutacm暑假集训总结" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" data-id="ckovhqp950000notncax532vv" data-title="2020年sdutacm暑假集训总结" class="article-share-link">Share</a>
       
       
       
@@ -168,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95/" data-id="ckovgw4kk0048cstng061bsku" data-title="银行家算法" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95/" data-id="ckovhqpck004mnotnc4n77zca" data-title="银行家算法" class="article-share-link">Share</a>
       
       
       
@@ -233,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" data-id="ckovgw4iy001mcstnd9jd8hmi" data-title="磁盘调度算法" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" data-id="ckovhqpba001tnotn7sgjfxoo" data-title="磁盘调度算法" class="article-share-link">Share</a>
       
       
       
@@ -277,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F/" data-id="ckovgw4iq001acstngc8ghren" data-title="数独游戏" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F/" data-id="ckovhqpb3001hnotndgsje10b" data-title="数独游戏" class="article-share-link">Share</a>
       
       
       
@@ -304,7 +483,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/BFS/">BFS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C/">差分前缀和</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E8%AE%BA/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/BFS/">BFS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C/">差分前缀和</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88/">栈</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E8%AE%BA/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
     </div>
   </div>
 
@@ -332,23 +511,23 @@
       <ul>
         
           <li>
+            <a href="/2021/05/19/L2-3%20%E6%B7%B1%E5%85%A5%E8%99%8E%E7%A9%B4%20(25%E5%88%86)(DFS%EF%BC%89/">L2-3 深入虎穴 (25分)(DFS）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/19/L2-032%20%E5%BD%A9%E8%99%B9%E7%93%B6%20(25%E5%88%86)/">L2-032 彩虹瓶 (25分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/19/L1-064%20%E4%BC%B0%E5%80%BC%E4%B8%80%E4%BA%BF%E7%9A%84AI%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%20(20%E5%88%86)/">L1-064 估值一亿的AI核心代码 (20分)</a>
+          </li>
+        
+          <li>
             <a href="/2021/05/19/J%20-%20%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%BB%E9%87%8D%E6%90%AD%E9%85%8D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%89/">J - 程序设计：轻重搭配（贪心）</a>
           </li>
         
           <li>
             <a href="/2021/05/19/B%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E7%82%AE%E5%8F%B0%E5%AE%9E%E9%AA%8C/">B - 结果填空：炮台实验</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/19/A%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E9%98%B6%E4%B9%98%E4%BD%8D%E6%95%B0%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/">A - 结果填空：阶乘位数（数论）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/19/D%20-%20Test%20Cases%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/">D - Test Cases（暴力）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/19/7-6%20%E6%8E%92%E5%BA%A7%E4%BD%8D%20(25%E5%88%86)/">7-6 排座位 (25分)</a>
           </li>
         
       </ul>

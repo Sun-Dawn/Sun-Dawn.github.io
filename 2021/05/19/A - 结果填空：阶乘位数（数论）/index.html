@@ -6,15 +6,15 @@
   
   <title>A - 结果填空：阶乘位数（数论） | Dawn&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="蒜头君对阶乘产生了兴趣，他列出了前10个正整数的阶乘以及对应位数的表： | n | n! | 位数 || —- | —- || 1 | 1 | 1 || 2 | 2 | 1 || 3 | 6 | 1 || 4 | 24 | 2 || 5 | 120 | 3 || 6 | 720 | 3 || 7 | 5040 | 4 || 8 | 40320 | 5 || 9 | 362880 | 6 || 10">
+  <meta name="description" content="蒜头君对阶乘产生了兴趣，他列出了前10个正整数的阶乘以及对应位数的表：    n n! 位数    1 1 1   2 2 1   3 6 1   4 24 2   5 120 3   6 720 3   7 5040 4   8 40320 5   9 362880 6   10 3628800 7   对于蒜头君来说，再往后就很难计算了。他试图寻找阶乘位数的规律，但是失败了。现在请你帮他计算出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="A - 结果填空：阶乘位数（数论）">
 <meta property="og:url" content="https://sun-dawn.github.io/2021/05/19/A%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E9%98%B6%E4%B9%98%E4%BD%8D%E6%95%B0%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/index.html">
 <meta property="og:site_name" content="Dawn&#39;s Blog">
-<meta property="og:description" content="蒜头君对阶乘产生了兴趣，他列出了前10个正整数的阶乘以及对应位数的表： | n | n! | 位数 || —- | —- || 1 | 1 | 1 || 2 | 2 | 1 || 3 | 6 | 1 || 4 | 24 | 2 || 5 | 120 | 3 || 6 | 720 | 3 || 7 | 5040 | 4 || 8 | 40320 | 5 || 9 | 362880 | 6 || 10">
+<meta property="og:description" content="蒜头君对阶乘产生了兴趣，他列出了前10个正整数的阶乘以及对应位数的表：    n n! 位数    1 1 1   2 2 1   3 6 1   4 24 2   5 120 3   6 720 3   7 5040 4   8 40320 5   9 362880 6   10 3628800 7   对于蒜头君来说，再往后就很难计算了。他试图寻找阶乘位数的规律，但是失败了。现在请你帮他计算出">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-19T12:17:23.000Z">
-<meta property="article:modified_time" content="2021-05-19T12:33:05.157Z">
+<meta property="article:modified_time" content="2021-05-19T12:40:46.340Z">
 <meta property="article:author" content="Sun-Dawn">
 <meta name="twitter:card" content="summary">
   
@@ -100,7 +100,65 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>蒜头君对阶乘产生了兴趣，他列出了前10个正整数的阶乘以及对应位数的表：</p>
-<p>| n | n! | 位数 |<br>| —- | —- |<br>| 1 | 1 | 1 |<br>| 2 | 2 | 1 |<br>| 3 | 6 | 1 |<br>| 4 | 24 | 2 |<br>| 5 | 120 | 3 |<br>| 6 | 720 | 3 |<br>| 7 | 5040 | 4 |<br>| 8 | 40320 | 5 |<br>| 9 | 362880 | 6 |<br>| 10 | 3628800 | 7 |</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>n!</th>
+<th>位数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>24</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>120</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>720</td>
+<td>3</td>
+</tr>
+<tr>
+<td>7</td>
+<td>5040</td>
+<td>4</td>
+</tr>
+<tr>
+<td>8</td>
+<td>40320</td>
+<td>5</td>
+</tr>
+<tr>
+<td>9</td>
+<td>362880</td>
+<td>6</td>
+</tr>
+<tr>
+<td>10</td>
+<td>3628800</td>
+<td>7</td>
+</tr>
+</tbody></table>
 <p>对于蒜头君来说，再往后就很难计算了。他试图寻找阶乘位数的规律，但是失败了。现在请你帮他计算出第一个正整数的阶乘位数大于等于 10000<br>的数是多少，即求最小的正整数 n 满足 n! 的位数大于等于 10000。</p>
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>一道填空题，直接输出答案就好了，一道典型的大数问题。<br>解决方法：设答案为n，需要求n！&gt;=10^10000，两边同时取log10的对数，然后就变成了log10(1 * 2 * 3*…n)&gt;=10000，然后利用数学法则<br>log10(ab)=log10(a)+log10(b)，所以上面那个式子的左边就可以变成log10(1)+log10(2)+…log10(n)，这样跑一个循环就行了</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">double</span> sum;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=i; j++)</span><br><span class="line">            sum+=<span class="built_in">log10</span>(j);</span><br><span class="line">        <span class="keyword">if</span>(sum&gt;=<span class="number">10000</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);<span class="comment">//答案是3249</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

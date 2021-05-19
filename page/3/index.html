@@ -71,6 +71,127 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-VJ HDU 1083 Courses（二分图最大匹配）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/18/VJ%20HDU%201083%20Courses%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2021-05-18T13:58:22.000Z" itemprop="datePublished">2021-05-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a>►<a class="article-category-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/18/VJ%20HDU%201083%20Courses%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/">VJ HDU 1083 Courses（二分图最大匹配）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Consider a group of N students and P courses. Each student visits zero, one or more than one courses. Your task is to determine whether it is possible to form a committee of exactly P students that satisfies simultaneously the conditions:</p>
+<ul>
+<li><p>every student in the committee represents a different course (a student can represent a course if he/she visits that course)</p>
+</li>
+<li><p>each course has a representative in the committee</p>
+</li>
+</ul>
+<p>Your program should read sets of data from a text file. The first line of the input file contains the number of the data sets. Each data set is presented in the following format:</p>
+<p>P N</p>
+<p>Count1 Student1 1 Student1 2 … Student1 Count1</p>
+<p>Count2 Student2 1 Student2 2 … Student2 Count2</p>
+<p>…</p>
+<p>CountP StudentP 1 StudentP 2 … StudentP CountP</p>
+<p>The first line in each data set contains two positive integers separated by one blank: P (1 &lt;= P &lt;= 100) - the number of courses and N (1 &lt;= N &lt;= 300) - the number of students. The next P lines describe in sequence of the courses . from course 1 to course P, each line describing a course. The description of course i is a line that starts with an integer Count i (0 &lt;= Count i &lt;= N) representing the number of students visiting course i. Next, after a blank, you’ll find the Count i students, visiting the course, each two consecutive separated by one blank. Students are numbered with the positive integers from 1 to N.</p>
+<p>There are no blank lines between consecutive sets of data. Input data are correct.</p>
+<p>The result of the program is on the standard output. For each input data set the program prints on a single line “YES” if it is possible to form a committee and “NO” otherwise. There should not be any leading blanks at the start of the line.</p>
+<p>An example of program input and output:</p>
+<p><em>Input</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><em>Output</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
+
+<h3 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h3><p>一共有P门课程，N名学生，每名学生可以选任意多门课程，但不能选两门一样的课程。<br>是否可以满足：<br>1.每个学生选的都是不同的课(即不能有两个学生选同一门课)<br>2.每门课都有一个代表(即P门课都被成功选过)<br>如果可以满足就输出YES，否则就输出NO。</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>一道二分图最大匹配的模板题，题目的关键在于最大匹配数和课程数P是否相等，即是否每门课都被成功选过。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, p, match[<span class="number">500</span>];</span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">500</span>], e[<span class="number">500</span>][<span class="number">500</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;<span class="comment">//匈牙利算法</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= p; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e[u][i] == <span class="number">1</span> &amp;&amp; book[i] == <span class="number">0</span>) &#123;</span><br><span class="line">            book[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (match[i] == <span class="number">0</span> || <span class="built_in">dfs</span>(match[i])) &#123;</span><br><span class="line">                match[i] = u;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, i, j, x, y, sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        sum = <span class="number">0</span>;<span class="comment">//注意每组数据的初始化</span></span><br><span class="line">        <span class="built_in">memset</span>(e, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(e));</span><br><span class="line">        <span class="built_in">memset</span>(match, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(match));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;p, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= p; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">            <span class="keyword">while</span> (x--) &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;y);</span><br><span class="line">                e[y][i] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">memset</span>(book, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">dfs</span>(i)) sum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sum == p)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/18/VJ%20HDU%201083%20Courses%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/" data-id="ckovi9ih40013c0tn176kdxvn" data-title="VJ HDU 1083 Courses（二分图最大匹配）" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-HDU-2444 The Accomodation of Students（二分图最大匹配）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/18/HDU-2444%20The%20Accomodation%20of%20Students%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2021-05-18T13:55:56.000Z" itemprop="datePublished">2021-05-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a>►<a class="article-category-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/18/HDU-2444%20The%20Accomodation%20of%20Students%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/">HDU-2444 The Accomodation of Students（二分图最大匹配）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>There are a group of students. Some of them may know each other, while others don’t. For example, A and B know each other, B and C know each other. But this may not imply that A and C know each other.</p>
+<p>Now you are given all pairs of students who know each other. Your task is to divide the students into two groups so that any two students in the same group don’t know each other.If this goal can be achieved, then arrange them into double rooms. Remember, only paris appearing in the previous given set can live in the same room, which means only known students can live in the same room.</p>
+<p>Calculate the maximum number of pairs that can be arranged into these double rooms.</p>
+<p><em>Input</em></p>
+<p>For each data set:<br>The first line gives two integers, n and m(1&lt;n&lt;=200), indicating there are n students and m pairs of students who know each other. The next m lines give such pairs.</p>
+<p>Proceed to the end of file.</p>
+<p><em>Output</em></p>
+<p>If these students cannot be divided into two groups, print “No”. Otherwise, print the maximum number of pairs that can be arranged in those rooms.</p>
+<p><em>Sample Input</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span> <span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">6</span> <span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span></span><br><span class="line"><span class="number">2</span> <span class="number">5</span></span><br><span class="line"><span class="number">3</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Sample Output</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">No</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, flag;</span><br><span class="line"><span class="keyword">bool</span> g[<span class="number">210</span>][<span class="number">210</span>];</span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">210</span>];</span><br><span class="line"><span class="keyword">int</span> c[<span class="number">210</span>];  <span class="comment">//颜色，0表示还没有访问，1表示黑色，-1表示白色</span></span><br><span class="line"><span class="keyword">int</span> match[<span class="number">210</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> color)</span>  <span class="comment">// 染色法判断G是否为二分图</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (g[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (c[j] == <span class="number">0</span>) &#123;</span><br><span class="line">                c[j] = -color;</span><br><span class="line">                <span class="built_in">dfs</span>(j, -color);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c[j] == color) &#123;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (flag == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    flag = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br><span class="line">    c[<span class="number">1</span>] = <span class="number">1</span>;   <span class="comment">//设一号是黑色，将其相邻的点染成白色</span></span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">1</span>);  <span class="comment">//从一号开始染色</span></span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (g[u][i] == <span class="number">1</span> &amp;&amp; book[i] == <span class="number">0</span>) &#123;</span><br><span class="line">            book[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (match[i] == <span class="number">0</span> || <span class="built_in">find</span>(match[i])) &#123;</span><br><span class="line">                match[i] = u;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, sum, p, q;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m) != EOF) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(g, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(g));</span><br><span class="line">        <span class="built_in">memset</span>(match, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(match));</span><br><span class="line">        <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;p, &amp;q);</span><br><span class="line">            g[p][q] = g[q][p] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">memset</span>(book, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">find</span>(i)) sum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, sum / <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/18/HDU-2444%20The%20Accomodation%20of%20Students%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/" data-id="ckovi9igi000oc0tn5qnw24u6" data-title="HDU-2444 The Accomodation of Students（二分图最大匹配）" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-HDU A + B Problem II（大数模拟）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/05/18/HDU%20A%20+%20B%20Problem%20II%EF%BC%88%E5%A4%A7%E6%95%B0%E6%A8%A1%E6%8B%9F%EF%BC%89/" class="article-date">
@@ -111,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/18/HDU%20A%20+%20B%20Problem%20II%EF%BC%88%E5%A4%A7%E6%95%B0%E6%A8%A1%E6%8B%9F%EF%BC%89/" data-id="ckovhqpa2000jnotn8d1v9t4g" data-title="HDU A + B Problem II（大数模拟）" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/18/HDU%20A%20+%20B%20Problem%20II%EF%BC%88%E5%A4%A7%E6%95%B0%E6%A8%A1%E6%8B%9F%EF%BC%89/" data-id="ckovi9igg000mc0tndk7n05wk" data-title="HDU A + B Problem II（大数模拟）" class="article-share-link">Share</a>
       
       
       
@@ -165,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/18/sdutoj2779%E6%89%BE%E6%9C%8B%E5%8F%8B%EF%BC%88DFS%EF%BC%89/" data-id="ckovhqpau0015notnc620g0jn" data-title="sdutoj2779找朋友（DFS）" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/18/sdutoj2779%E6%89%BE%E6%9C%8B%E5%8F%8B%EF%BC%88DFS%EF%BC%89/" data-id="ckovi9ih90018c0tneev5b70o" data-title="sdutoj2779找朋友（DFS）" class="article-share-link">Share</a>
       
       
       
@@ -217,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/18/%E4%BB%8E%E8%B5%B7%E5%A7%8B%E7%82%B9%E5%88%B0%E7%9B%AE%E6%A0%87%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E6%AD%A5%E6%95%B0%EF%BC%88BFS%EF%BC%89/" data-id="ckovhqpax001anotneri3dwwy" data-title="从起始点到目标点的最短步数（BFS）" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/18/%E4%BB%8E%E8%B5%B7%E5%A7%8B%E7%82%B9%E5%88%B0%E7%9B%AE%E6%A0%87%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E6%AD%A5%E6%95%B0%EF%BC%88BFS%EF%BC%89/" data-id="ckovi9ihe001dc0tngzaphe3a" data-title="从起始点到目标点的最短步数（BFS）" class="article-share-link">Share</a>
       
       
       
@@ -265,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="ckovhqpas0012notn8ncx647m" data-title="python中整除与取整的区别" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="ckovi9ih70016c0tn5ibhd89o" data-title="python中整除与取整的区别" class="article-share-link">Share</a>
       
       
       
@@ -313,7 +434,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/" data-id="ckovhqpaz001cnotnhtuz4wr9" data-title="关于c++模板的思考" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/" data-id="ckovi9ihf001fc0tn50ifcbnc" data-title="关于c++模板的思考" class="article-share-link">Share</a>
       
       
       
@@ -357,7 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E4%BA%8C%E5%8F%89%E6%A0%91/" data-id="ckovhqpb6001mnotn53fm4hhv" data-title="数组模拟二叉树" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E4%BA%8C%E5%8F%89%E6%A0%91/" data-id="ckovi9ihm001pc0tn73csbjyd" data-title="数组模拟二叉树" class="article-share-link">Share</a>
       
       
       
@@ -483,7 +604,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-id="ckovhqpbc001wnotn1ixrfg27" data-title="面向对象开发笔记" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-id="ckovi9ihu001zc0tnf93fcwip" data-title="面向对象开发笔记" class="article-share-link">Share</a>
       
       
       
@@ -541,101 +662,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%A8%A1%E6%9D%BF/" data-id="ckovhqpb7001onotnho6vb5hw" data-title="模板" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-由数据范围反推算法复杂度以及算法内容" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/17/%E7%94%B1%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4%E5%8F%8D%E6%8E%A8%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%BB%A5%E5%8F%8A%E7%AE%97%E6%B3%95%E5%86%85%E5%AE%B9/" class="article-date">
-  <time class="dt-published" datetime="2021-05-17T12:02:14.000Z" itemprop="datePublished">2021-05-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>►<a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/17/%E7%94%B1%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4%E5%8F%8D%E6%8E%A8%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%BB%A5%E5%8F%8A%E7%AE%97%E6%B3%95%E5%86%85%E5%AE%B9/">由数据范围反推算法复杂度以及算法内容</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="转载于👉转载地址"><a href="#转载于👉转载地址" class="headerlink" title="转载于👉转载地址"></a>转载于👉<a target="_blank" rel="noopener" href="https://www.acwing.com/file_system/file/content/whole/index/content/3074/">转载地址</a></h3><p><img src="https://img-blog.csdnimg.cn/20210419201307118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E7%94%B1%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4%E5%8F%8D%E6%8E%A8%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%BB%A5%E5%8F%8A%E7%AE%97%E6%B3%95%E5%86%85%E5%AE%B9/" data-id="ckovhqpb9001rnotn30gx0lsc" data-title="由数据范围反推算法复杂度以及算法内容" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-两种数组模拟建小根堆方法比较" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/17/%E4%B8%A4%E7%A7%8D%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E5%BB%BA%E5%B0%8F%E6%A0%B9%E5%A0%86%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/" class="article-date">
-  <time class="dt-published" datetime="2021-05-17T11:56:45.000Z" itemprop="datePublished">2021-05-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>►<a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/17/%E4%B8%A4%E7%A7%8D%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E5%BB%BA%E5%B0%8F%E6%A0%B9%E5%A0%86%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/">两种数组模拟建小根堆方法比较</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="第一种（父节点比左右儿子小，但是左右儿子之间大小无法保证）："><a href="#第一种（父节点比左右儿子小，但是左右儿子之间大小无法保证）：" class="headerlink" title="第一种（父节点比左右儿子小，但是左右儿子之间大小无法保证）："></a>第一种（父节点比左右儿子小，但是左右儿子之间大小无法保证）：</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> h[<span class="number">10010</span>],cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    h[++cnt]=x;</span><br><span class="line">    <span class="keyword">int</span> t=cnt;</span><br><span class="line">    <span class="keyword">while</span>(t&gt;<span class="number">1</span>&amp;&amp;h[t/<span class="number">2</span>]&gt;h[t])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">swap</span>(h[t],h[t/<span class="number">2</span>]);</span><br><span class="line">        t/=<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    h[t]=x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        cin&gt;&gt;x;</span><br><span class="line">        <span class="built_in">create</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,h[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20210326195530380.png"></p>
-<p><img src="https://img-blog.csdnimg.cn/20210326195542221.png"></p>
-<p>&nbsp;</p>
-<h1 id="第二种（父节点比左右儿子小，同时左右儿子的大小可以保证，左儿子-lt-右儿子）："><a href="#第二种（父节点比左右儿子小，同时左右儿子的大小可以保证，左儿子-lt-右儿子）：" class="headerlink" title="第二种（父节点比左右儿子小，同时左右儿子的大小可以保证，左儿子&lt;=右儿子）："></a>第二种（父节点比左右儿子小，同时左右儿子的大小可以保证，左儿子&lt;=右儿子）：</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> h[<span class="number">10010</span>],cnt,n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">down</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=u;</span><br><span class="line">    <span class="keyword">if</span>(h[u*<span class="number">2</span>]&lt;h[t]&amp;&amp;u*<span class="number">2</span>&lt;=n)</span><br><span class="line">        t=u*<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(h[u*<span class="number">2</span>+<span class="number">1</span>]&lt;h[t]&amp;&amp;u*<span class="number">2</span>+<span class="number">1</span>&lt;=n)</span><br><span class="line">        t=u*<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(t!=u)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">swap</span>(h[u],h[t]);</span><br><span class="line">        <span class="built_in">down</span>(t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        cin&gt;&gt;h[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n/<span class="number">2</span>; i; i--)</span><br><span class="line">        <span class="built_in">down</span>(i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,h[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20210326195827725.png"></p>
-<p><img src="https://img-blog.csdnimg.cn/20210326195832499.png"></p>
-<p>&nbsp;</p>
-<p><strong>总结：两种方法都能建出来小顶堆，但是并不完全相同，第一种无法保证左右儿子之间的关系，但是第二种可以保证。这两种方法建堆，虽然都是小顶堆，但是也并不完全相同，需要题目做出选择。</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/17/%E4%B8%A4%E7%A7%8D%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E5%BB%BA%E5%B0%8F%E6%A0%B9%E5%A0%86%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/" data-id="ckovhqpav0017notneewsbsuj" data-title="两种数组模拟建小根堆方法比较" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/17/%E6%A8%A1%E6%9D%BF/" data-id="ckovi9ihn001rc0tn5zozhmpj" data-title="模板" class="article-share-link">Share</a>
       
       
       
@@ -662,7 +689,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/BFS/">BFS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C/">差分前缀和</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88/">栈</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E8%AE%BA/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/DFS/">DFS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/BFS/">BFS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C/">差分前缀和</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88/">栈</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E8%AE%BA/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
     </div>
   </div>
 
@@ -690,6 +717,14 @@
       <ul>
         
           <li>
+            <a href="/2021/05/19/1039%20Course%20List%20for%20Student%20(25%20%E5%88%86)/">1039 Course List for Student (25 分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/19/2020%E5%B0%8F%E7%B1%B3%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9BI%20Walking%20Machine/">2020小米网络选拔赛I Walking Machine</a>
+          </li>
+        
+          <li>
             <a href="/2021/05/19/L2-3%20%E6%B7%B1%E5%85%A5%E8%99%8E%E7%A9%B4%20(25%E5%88%86)(DFS%EF%BC%89/">L2-3 深入虎穴 (25分)(DFS）</a>
           </li>
         
@@ -699,14 +734,6 @@
         
           <li>
             <a href="/2021/05/19/L1-064%20%E4%BC%B0%E5%80%BC%E4%B8%80%E4%BA%BF%E7%9A%84AI%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%20(20%E5%88%86)/">L1-064 估值一亿的AI核心代码 (20分)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/19/J%20-%20%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%BB%E9%87%8D%E6%90%AD%E9%85%8D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%89/">J - 程序设计：轻重搭配（贪心）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/19/B%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E7%82%AE%E5%8F%B0%E5%AE%9E%E9%AA%8C/">B - 结果填空：炮台实验</a>
           </li>
         
       </ul>

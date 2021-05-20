@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>J - Torn To Pieces | Dawn&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="题目链接 题目大意：先给出一个数n，代表下面有n行，每行的第一个字符串能与后面的几个字符串之间形成通路，例如E D F G，代表E能够和D，F，G形成通路（无向）。然后第n+1行给出两个字符串，让求能否从第一个字符串经过若干通路走到第二个字符串。 &amp;nbsp; 解题思路：读完题第一感觉就是dfs搜索模板题，根据题目给出的信息建图，然后跑一个dfs看看能不能从起点跑到终点，能的话就输出路径，不能的话">
+<meta property="og:type" content="article">
+<meta property="og:title" content="J - Torn To Pieces">
+<meta property="og:url" content="https://sun-dawn.github.io/2021/05/20/J%20-%20Torn%20To%20Pieces/index.html">
+<meta property="og:site_name" content="Dawn&#39;s Blog">
+<meta property="og:description" content="题目链接 题目大意：先给出一个数n，代表下面有n行，每行的第一个字符串能与后面的几个字符串之间形成通路，例如E D F G，代表E能够和D，F，G形成通路（无向）。然后第n+1行给出两个字符串，让求能否从第一个字符串经过若干通路走到第二个字符串。 &amp;nbsp; 解题思路：读完题第一感觉就是dfs搜索模板题，根据题目给出的信息建图，然后跑一个dfs看看能不能从起点跑到终点，能的话就输出路径，不能的话">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210303205216699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210303205259901.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-05-20T12:45:00.000Z">
+<meta property="article:modified_time" content="2021-05-20T12:46:29.906Z">
+<meta property="article:author" content="Sun-Dawn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210303205216699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70">
+  
+    <link rel="alternate" href="/atom.xml" title="Dawn's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Dawn&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Sun-Dawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-J - Torn To Pieces" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/20/J%20-%20Torn%20To%20Pieces/" class="article-date">
+  <time class="dt-published" datetime="2021-05-20T12:45:00.000Z" itemprop="datePublished">2021-05-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      J - Torn To Pieces
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/425090#problem/J">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20210303205216699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"><br><img src="https://img-blog.csdnimg.cn/20210303205259901.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>先给出一个数n，代表下面有n行，每行的第一个字符串能与后面的几个字符串之间形成通路，例如E D F G，代表E能够和D，F，G形成通路（无向）。然后第n+1行给出两个字符串，让求能否从第一个字符串经过若干通路走到第二个字符串。</p>
+<p>&nbsp;</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>读完题第一感觉就是dfs搜索模板题，根据题目给出的信息建图，然后跑一个dfs看看能不能从起点跑到终点，能的话就输出路径，不能的话就输出“no route found”。但是这个题的难点在于所给元素是字符串而不是数字，这大大提高了题目难度。</p>
+<p>解决办法：用map来给每一个字符串建立一个一一对应的编号，然后按照传统方法对编号进行建图和搜索。<br>其次还有一个难点是在一行中不知道给出几个字符串，所以我们需要读入整行字符串，然后按照空格进行划分，把划分后的字符串存起来。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">map&lt;string,<span class="keyword">int</span>&gt;mp;<span class="comment">//存储字符串所对应的编号</span></span><br><span class="line">map&lt;<span class="keyword">int</span>,string&gt;mm;<span class="comment">//存储编号对应的字符串</span></span><br><span class="line">vector&lt;string&gt;v;<span class="comment">//存储划分后的字符串</span></span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">5000</span>];<span class="comment">//标记走过的节点编号</span></span><br><span class="line"><span class="keyword">int</span> first,last,flag,k=<span class="number">1</span>,e[<span class="number">5000</span>][<span class="number">5000</span>],que[<span class="number">5000</span>],tmp;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> sum)</span><span class="comment">//dfs模板</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>(flag==<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    que[sum]=u;</span><br><span class="line">    <span class="keyword">if</span>(u==last)</span><br><span class="line">    &#123;</span><br><span class="line">        flag=<span class="number">1</span>;</span><br><span class="line">        tmp=sum;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;k; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(book[i]==<span class="number">0</span>&amp;&amp;e[u][i]==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            book[i]=<span class="number">1</span>;</span><br><span class="line">            <span class="built_in">dfs</span>(i,sum+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(flag==<span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t,i;</span><br><span class="line">    string a,c,d,str;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        string b=<span class="string">&quot;&quot;</span>;</span><br><span class="line">        v.<span class="built_in">clear</span>();<span class="comment">//清空容器</span></span><br><span class="line">        cin&gt;&gt;a;<span class="comment">//读入第一个字符串</span></span><br><span class="line">        v.<span class="built_in">push_back</span>(a);<span class="comment">//放进容器里</span></span><br><span class="line">        <span class="built_in">getchar</span>();</span><br><span class="line">        <span class="built_in">getline</span>(cin,str);<span class="comment">//然后读入一整行字符串</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;str.<span class="built_in">size</span>(); i++)<span class="comment">//遍历</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(str[i]==<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                v.<span class="built_in">push_back</span>(b);<span class="comment">//把分割好的字符串放进容器里</span></span><br><span class="line">                b=<span class="string">&quot;&quot;</span>;<span class="comment">//初始化b</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                b+=str[i];<span class="comment">//更新字符串</span></span><br><span class="line">        &#125;</span><br><span class="line">        v.<span class="built_in">push_back</span>(b);<span class="comment">//因为一行的最后可能没有空格，所以最后需要手动放进容器里</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;v.<span class="built_in">size</span>(); i++)</span><br><span class="line">            <span class="keyword">if</span>(mp[v[i]]==<span class="number">0</span>)<span class="comment">//如果容器中的字符串没有出现过</span></span><br><span class="line">            &#123;</span><br><span class="line">                mp[v[i]]=k;<span class="comment">//赋予这个字符串编号</span></span><br><span class="line">                mm[k]=v[i];<span class="comment">//编号与字符串对应</span></span><br><span class="line">                k++;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;v.<span class="built_in">size</span>(); i++)</span><br><span class="line">            e[mp[v[i]]][mp[v[<span class="number">0</span>]]]=e[mp[v[<span class="number">0</span>]]][mp[v[i]]]=<span class="number">1</span>;<span class="comment">//建图</span></span><br><span class="line">    &#125;</span><br><span class="line">    cin&gt;&gt;c&gt;&gt;d;<span class="comment">//输入起点与终点</span></span><br><span class="line">    <span class="keyword">if</span>(mp[c]==<span class="number">0</span>)<span class="comment">//这里我错了好多次，因为起点与终点不一定出现过，所以也需要对起点字符串与终点字符串进行检查</span></span><br><span class="line">    &#123;</span><br><span class="line">        mp[c]=k;</span><br><span class="line">        mm[k]=c;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(mp[d]==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        mp[d]=k;</span><br><span class="line">        mm[k]=d;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    first=mp[c];</span><br><span class="line">    last=mp[d];</span><br><span class="line">    book[first]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">dfs</span>(first,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(flag==<span class="number">0</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;no route found\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;=tmp; i++)</span><br><span class="line">            cout&lt;&lt;mm[que[i]]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/20/J%20-%20Torn%20To%20Pieces/" data-id="ckowx64ym001ztctnbtwdcfz2" data-title="J - Torn To Pieces" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/20/%E3%80%90NOIP2013%E6%A8%A1%E6%8B%9F%E3%80%91%E4%B8%83%E5%A4%95%E7%A5%AD%EF%BC%88%E8%B4%AA%E5%BF%83+%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【NOIP2013模拟】七夕祭（贪心+前缀和）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/20/SDUT%202021%20Winter%20Individual%20Contest%20-%20M/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SDUT 2021 Winter Individual Contest - M</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E4%BA%8C%E5%88%86/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%80%9D%E7%BB%B4/">思维</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/BFS/">BFS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%89%8D%E7%BC%80%E5%92%8C%E5%B7%AE%E5%88%86/">前缀和差分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C/">差分前缀和</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88/">栈</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E8%AE%BA/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/20/L2-016%20%E6%84%BF%E5%A4%A9%E4%B8%8B%E6%9C%89%E6%83%85%E4%BA%BA%E9%83%BD%E6%98%AF%E5%A4%B1%E6%95%A3%E5%A4%9A%E5%B9%B4%E7%9A%84%E5%85%84%E5%A6%B9%20(25%20%E5%88%86)/">L2-016 愿天下有情人都是失散多年的兄妹 (25 分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/20/L2-014%20%E5%88%97%E8%BD%A6%E8%B0%83%E5%BA%A6%20(25%20%E5%88%86)/">L2-014 列车调度 (25 分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/20/L1-046%20%E6%95%B4%E9%99%A4%E5%85%89%E6%A3%8D%20(20%20%E5%88%86)/">L1-046 整除光棍 (20 分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/20/L1-043%20%E9%98%85%E8%A7%88%E5%AE%A4%20(20%20%E5%88%86)/">L1-043 阅览室 (20 分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/20/L2-036%20%E7%BD%91%E7%BA%A2%E7%82%B9%E6%89%93%E5%8D%A1%E6%94%BB%E7%95%A5%20(25%20%E5%88%86)/">L2-036 网红点打卡攻略 (25 分)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Sun-Dawn<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

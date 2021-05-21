@@ -71,6 +71,141 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-L2-036 网红点打卡攻略 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/20/L2-036%20%E7%BD%91%E7%BA%A2%E7%82%B9%E6%89%93%E5%8D%A1%E6%94%BB%E7%95%A5%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-05-20T13:08:04.000Z" itemprop="datePublished">2021-05-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/20/L2-036%20%E7%BD%91%E7%BA%A2%E7%82%B9%E6%89%93%E5%8D%A1%E6%94%BB%E7%95%A5%20(25%20%E5%88%86)/">L2-036 网红点打卡攻略 (25 分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805046380707840/problems/1336215880692482059">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20210320171225695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210320171251665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>水题，根据题意暴力跑一边就行</p>
+<p>&nbsp;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> e[<span class="number">210</span>][<span class="number">210</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,a[<span class="number">210</span>],book[<span class="number">210</span>];</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x,y,z;</span><br><span class="line">        cin&gt;&gt;x&gt;&gt;y&gt;&gt;z;</span><br><span class="line">        e[x][y]=z;</span><br><span class="line">        e[y][x]=z;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> t,minn=<span class="number">0x3f3f3f3f</span>,num,tot=<span class="number">0</span>;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=t; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> k,j,flag=<span class="number">1</span>;</span><br><span class="line">        <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">        cin&gt;&gt;k;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=k; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin&gt;&gt;a[j];</span><br><span class="line">            book[a[j]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        a[<span class="number">0</span>]=a[k+<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=n; j++)<span class="comment">//判断能不能走且仅走一次所有网红点</span></span><br><span class="line">            <span class="keyword">if</span>(book[j]!=<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                flag=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;=k; j++)<span class="comment">//判断这些路径能不能从家开始遍历所有网红点然后回家（确定他们之间是否有路）</span></span><br><span class="line">                <span class="keyword">if</span>(e[a[j]][a[j+<span class="number">1</span>]]==<span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    flag=<span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag==<span class="number">1</span>)<span class="comment">//如果都可以的话代表这是一条可行的路径</span></span><br><span class="line">            tot++;<span class="comment">//可行路径+1</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;=k; j++)</span><br><span class="line">            sum+=e[a[j]][a[j+<span class="number">1</span>]];<span class="comment">//计算花费</span></span><br><span class="line">        <span class="keyword">if</span>(sum&lt;minn)</span><br><span class="line">        &#123;</span><br><span class="line">            minn=sum;<span class="comment">//更新最小花费</span></span><br><span class="line">            num=i;<span class="comment">//记录序号</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,tot);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,num,minn);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/20/L2-036%20%E7%BD%91%E7%BA%A2%E7%82%B9%E6%89%93%E5%8D%A1%E6%94%BB%E7%95%A5%20(25%20%E5%88%86)/" data-id="ckoybt47i0033k0tn05svgza2" data-title="L2-036 网红点打卡攻略 (25 分)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-L2-029 特立独行的幸福 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/20/L2-029%20%E7%89%B9%E7%AB%8B%E7%8B%AC%E8%A1%8C%E7%9A%84%E5%B9%B8%E7%A6%8F%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-05-20T13:05:31.000Z" itemprop="datePublished">2021-05-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/20/L2-029%20%E7%89%B9%E7%AB%8B%E7%8B%AC%E8%A1%8C%E7%9A%84%E5%B9%B8%E7%A6%8F%20(25%20%E5%88%86)/">L2-029 特立独行的幸福 (25 分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805046380707840/problems/1111914599412858886">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20210320165313293.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210320165341595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>给一个区间让求出在这个区间内的独立幸福数和该幸福数的值，例如19-&gt;82-&gt;68-&gt;100-&gt;1可以达到1，即是幸福数，独立的意思是该数是变换序列的开始，例如这个样例中82就不是独立的，因为82可以由19衍生出来。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">10010</span>],b[<span class="number">10010</span>];<span class="comment">//book标记该数是不是独立幸福数，b标记的是循环过程中衍生出来的数字（用来判断循环是否是死循环）</span></span><br><span class="line"><span class="keyword">int</span> n,m,flag;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt;st[<span class="number">10010</span>];<span class="comment">//st[i].size()代表i这个数字的衍生出的数字个数，即幸福值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">prime</span><span class="params">(<span class="keyword">int</span> u)</span><span class="comment">//判断该数是不是素数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i*i&lt;=u; i++)</span><br><span class="line">        <span class="keyword">if</span>(u%i==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> k)</span><span class="comment">//u代表当前数字，k代表祖先数字</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> a[<span class="number">10010</span>];</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">sprintf</span>(a,<span class="string">&quot;%d&quot;</span>,u);<span class="comment">//转化成字符串，方便计算</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">strlen</span>(a); i++)</span><br><span class="line">        sum+=(a[i]-<span class="string">&#x27;0&#x27;</span>)*(a[i]-<span class="string">&#x27;0&#x27;</span>);<span class="comment">//计算</span></span><br><span class="line">    <span class="keyword">if</span>(sum==<span class="number">1</span>)<span class="comment">//如果可以达到1，就代表该数是幸福数</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(b[sum]==<span class="number">0</span>)<span class="comment">//如果这个数字在循环前没出现过</span></span><br><span class="line">    &#123;</span><br><span class="line">        st[k].<span class="built_in">push_back</span>(sum);<span class="comment">//把衍生出来的数字放进去</span></span><br><span class="line">        b[sum]=<span class="number">1</span>;<span class="comment">//标记这个衍生数字，如果后续再次出现该数字就代表是死循环数字</span></span><br><span class="line">        book[sum]=<span class="number">1</span>;<span class="comment">//标记sum这个数字不是祖先数字，因为它是由k衍生出来的</span></span><br><span class="line">        <span class="built_in">dfs</span>(sum,k);<span class="comment">//继续递归</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        book[k]=<span class="number">1</span>;<span class="comment">//如果遇到了死循环数字，就把这个祖先数字标记，代表这个祖先数字不是幸福数字（无法达到1）</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(book[i]==<span class="number">0</span>)<span class="comment">//如果这个数字没被标记过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memset</span>(b,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(b));<span class="comment">//初始化衍生数字全为0</span></span><br><span class="line">            <span class="built_in">dfs</span>(i,i);<span class="comment">//递归</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n; i&lt;=m; i++)</span><br><span class="line">        <span class="keyword">if</span>(book[i]==<span class="number">0</span>)<span class="comment">//如果该数字是独立幸福数字</span></span><br><span class="line">        &#123;</span><br><span class="line">            result=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">prime</span>(i))<span class="comment">//判断该数字是否是素数</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,<span class="number">2</span>*(st[i].<span class="built_in">size</span>()+<span class="number">1</span>));</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,st[i].<span class="built_in">size</span>()+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(result==<span class="number">0</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;SAD\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/20/L2-029%20%E7%89%B9%E7%AB%8B%E7%8B%AC%E8%A1%8C%E7%9A%84%E5%B9%B8%E7%A6%8F%20(25%20%E5%88%86)/" data-id="ckoybt47e002vk0tnb2q1f169" data-title="L2-029 特立独行的幸福 (25 分)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-L1-071 前世档案 (20 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/20/L1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-05-20T12:58:55.000Z" itemprop="datePublished">2021-05-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/20/L1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/">L1-071 前世档案 (20 分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805046380707840/problems/1336215880692482054">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20210315125746614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>按要求找规律模拟就行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//getchar();</span></span><br><span class="line">        string a;</span><br><span class="line">        cin&gt;&gt;a;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">0</span>,k=n<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> l=<span class="number">1</span>,r=(<span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span>)<span class="built_in">pow</span>(<span class="number">2</span>,n);</span><br><span class="line">        <span class="keyword">while</span>(l&lt;r)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]==<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">                r-=(<span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span>)<span class="built_in">pow</span>(<span class="number">2</span>,k);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                l+=(<span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span>)<span class="built_in">pow</span>(<span class="number">2</span>,k);</span><br><span class="line">            k--;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,l);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/20/L1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/" data-id="ckoybt46k0026k0tn7r4fgvu2" data-title="L1-071 前世档案 (20 分)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-L1-009 N个数求和 (20 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/05/20/L1-009%20N%E4%B8%AA%E6%95%B0%E6%B1%82%E5%92%8C%20(20%20%E5%88%86)/" class="article-date">
@@ -105,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/L1-009%20N%E4%B8%AA%E6%95%B0%E6%B1%82%E5%92%8C%20(20%20%E5%88%86)/" data-id="ckoya3by3001umctn5hax4lix" data-title="L1-009 N个数求和 (20 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/20/L1-009%20N%E4%B8%AA%E6%95%B0%E6%B1%82%E5%92%8C%20(20%20%E5%88%86)/" data-id="ckoybt466001xk0tnduvmf06s" data-title="L1-009 N个数求和 (20 分)" class="article-share-link">Share</a>
       
       
       
@@ -150,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/L1-006%20%E8%BF%9E%E7%BB%AD%E5%9B%A0%E5%AD%90%20(20%20%E5%88%86)/" data-id="ckoya3by2001smctn0mx5d8vu" data-title="L1-006 连续因子 (20 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/20/L1-006%20%E8%BF%9E%E7%BB%AD%E5%9B%A0%E5%AD%90%20(20%20%E5%88%86)/" data-id="ckoybt465001uk0tn3y1y5zx2" data-title="L1-006 连续因子 (20 分)" class="article-share-link">Share</a>
       
       
       
@@ -228,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/%E3%80%90NOIP2013%E6%A8%A1%E6%8B%9F%E3%80%91%E4%B8%83%E5%A4%95%E7%A5%AD%EF%BC%88%E8%B4%AA%E5%BF%83+%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/" data-id="ckoya3bzw0046mctnhqxlh9yq" data-title="【NOIP2013模拟】七夕祭（贪心+前缀和）" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/20/%E3%80%90NOIP2013%E6%A8%A1%E6%8B%9F%E3%80%91%E4%B8%83%E5%A4%95%E7%A5%AD%EF%BC%88%E8%B4%AA%E5%BF%83+%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/" data-id="ckoybt48u004bk0tn7su7hj6d" data-title="【NOIP2013模拟】七夕祭（贪心+前缀和）" class="article-share-link">Share</a>
       
       
       
@@ -275,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/J%20-%20Torn%20To%20Pieces/" data-id="ckoya3bxz001nmctn4bf99tqb" data-title="J - Torn To Pieces" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/20/J%20-%20Torn%20To%20Pieces/" data-id="ckoybt462001pk0tn82vnf2nj" data-title="J - Torn To Pieces" class="article-share-link">Share</a>
       
       
       
@@ -321,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/SDUT%202021%20Winter%20Individual%20Contest%20-%20M/" data-id="ckoya3bzi003pmctn3zazghk4" data-title="SDUT 2021 Winter Individual Contest - M" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/20/SDUT%202021%20Winter%20Individual%20Contest%20-%20M/" data-id="ckoybt482003rk0tn0e0t7gn7" data-title="SDUT 2021 Winter Individual Contest - M" class="article-share-link">Share</a>
       
       
       
@@ -369,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/Problem%20C%20Game%20Map%20(dfs+%E5%89%AA%E6%9E%9D%EF%BC%89/" data-id="ckoya3bzf003kmctnguv15dim" data-title="Problem C Game Map (dfs+剪枝）" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/20/Problem%20C%20Game%20Map%20(dfs+%E5%89%AA%E6%9E%9D%EF%BC%89/" data-id="ckoybt47z003mk0tn1tu5g8pk" data-title="Problem C Game Map (dfs+剪枝）" class="article-share-link">Share</a>
       
       
       
@@ -432,176 +567,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/G%20-%20Goodbye%EF%BC%88%E7%B4%A0%E6%95%B0%E7%BB%BC%E5%90%88%E8%BF%90%E7%94%A8%EF%BC%89/" data-id="ckoya3bxp001amctnd1zk3uc7" data-title="G - Goodbye（素数综合运用）" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-H - Hack a Contest" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/20/H%20-%20Hack%20a%20Contest/" class="article-date">
-  <time class="dt-published" datetime="2021-05-20T12:27:03.000Z" itemprop="datePublished">2021-05-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/20/H%20-%20Hack%20a%20Contest/">H - Hack a Contest</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/406549#problem/H">题目链接</a></h3><p>Fish just participated in a programming contest. Before the final standing being public, he hacks the database and wants to change his result!</p>
-<p>The database he accessed records the number of times he submitted for each problem and the result (AC or not) for each submission. Soon he finds out that even thought the time for each submission is stored in random order, he can not change it at all (neither the number of submissions for each problem). What he can modify is problem id and result for each submission. In order not to make things too strange, there should not be any submissions for a problem after he has already got an AC in this problem in the end.</p>
-<p>You must have known that participants are ranked according to the most problems solved and then ranked by least penalty for those in the same place. The penalty is the sum of the time consumed for each problem solved. The time consumed for a solved problem is the time for its first AC submission, plus 20 for every previously not AC submissions for that problem.</p>
-<p>Please help Fish find the best result he can get.</p>
-<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>The first line of input contains an integer T, representing the number of test cases.</p>
-<p>Then for each test case:</p>
-<p>The first line contains two integers N,M, the number of submissions and number of problems.</p>
-<p>The second line contains N integers ti, the time of each submission.</p>
-<p>The third line contains M integers ci, the number of submissions on each problem.</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>For each test cases, you should output Case x: y, where x indicates the case number starting from 1, and y is the penalty for his best result.</p>
-<h3 id="Input-1"><a href="#Input-1" class="headerlink" title="Input"></a>Input</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span> <span class="number">2</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span> <span class="number">30</span> <span class="number">40</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span></span><br><span class="line"><span class="number">4</span> <span class="number">3</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span> <span class="number">30</span> <span class="number">40</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Output-1"><a href="#Output-1" class="headerlink" title="Output"></a>Output</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Case <span class="number">1</span>: <span class="number">100</span></span><br><span class="line">Case <span class="number">2</span>: <span class="number">90</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>t组输入，每组输入先给你两个数n和m，分别代表尝试提交了n个题（如果一道题ac后就不会再提交）和ac了m道题，然后给出n个数字，代表提交的时间（这里给出的时间是绝对时间，例如第一个样例中的10 20 30 40，可以理解为10分钟的时候交了一次，20分钟的时候交了一次，也就是说20包含10，而不是10分钟交了一次，然后20分钟后又交了一次），再给出ac题目尝试提交的次数，最后问你最短的罚时时间是多少，如果wa了就会罚时20。</p>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>先解释下样例，由于题目中说可以“作弊修改”，其实翻译过来就是你可以更改每道题的时间顺序，再直白点说就是你可以排序，第一个样例我们分别在10分钟20分钟30分钟40分钟的时候交过题，然后一共ac了两道题，每道题交过两次，这两道题都是在第2次交的时候才ac的也就是说这两道题每道题都罚过一次时，那么时间就是20*2=40，然后我们再寻找提交ac的时间，第一道题由于我们wa了一次（10分钟的时候）所以我们在20分钟的时候ac了，时间+=20，第二道题我们在30分钟的时候wa了，时间+=40，所以最终答案就是100.</p>
-<p>第二个样例：<br>有两道题一遍过，那我们让这两道题ac的时间分别为10和20（时间最少的前两个），然后时间+=20（第三道题罚时），再加上第三道题ac的时间40，所以答案等于90<br>总结：如果有题目一遍ac那么我们就让这个题目的时间尽量的小，如果题目不是一遍ac的我们就根据wa的次数相应的向后移动，直到找到一个相应较小的时间。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t,n,m,a[<span class="number">100010</span>],b[<span class="number">15</span>],i,j,head;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=t; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;b[i]);</span><br><span class="line">        head=<span class="number">0</span>;<span class="comment">//模拟指针</span></span><br><span class="line">        <span class="built_in">sort</span>(a,a+n);<span class="comment">//时间排序</span></span><br><span class="line">        <span class="built_in">sort</span>(b,b+m);<span class="comment">//题目提交次数排序</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">            <span class="keyword">if</span>(b[i]==<span class="number">1</span>)<span class="comment">//如果是一遍ac的</span></span><br><span class="line">                sum+=a[head++];<span class="comment">//加上当前最小的时间</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                head+=b[i]<span class="number">-1</span>;<span class="comment">//指针后移b[i]-1次</span></span><br><span class="line">                sum+=<span class="number">20</span>*(b[i]<span class="number">-1</span>)+a[head++];<span class="comment">//移动后相应最小的时间</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case %d: %lld\n&quot;</span>,j,sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/H%20-%20Hack%20a%20Contest/" data-id="ckoya3bxt001dmctn61xk1fss" data-title="H - Hack a Contest" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-B - Bin Packing" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/20/B%20-%20Bin%20Packing/" class="article-date">
-  <time class="dt-published" datetime="2021-05-20T12:25:12.000Z" itemprop="datePublished">2021-05-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/20/B%20-%20Bin%20Packing/">B - Bin Packing</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/406549#problem/B">题目链接</a></h3><p>Packing items into a bin is well known as packing problem, and Fish is studying it too. As a beginner, he starts with 2-dimension-version problem with 2</p>
-<p>rectangle-shape items. He just wants to find a convex polygon with the smallest area so that these two items can be well included in it. You should notice that these two items can not overlap each other and you can shift or rotate them in the plane if you like.</p>
-<p>Please help Fish solve the problem.</p>
-<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>The first line of input contains an integer T, representing the number of test cases. Then following T lines, each line representing one test case.</p>
-<p>For each test case there are four integers w1,h1,w2,h2<br>separated by one space telling the width and length of these two items respectively.</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>For each test case, you should output Case x: y in one line, where x indicates the case number starting from 1 and y represents the smallest area.</p>
-<p>Your answers will be consider correct if its absolute error does not exceed 10−6.</p>
-<h3 id="Input-1"><a href="#Input-1" class="headerlink" title="Input"></a>Input</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">2</span> <span class="number">4</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
-<h3 id="Output-1"><a href="#Output-1" class="headerlink" title="Output"></a>Output</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Case <span class="number">1</span>: <span class="number">11.5</span></span><br><span class="line">Case <span class="number">2</span>: <span class="number">27.0</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>首先t组输入，每组输入给你两组数据，每组数据包含两个数字，分别代表一个矩形的长和宽（也有可能是宽和长），让你求由这两个矩形组成最小的凸多边形的面积。</p>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>枚举每一种情况即可。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t,j;</span><br><span class="line">    <span class="keyword">double</span> a,b,c,d,minn;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=t; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        minn=<span class="number">999999</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf%lf%lf&quot;</span>,&amp;a,&amp;b,&amp;c,&amp;d);</span><br><span class="line">        <span class="keyword">if</span>(d&gt;b)</span><br><span class="line">            minn=<span class="built_in">min</span>(<span class="number">0.5</span>*(d-b)*a,minn);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            minn=<span class="built_in">min</span>(<span class="number">0.5</span>*(b-d)*c,minn);</span><br><span class="line">        <span class="keyword">if</span>(d&gt;a)</span><br><span class="line">            minn=<span class="built_in">min</span>(<span class="number">0.5</span>*(d-a)*b,minn);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            minn=<span class="built_in">min</span>(<span class="number">0.5</span>*(a-d)*c,minn);</span><br><span class="line">        <span class="keyword">if</span>(a&gt;c)</span><br><span class="line">            minn=<span class="built_in">min</span>(<span class="number">0.5</span>*(a-c)*d,minn);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            minn=<span class="built_in">min</span>(<span class="number">0.5</span>*(c-a)*b,minn);</span><br><span class="line">        <span class="keyword">if</span>(c&gt;b)</span><br><span class="line">            minn=<span class="built_in">min</span>(<span class="number">0.5</span>*(c-b)*a,minn);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            minn=<span class="built_in">min</span>(<span class="number">0.5</span>*(b-c)*d,minn);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case %d: %.6f\n&quot;</span>,j,a*b+c*d+minn);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/B%20-%20Bin%20Packing/" data-id="ckoya3bxg000vmctnbjrvffc5" data-title="B - Bin Packing" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-A - AD 2020 Gym - 102770A" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/20/A%20-%20AD%202020%20Gym%20-%20102770A/" class="article-date">
-  <time class="dt-published" datetime="2021-05-20T12:21:14.000Z" itemprop="datePublished">2021-05-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/20/A%20-%20AD%202020%20Gym%20-%20102770A/">A - AD 2020 Gym - 102770A</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/402565#problem/A">题目链接</a></h3><p>2020 is the current year and is a leap year starting on Wednesday of the Gregorian calendar, the 2020th year of the Common Era (CE) and Anno Domini (AD) designations, the 20th year of the 3rd millennium, the 20th year of the 21st century, and the 1st year of the 2020s decade.</p>
-<p>2020 has been designated as Year of the Nurse and Midwife by the World Health Organization. The United Nations has declared 2020 as the International Year of Plant Health. 2020 has been designated as International Year of Sound by the International Commission for Acoustics.</p>
-<p>Because there are so many unforgettable things happening in 2020, somebody has now proposed that all dates with a substring containing “202” to be designated as the Day for Disaster Reduction. We represent a date in the format YYYYMMDD (for example, 21110202), then if 202 is a substring of this date, this day is the Day for Disaster Reduction.</p>
-<p>Please write a program to compute how many Days for Disaster Reduction are there in all the dates between Y1<br>M1D1 and Y2M2D2 (both inclusive)? Note that you should take leap years into consideration. A leap year is a year that can be divided by 400 or can be divided by 4 but can’t be divided by 100. A leap year has 29 days in February, instead of the normal 28 days.</p>
-<h3 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h3><p>The input contains multiple cases. The first line of the input contains a single positive integer T (1≤T≤105), the number of cases.</p>
-<p>The first and only line of each case contains six integers Y1,M1,D1,Y2,M2,D2, which are described in the problem statement above.</p>
-<p>It’s guaranteed that Y1M1D1 is not larger than Y2M2D2. Both Y1M1D1 and Y2M2D2 are between 20000101 and 99991231, and both dates are valid.</p>
-<p>We kindly remind you that the size of the input and output of this problem can be large, so it’s recommended to use a faster I/O method. For example, in C++, you can use scanf/printf instead of cin/cout.</p>
-<h3 id="输出："><a href="#输出：" class="headerlink" title="输出："></a>输出：</h3><p>For each case, print a single line containing a single integer, the answer.</p>
-<h3 id="样例输入："><a href="#样例输入：" class="headerlink" title="样例输入："></a>样例输入：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2111</span> <span class="number">02</span> <span class="number">01</span> <span class="number">2111</span> <span class="number">02</span> <span class="number">03</span></span><br><span class="line"><span class="number">2202</span> <span class="number">01</span> <span class="number">01</span> <span class="number">2202</span> <span class="number">12</span> <span class="number">31</span></span><br><span class="line"><span class="number">2000</span> <span class="number">01</span> <span class="number">01</span> <span class="number">9999</span> <span class="number">12</span> <span class="number">31</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="样例输出："><a href="#样例输出：" class="headerlink" title="样例输出："></a>样例输出：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">365</span></span><br><span class="line"><span class="number">44294</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>如果给定一个年份我们就可以直接得知这一年中有多少个日期含有202，所以我们把所给区间大体分为3部分，第一部分就是位于两个日期之间的整年，例如2000 01 01和2002 01 01，那么位于两个日期中的整年就是2001年，第二三部分就是2000这一年和2002这一年中所有日期中包含202的个数，最后把他们相加。（如果第一个日期和第二个日期的年份相同的话就只有1部分了，就是他们中间的那部分日期）</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> data)</span><span class="comment">//判断是否闰年</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(data%<span class="number">4</span>==<span class="number">0</span>||(data%<span class="number">100</span>==<span class="number">0</span>&amp;&amp;data%<span class="number">400</span>!=<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">checkyear</span><span class="params">(<span class="keyword">int</span> year)</span><span class="comment">//判断年份是否含有202</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(year/<span class="number">10</span>==<span class="number">202</span>||year%<span class="number">1000</span>==<span class="number">202</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">checktwo</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//判断所给日期（包含年月日）是否含有202</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> year=x/<span class="number">10000</span>;</span><br><span class="line">    <span class="keyword">int</span> month=(x%<span class="number">10000</span>)/<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">int</span> day=x%<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">if</span>(year/<span class="number">10</span>==<span class="number">202</span>||year%<span class="number">1000</span>==<span class="number">202</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(year%<span class="number">10</span>==<span class="number">2</span>&amp;&amp;month==<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(month%<span class="number">10</span>==<span class="number">2</span>&amp;&amp;day==<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> yue[<span class="number">13</span>] = &#123;<span class="number">0</span>, <span class="number">31</span>, <span class="number">28</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t,i,j,l,year1,month1,day1,year2,month2,day2,sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        sum=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d%d%d%d&quot;</span>,&amp;year1,&amp;month1,&amp;day1,&amp;year2,&amp;month2,&amp;day2);</span><br><span class="line">        <span class="keyword">for</span>(i=year1+<span class="number">1</span>; i&lt;=year2<span class="number">-1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">checkyear</span>(i))<span class="comment">//如果这年份中含有202，那么这一整年都是</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">check</span>(i))<span class="comment">//如果是闰年就是366天</span></span><br><span class="line">                    sum+=<span class="number">366</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    sum+=<span class="number">365</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(i%<span class="number">10</span>==<span class="number">2</span>)<span class="comment">//如果是XXX2 XX XX类型的话</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="built_in">check</span>(i))<span class="comment">//如果是闰年就是2月的29天+12月02号</span></span><br><span class="line">                        sum+=<span class="number">30</span>;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        sum+=<span class="number">29</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span><span class="comment">//其余只有02月02号和12月02号符合要求</span></span><br><span class="line">                    sum+=<span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(year1!=year2)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(j=month1; j&lt;=<span class="number">12</span>; j++)<span class="comment">//第一个日期所在的年</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(j==<span class="number">2</span>&amp;&amp;<span class="built_in">check</span>(year1))</span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=<span class="number">29</span>; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month1&amp;&amp;l&lt;day1)<span class="comment">//如果枚举的日期比第一个日期小</span></span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year1*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=yue[j]; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month1&amp;&amp;l&lt;day1)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year1*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=month2; j++)<span class="comment">//第二个日期所在的年</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(j==<span class="number">2</span>&amp;&amp;<span class="built_in">check</span>(year2))</span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=<span class="number">29</span>; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month2&amp;&amp;l&gt;day2)<span class="comment">//如果日期超过第二个日期的话</span></span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year2*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=yue[j]; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month2&amp;&amp;l&gt;day2)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year2*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(year1==year2)</span><br><span class="line">            <span class="keyword">for</span>(j=month1; j&lt;=month2; j++)</span><br><span class="line">                <span class="keyword">if</span>(j==<span class="number">2</span>&amp;&amp;<span class="built_in">check</span>(year1))</span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=<span class="number">29</span>; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month1&amp;&amp;l&lt;day1)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(j==month2&amp;&amp;l&gt;day2)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year1*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=yue[j]; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month1&amp;&amp;l&lt;day1)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(j==month2&amp;&amp;l&gt;day2)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year1*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/20/A%20-%20AD%202020%20Gym%20-%20102770A/" data-id="ckoya3bxb000qmctn59wiczpx" data-title="A - AD 2020 Gym - 102770A" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/20/G%20-%20Goodbye%EF%BC%88%E7%B4%A0%E6%95%B0%E7%BB%BC%E5%90%88%E8%BF%90%E7%94%A8%EF%BC%89/" data-id="ckoybt45t001dk0tn9l4wgo10" data-title="G - Goodbye（素数综合运用）" class="article-share-link">Share</a>
       
       
       
@@ -656,23 +622,23 @@
       <ul>
         
           <li>
+            <a href="/2021/05/21/C&C++%E4%B8%AD%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%BA%93%E5%87%BD%E6%95%B0/">C&amp;C++中强大的库函数</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/21/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E5%90%8D%E8%AF%8D%E5%8F%8A%E5%AE%9A%E4%B9%89/">面向对象开发名词及定义</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/21/STL%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/">STL容器总结</a>
+          </li>
+        
+          <li>
             <a href="/2021/05/21/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
           </li>
         
           <li>
             <a href="/2021/05/21/L2-040%20%E5%93%B2%E5%93%B2%E6%89%93%E6%B8%B8%E6%88%8F%20(25%20%E5%88%86)/">L2-040 哲哲打游戏 (25 分)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/21/L2-038%20%E7%97%85%E6%AF%92%E6%BA%AF%E6%BA%90%20(25%20%E5%88%86)/">L2-038 病毒溯源 (25 分)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/21/acwing%201381.%20%E9%98%B6%E4%B9%98/">acwing 1381. 阶乘</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/21/7-7%20%E7%A4%BE%E4%BA%A4%E9%9B%86%E7%BE%A4%20(30%20%E5%88%86)/">7-7 社交集群 (30 分)</a>
           </li>
         
       </ul>

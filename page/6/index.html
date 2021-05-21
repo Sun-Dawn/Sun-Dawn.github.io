@@ -71,6 +71,211 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-J - 程序设计：轻重搭配（贪心）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/19/J%20-%20%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%BB%E9%87%8D%E6%90%AD%E9%85%8D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2021-05-19T12:26:28.000Z" itemprop="datePublished">2021-05-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/19/J%20-%20%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%BB%E9%87%8D%E6%90%AD%E9%85%8D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%89/">J - 程序设计：轻重搭配（贪心）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>n 个同学去动物园参观，原本每人都需要买一张门票，但售票处推出了一个优惠活动，一个体重为 x 的人可以和体重至少为 2x 配对，这样两人只需买一张票。现在给出了 n个人的体重，请你计算他们最少需要买几张门票？</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>第一行一个整数 n，表示人数。<br>第二行 n个整数，每个整数 ai表示每个人的体重。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>一个整数，表示最少需要购买的门票数目。</p>
+<p>数据范围：</p>
+<p>对于 30%的数据：1≤n≤25，1≤ai≤100。</p>
+<p>对于 60%的数据：1≤n≤10000，1≤ai≤1000。</p>
+<p>对于 100%的数据：1≤n≤5⋅105，1≤ai≤105。</p>
+<h3 id="样例解释"><a href="#样例解释" class="headerlink" title="样例解释:"></a>样例解释:</h3><p>1和 9 配对，7 和 3 配对，剩下 5,5 单独，一共买四张票。</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">1</span> <span class="number">9</span> <span class="number">7</span> <span class="number">3</span> <span class="number">5</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>先排序然后贪心，从中间靠左的那个位置开始贪，与最末尾的数进行比较，如果符合题意，则两个数都左移，如果不符合题意，则左边的那个数左移，右边的数不能浪费。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,i,j,a[<span class="number">500010</span>],sum=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">sort</span>(a,a+n);</span><br><span class="line">    <span class="keyword">for</span>(i=n/<span class="number">2</span><span class="number">-1</span>,j=n<span class="number">-1</span>; i&gt;=<span class="number">0</span>&amp;&amp;j&gt;n/<span class="number">2</span><span class="number">-1</span>;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i]*<span class="number">2</span>&lt;=a[j])</span><br><span class="line">        &#123;</span><br><span class="line">            i--;</span><br><span class="line">            j--;</span><br><span class="line">            sum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            i--;</span><br><span class="line">    &#125;</span><br><span class="line">    sum+=n<span class="number">-2</span>*sum;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/19/J%20-%20%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%BB%E9%87%8D%E6%90%AD%E9%85%8D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%89/" data-id="ckoybt463001sk0tn2133dzkq" data-title="J - 程序设计：轻重搭配（贪心）" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-B - 结果填空：炮台实验" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/19/B%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E7%82%AE%E5%8F%B0%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time class="dt-published" datetime="2021-05-19T12:24:46.000Z" itemprop="datePublished">2021-05-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%80%9D%E7%BB%B4/">思维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/19/B%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E7%82%AE%E5%8F%B0%E5%AE%9E%E9%AA%8C/">B - 结果填空：炮台实验</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>蒜头君在玩一个战争模拟游戏，他有高度为 1,2,3,…,n 的炮台各一个，他需要把这 n 个炮台从左往右排成一行，并且炮口都朝向右边。</p>
+<p>在这个游戏中，所有炮台发射的炮弹会摧毁前方所有高度比自己低的炮台。每当蒜头君把 n<br>个炮台排成一行后，可能会有一些炮台被摧毁。举个例子：当前有 5 个炮台，从左到右高度分别为 2,1,3,5,4，往右发射炮弹后，高度为 4 的炮台被高度为 5 的摧毁，高度为 1 的炮台被高度为 2 的炮台摧毁，最后只会剩下 2,3,5 这三个炮台。</p>
+<p>现在蒜头君想知道，如果随机地摆放这 n 个炮台，最后剩下炮台个数的期望是多少？比如 n=2 时，有两种摆放方式，高度序列分别为 1,2 和 2,1，前者最后剩下 2 个炮台，后者最后剩下一个炮台，因此期望为 (2+1)/2=1.5000。<br>请你求出 n=2019 时剩下炮台个数的期望，保留四位小数。</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>找规律，列出n为1-4的结果然后找规律就一目了然了。<br>规律为：1/1+1/2+1/3+…1/2019</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">double</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=<span class="number">2019</span>; i++)</span><br><span class="line">        sum+=<span class="number">1.0</span>*<span class="number">1</span>/i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.4f\n&quot;</span>,sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/19/B%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E7%82%AE%E5%8F%B0%E5%AE%9E%E9%AA%8C/" data-id="ckoybt45i000yk0tn160of3v2" data-title="B - 结果填空：炮台实验" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-A - 结果填空：阶乘位数（数论）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/19/A%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E9%98%B6%E4%B9%98%E4%BD%8D%E6%95%B0%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2021-05-19T12:17:23.000Z" itemprop="datePublished">2021-05-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E8%AE%BA/">数论</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/19/A%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E9%98%B6%E4%B9%98%E4%BD%8D%E6%95%B0%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/">A - 结果填空：阶乘位数（数论）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>蒜头君对阶乘产生了兴趣，他列出了前10个正整数的阶乘以及对应位数的表：</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>n!</th>
+<th>位数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>24</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>120</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>720</td>
+<td>3</td>
+</tr>
+<tr>
+<td>7</td>
+<td>5040</td>
+<td>4</td>
+</tr>
+<tr>
+<td>8</td>
+<td>40320</td>
+<td>5</td>
+</tr>
+<tr>
+<td>9</td>
+<td>362880</td>
+<td>6</td>
+</tr>
+<tr>
+<td>10</td>
+<td>3628800</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p>对于蒜头君来说，再往后就很难计算了。他试图寻找阶乘位数的规律，但是失败了。现在请你帮他计算出第一个正整数的阶乘位数大于等于 10000<br>的数是多少，即求最小的正整数 n 满足 n! 的位数大于等于 10000。</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>一道填空题，直接输出答案就好了，一道典型的大数问题。<br>解决方法：设答案为n，需要求n！&gt;=10^10000，两边同时取log10的对数，然后就变成了log10(1 * 2 * 3*…n)&gt;=10000，然后利用数学法则<br>log10(ab)=log10(a)+log10(b)，所以上面那个式子的左边就可以变成log10(1)+log10(2)+…log10(n)，这样跑一个循环就行了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">double</span> sum;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=i; j++)</span><br><span class="line">            sum+=<span class="built_in">log10</span>(j);</span><br><span class="line">        <span class="keyword">if</span>(sum&gt;=<span class="number">10000</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);<span class="comment">//答案是3249</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/05/19/A%20-%20%E7%BB%93%E6%9E%9C%E5%A1%AB%E7%A9%BA%EF%BC%9A%E9%98%B6%E4%B9%98%E4%BD%8D%E6%95%B0%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/" data-id="ckoybt45a000sk0tn51h0fuqu" data-title="A - 结果填空：阶乘位数（数论）" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-D - Test Cases（暴力）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/05/19/D%20-%20Test%20Cases%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/" class="article-date">
@@ -112,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/D%20-%20Test%20Cases%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/" data-id="ckoya3bxm0015mctnd4a8cd1o" data-title="D - Test Cases（暴力）" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/19/D%20-%20Test%20Cases%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/" data-id="ckoybt45n0018k0tn75a00pvj" data-title="D - Test Cases（暴力）" class="article-share-link">Share</a>
       
       
       
@@ -160,7 +365,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/7-6%20%E6%8E%92%E5%BA%A7%E4%BD%8D%20(25%E5%88%86)/" data-id="ckoya3bx3000gmctnfxc80hq8" data-title="7-6 排座位 (25分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/19/7-6%20%E6%8E%92%E5%BA%A7%E4%BD%8D%20(25%E5%88%86)/" data-id="ckoybt451000gk0tng98u6ma4" data-title="7-6 排座位 (25分)" class="article-share-link">Share</a>
       
       
       
@@ -205,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/Problem%20D%20Bus%20Stop/" data-id="ckoya3bzg003mmctn46w42bmg" data-title="Problem D Bus Stop" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/19/Problem%20D%20Bus%20Stop/" data-id="ckoybt481003pk0tn7uvl23rq" data-title="Problem D Bus Stop" class="article-share-link">Share</a>
       
       
       
@@ -260,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/7-12%20%E6%8B%AF%E6%95%91007%20(25%E5%88%86)/" data-id="ckoya3bwu0008mctnc0p6hv1c" data-title="7-12 拯救007 (25分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/19/7-12%20%E6%8B%AF%E6%95%91007%20(25%E5%88%86)/" data-id="ckoybt44j0008k0tnhw2ub8mj" data-title="7-12 拯救007 (25分)" class="article-share-link">Share</a>
       
       
       
@@ -310,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/7-11%20%E5%9B%BE%E7%9D%80%E8%89%B2%E9%97%AE%E9%A2%98%20(25%E5%88%86)/" data-id="ckoya3bwt0007mctnam3y7ggg" data-title="7-11 图着色问题 (25分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/19/7-11%20%E5%9B%BE%E7%9D%80%E8%89%B2%E9%97%AE%E9%A2%98%20(25%E5%88%86)/" data-id="ckoybt44g0007k0tn15hq2qjv" data-title="7-11 图着色问题 (25分)" class="article-share-link">Share</a>
       
       
       
@@ -362,7 +567,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/7-10%20%E5%8A%9F%E5%A4%AB%E4%BC%A0%E4%BA%BA%20(25%E5%88%86)/" data-id="ckoya3bwp0005mctnd8rw4bf2" data-title="7-10 功夫传人 (25分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/19/7-10%20%E5%8A%9F%E5%A4%AB%E4%BC%A0%E4%BA%BA%20(25%E5%88%86)/" data-id="ckoybt44a0005k0tn6ff886dy" data-title="7-10 功夫传人 (25分)" class="article-share-link">Share</a>
       
       
       
@@ -413,159 +618,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/7-7%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%E5%88%86)/" data-id="ckoya3bx8000lmctnc7y16wcu" data-title="7-7 红色警报 (25分)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-D - Find Integer（数论）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/19/D%20-%20Find%20Integer%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2021-05-19T11:47:58.000Z" itemprop="datePublished">2021-05-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E8%AE%BA/">数论</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/19/D%20-%20Find%20Integer%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/">D - Find Integer（数论）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="https://img-blog.csdnimg.cn/20200919211845311.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p><img src="https://img-blog.csdnimg.cn/20200919211945772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t,n,a;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;a);</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,<span class="number">1</span>,a+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a%<span class="number">2</span>==<span class="number">0</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,a*a/<span class="number">4</span><span class="number">-1</span>,a*a/<span class="number">4</span>+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,(a*a<span class="number">-1</span>)/<span class="number">2</span>,(a*a+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;-1 -1\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上网搜了一些勾股数来验证，其中一组数据是 16 30 34，但是如果这个题目输入2 16的话 输出是63和65，虽然这也是一组勾股数，但显然不是最小的，由此可以看出这个题目检测机制是判断你输出的数据是不是勾股数而没有判断是不是最小的，这个结论从n==1时也可以看出，只要你程序输出的数据是符合题目要求即可，不用输出最小的那一组。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/D%20-%20Find%20Integer%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/" data-id="ckoya3bxl0013mctnhida3cco" data-title="D - Find Integer（数论）" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-G - Game Rank(模拟)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/19/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-19T11:37:08.000Z" itemprop="datePublished">2021-05-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/19/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/">G - Game Rank(模拟）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="https://img-blog.csdnimg.cn/20200918201533364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"><br><img src="https://img-blog.csdnimg.cn/20200918201556506.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>就是炉石的排位机制……</p>
-<p>共25个等级和传说等级，赢一局一颗星，连续赢三局以上额外多加一颗星（高于5级后不多加星），满星后再多一颗星才能升等级，并且升级后新等级有一颗星。</p>
-<p>输一局减一颗星（21-25级输了不扣星，但是仍会断连胜），输了后没星仍可以保持段位，但是没星后又掉星了会掉等级。传说后不论输赢均不掉段。</p>
-<p>各等级的星星为</p>
-<ul>
-<li><p>Rank 25-21: 2 stars</p>
-</li>
-<li><p>Rank 20-16: 3 stars</p>
-</li>
-<li><p>Rank 15-11: 4 stars</p>
-</li>
-<li><p>Rank 10-1: 5 stars</p>
-</li>
-</ul>
-<p>这个题就是纯粹的模拟了，我们组问题主要出在了段位下降一次之后星也会少一颗，比如现在是Rank2 0颗星，如果输一次的话就变成了Rank3 1颗星（满星为2颗），我们一直以为是变成Rank3 2颗星，还有一个问题就是段位保护那里边界问题，题目描述是Rank21-25处于段为保护 输了不会掉星，所以我们只考虑了处于段位21-25输的时候不掉星，没考虑到如果是Rank20 0颗星的话会怎么样，实际上如果是Rank20 0颗星同时输掉一次的话应该还是Rank20 0颗星，我们之前没考虑到这个样例，所以根据我们的程序会变成Rank21 2颗星（满星为2颗），所以我们一直在WA并且找不出错误- -</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">200</span>]= &#123;<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>&#125;;<span class="comment">//数组a记录每个段位满星的个数，顺序是逆序的，为了和ranks同步</span></span><br><span class="line">    <span class="keyword">int</span> ranks=<span class="number">25</span>,starts=<span class="number">0</span>,times=<span class="number">0</span>,i,len;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">10010</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,str);</span><br><span class="line">    len=<span class="built_in">strlen</span>(str);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ranks==<span class="number">0</span>)<span class="comment">//如果是Rank0的话就说明达到最顶峰了，直接break出去输出Legend就行了</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(str[i]==<span class="string">&#x27;W&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            times++;<span class="comment">//连胜+1</span></span><br><span class="line">            starts++;<span class="comment">//星数+1</span></span><br><span class="line">            <span class="keyword">if</span>(times&gt;=<span class="number">3</span>&amp;&amp;ranks&gt;=<span class="number">6</span>&amp;&amp;ranks&lt;=<span class="number">25</span>)<span class="comment">//如果连胜&gt;3同时段位没有在5之上的话就触发连胜额外加的那一颗星</span></span><br><span class="line">                starts++;</span><br><span class="line">            <span class="keyword">if</span>(starts&gt;a[ranks])<span class="comment">//如果星数&gt;该段位最多星数，即代表晋级段位</span></span><br><span class="line">            &#123;</span><br><span class="line">                starts-=a[ranks];</span><br><span class="line">                ranks--;<span class="comment">//段位上升一个</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            times=<span class="number">0</span>;<span class="comment">//终结连胜</span></span><br><span class="line">            <span class="keyword">if</span>(ranks&gt;=<span class="number">21</span>&amp;&amp;ranks&lt;=<span class="number">25</span>)<span class="comment">//处于段位保护状态，输了也没什么操作，所以直接contin</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            starts--;<span class="comment">//星数-1</span></span><br><span class="line">            <span class="keyword">if</span>(starts&lt;<span class="number">0</span>)<span class="comment">//如果星数为负</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(ranks==<span class="number">20</span>)<span class="comment">//特殊情况，我们队没有想到的情况</span></span><br><span class="line">                    starts=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    ranks++;</span><br><span class="line">                    starts=a[ranks]<span class="number">-1</span>;<span class="comment">//掉段之后星数也要再-1</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ranks)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ranks);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Legend\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/" data-id="ckoya3bxo0018mctn0p9nb9pm" data-title="G - Game Rank(模拟）" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-D - Daydreaming Stockbroker(模拟）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/19/D%20-%20Daydreaming%20Stockbroker(%E6%A8%A1%E6%8B%9F%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2021-05-19T11:37:07.000Z" itemprop="datePublished">2021-05-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/19/D%20-%20Daydreaming%20Stockbroker(%E6%A8%A1%E6%8B%9F%EF%BC%89/">D - Daydreaming Stockbroker(模拟）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="https://img-blog.csdnimg.cn/20200918190251713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"><br><img src="https://img-blog.csdnimg.cn/20200918185817701.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>你刚开始有100本金，然后给出n天的股票价格（可以以这个价格买入，也可以以这个价格卖出），但是你手上的股票最多有10w股，求你最多能挣多少钱。</p>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>不用开数组来保存每一天股票的价格，直接一边读入一遍处理，即每天都处理当天的股票。核心思想是用一个flag标记一下你买入（或者卖出）股票的价格，如果第二天的价格比flag要高的话就在第二天补上这两天的股票差价。如果第二天的价格比flag要低的话就在第二天买入这个股票。点睛之笔在于这个代码并不是用num+=的形式来记录股票的数量，而是直接用num=当前手里的钱/当天股票的价格，同时sum（手里的钱数）并不会因为买入股票而减少（sum一直是以补差价的形式来加的，即sum+=的形式），这样一来如果以后几天有更便宜的股票你也可以直接购买，这样前一次的num（股票的数目）并不会影响到后面，例如你现在手里有200本金，第一天股票的价格为50，第二天股票的价格为40，第一天你买入的num=200/50=4，同时flag=50（即记录当前买入股票时的价格），但是这并不是最优的方法，因为第二天股票价格更低，所以我们应该在第二天买入，当你输入第二天的股票价格时，由于（40&lt;flag)，所以这时候num=200/40=5，这时才是最优方案。</p>
-<p>上面说的是买入的思想，其实卖出的思想也是一样，如果flag&lt;x（x代表当天股票价格），就说明现在股票售价比我们买入的时候要高，我们是有利可图的，这时候我们就卖出，同时sum+=num*(x-flag)//这里是以差价的形式增加的，非常奇妙的思想！ 例如：第一天股票价格是100，第二天是101，第三天是300，我们一眼可以看出应该在第一天买入，第三天卖出这样可以利益最大化，下面我们模拟一下通过大佬代码的过程，首先我们在第一天买入（价格为100）同时flag=100，第二天价格为101&gt;100，所以我们“卖出”（注意！！！这里的卖出是“伪卖出”，即并不是真正的卖出），同时flag标记为101，这时候我们的sum是101，即原本的100+差价1块。到了第三天，股票价格为300，比第二天的101要大，300&gt;flag，所以sum+=（300-101）<em>1，300-101是差价，后面的那个</em>1是有一支股票，所以sum其实是一直以补差价的形式增加的，这也是代码的巧妙之处！！！</p>
-<p>最后还有一个重点就是num（股票的数目）的值要用long long，不用long long 会WA，虽然题目说你手上最多有10w股，但是你用sum/x之后会超过int的范围，所以用long long 记录</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,n,x,flag=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> sum=<span class="number">100</span>,num=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x);<span class="comment">//x代表当天股票的价格</span></span><br><span class="line">        <span class="keyword">if</span>(x&lt;=flag)</span><br><span class="line">        &#123;</span><br><span class="line">            num=sum/x;<span class="comment">//num用long long 否则会WA</span></span><br><span class="line">            flag=x;</span><br><span class="line">            num=<span class="built_in">min</span>(num,(<span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span>)<span class="number">100000</span>);<span class="comment">//股票最多10w股，不能超过10w股</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            sum+=num*(x-flag);<span class="comment">//补差价</span></span><br><span class="line">            flag=x;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/19/D%20-%20Daydreaming%20Stockbroker(%E6%A8%A1%E6%8B%9F%EF%BC%89/" data-id="ckoya3bxi000ymctn0gwce7xm" data-title="D - Daydreaming Stockbroker(模拟）" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/05/19/7-7%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%E5%88%86)/" data-id="ckoybt454000jk0tn2nmx9ske" data-title="7-7 红色警报 (25分)" class="article-share-link">Share</a>
       
       
       
@@ -620,23 +673,23 @@
       <ul>
         
           <li>
+            <a href="/2021/05/21/C&C++%E4%B8%AD%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%BA%93%E5%87%BD%E6%95%B0/">C&amp;C++中强大的库函数</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/21/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E5%90%8D%E8%AF%8D%E5%8F%8A%E5%AE%9A%E4%B9%89/">面向对象开发名词及定义</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/21/STL%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/">STL容器总结</a>
+          </li>
+        
+          <li>
             <a href="/2021/05/21/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
           </li>
         
           <li>
             <a href="/2021/05/21/L2-040%20%E5%93%B2%E5%93%B2%E6%89%93%E6%B8%B8%E6%88%8F%20(25%20%E5%88%86)/">L2-040 哲哲打游戏 (25 分)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/21/L2-038%20%E7%97%85%E6%AF%92%E6%BA%AF%E6%BA%90%20(25%20%E5%88%86)/">L2-038 病毒溯源 (25 分)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/21/acwing%201381.%20%E9%98%B6%E4%B9%98/">acwing 1381. 阶乘</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/21/7-7%20%E7%A4%BE%E4%BA%A4%E9%9B%86%E7%BE%A4%20(30%20%E5%88%86)/">7-7 社交集群 (30 分)</a>
           </li>
         
       </ul>

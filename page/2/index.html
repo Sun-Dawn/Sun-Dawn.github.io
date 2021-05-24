@@ -71,10 +71,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-7-8 三足鼎立 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/19/7-8%20%E4%B8%89%E8%B6%B3%E9%BC%8E%E7%AB%8B%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-19T04:05:29.000Z" itemprop="datePublished">2021-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E4%BA%8C%E5%88%86/">二分</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/19/7-8%20%E4%B8%89%E8%B6%B3%E9%BC%8E%E7%AB%8B%20(25%20%E5%88%86)/">7-8 三足鼎立 (25 分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/1259839299727368192/problems/1259850789826048005">题目链接</a></h3><p>（这个比赛已经结束了没法提交了，只能用来看题面，暂时没找到可以提交的网站）</p>
+<p><img src="https://img-blog.csdnimg.cn/20210419114504865.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">    <span class="built_in">sort</span>(a + <span class="number">1</span>, a + n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="built_in">upper_bound</span>(a + i + <span class="number">1</span>, a + n + <span class="number">1</span>, <span class="built_in">abs</span>(m - a[i])) - a;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, l);</span><br><span class="line">        <span class="keyword">int</span> r = <span class="built_in">lower_bound</span>(a + i + <span class="number">1</span>, a + n + <span class="number">1</span>, m + a[i]) - a;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, r);</span><br><span class="line">        sum += r - l;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码分析："><a href="#代码分析：" class="headerlink" title="代码分析："></a>代码分析：</h1><h2 id="1-为什么l用upper而r用lower？"><a href="#1-为什么l用upper而r用lower？" class="headerlink" title="1.为什么l用upper而r用lower？"></a>1.为什么l用upper而r用lower？</h2><p>给出两个数x，y，我们需要找abs(x-y)&lt;元素个数&lt;x+y，中的元素个数，所以我们需要先找到第一个比abs(x-y)大的（严格大，没有=号）数的下标，同时这个下标是可以取到的（因为这个下标代表的这个数本身就比abs(x-y)大），这样左边的值我们就找到了，下面需要找右面的值。如果有一串序列是a[]={0,3,3,3,3,4},如果我们在求右边边界值的时候也用upper同时我们x+y在这里为3的话，那我们找的就是a[5]，也就是4那个值所在的下标（因为upper是严格大于），但是很明显之前还有很多3，这些3同样是不能取的，因为我们要找的是两边之和大于第三边（严格大于而不是大于等于），所以如果我们用upper的话，我们找到的是严格大于x+y的，我们不确定在严格大于x+y之前有没有和x+y相等的数，这样一来问题就会变得麻烦，所以再求右边边界值的时候我们用lower，即找第一个&gt;=x+y的数，这样一来r-1就一定是最后一个比x+y小的值的下标，同时我们sum+=的时候加的是r-l，这样一来就刚好是这个区间内元素的个数，因为这个区间就是[l,r).</p>
+<p>&nbsp;</p>
+<h2 id="2-为什么upper和lower的时候起始点都是a-i-1而不是a-1？"><a href="#2-为什么upper和lower的时候起始点都是a-i-1而不是a-1？" class="headerlink" title="2.为什么upper和lower的时候起始点都是a + i + 1而不是a + 1？"></a>2.为什么upper和lower的时候起始点都是a + i + 1而不是a + 1？</h2><p>因为会有重复<br>如果有一下一组数据<br>7 30<br>15 16 27 35 42 51 92（顺序已经排好）<br>如果我们已知两边分别为30和16的话，我们应该找位于区间(14,46)的元素的个数，第一个数字15显然在这个区间中，但是如果按照代码从a + i + 1开始找的话不就找不到15了吗？很明显不会的，因为30 16 15这个组合在找30 15的时候就找完了，也就是说其实并不是30和16找15而是30和15找的16，因为15的位置比16靠前，所以这个组合在之前就已经被找过了，如果我们从a+1开始找的话，那15 16 30这个组合就被找过两次了，所以我们从a+i+1开始找，这样可以避免找到重复的组合。</p>
+<p>&nbsp;</p>
+<h2 id="3-为什么upper和lower的时候起始点都是a-i-1而不是a-i？"><a href="#3-为什么upper和lower的时候起始点都是a-i-1而不是a-i？" class="headerlink" title="3.为什么upper和lower的时候起始点都是a + i + 1而不是a + i？"></a>3.为什么upper和lower的时候起始点都是a + i + 1而不是a + i？</h2><p>因为a+i+1把a+i这个点排除在外了<br>例如一个序列 15 16 27 ，我们要已知两边为30和16，那么我们要找的区间就是(14,46)，很显然16本身就在这个序列中，但是因为16已经作为一条边出现了，所以我们不能再考虑16，我们需要筛掉它，所以当我们遍历到第i个点时要从a+i+1开始，而不是从a+i开始</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/04/19/7-8%20%E4%B8%89%E8%B6%B3%E9%BC%8E%E7%AB%8B%20(25%20%E5%88%86)/" data-id="ckp2dd6wy000n98tn69g02de3" data-title="7-8 三足鼎立 (25 分)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-L2-002 链表去重 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/21/L2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:35:58.000Z" itemprop="datePublished">2021-05-21</time>
+    <a href="/2021/04/14/L2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-14T12:24:44.000Z" itemprop="datePublished">2021-04-14</time>
 </a>
     
   <div class="article-category">
@@ -89,7 +140,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/L2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/">L2-002 链表去重 (25 分)</a>
+      <a class="p-name article-title" href="/2021/04/14/L2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/">L2-002 链表去重 (25 分)</a>
     </h1>
   
 
@@ -103,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/L2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/" data-id="ckoybt46x002ek0tn9qfj312j" data-title="L2-002 链表去重 (25 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/04/14/L2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/" data-id="ckp2dd6yi002e98tnai641e39" data-title="L2-002 链表去重 (25 分)" class="article-share-link">Share</a>
       
       
       
@@ -117,8 +168,8 @@
   
     <article id="post-7-3 奥运排行榜 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/21/7-3%20%E5%A5%A5%E8%BF%90%E6%8E%92%E8%A1%8C%E6%A6%9C%20(25%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:33:30.000Z" itemprop="datePublished">2021-05-21</time>
+    <a href="/2021/04/14/7-3%20%E5%A5%A5%E8%BF%90%E6%8E%92%E8%A1%8C%E6%A6%9C%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-14T11:56:02.000Z" itemprop="datePublished">2021-04-14</time>
 </a>
     
   <div class="article-category">
@@ -133,7 +184,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/7-3%20%E5%A5%A5%E8%BF%90%E6%8E%92%E8%A1%8C%E6%A6%9C%20(25%20%E5%88%86)/">7-3 奥运排行榜 (25 分)</a>
+      <a class="p-name article-title" href="/2021/04/14/7-3%20%E5%A5%A5%E8%BF%90%E6%8E%92%E8%A1%8C%E6%A6%9C%20(25%20%E5%88%86)/">7-3 奥运排行榜 (25 分)</a>
     </h1>
   
 
@@ -149,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/7-3%20%E5%A5%A5%E8%BF%90%E6%8E%92%E8%A1%8C%E6%A6%9C%20(25%20%E5%88%86)/" data-id="ckoybt44r000dk0tn6p1zbfdg" data-title="7-3 奥运排行榜 (25 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/04/14/7-3%20%E5%A5%A5%E8%BF%90%E6%8E%92%E8%A1%8C%E6%A6%9C%20(25%20%E5%88%86)/" data-id="ckp2dd6wi000d98tnc52n2k6k" data-title="7-3 奥运排行榜 (25 分)" class="article-share-link">Share</a>
       
       
       
@@ -163,8 +214,8 @@
   
     <article id="post-7-23 还原二叉树 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/21/7-23%20%E8%BF%98%E5%8E%9F%E4%BA%8C%E5%8F%89%E6%A0%91%20(25%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:32:47.000Z" itemprop="datePublished">2021-05-21</time>
+    <a href="/2021/04/12/7-23%20%E8%BF%98%E5%8E%9F%E4%BA%8C%E5%8F%89%E6%A0%91%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-12T09:21:33.000Z" itemprop="datePublished">2021-04-12</time>
 </a>
     
   <div class="article-category">
@@ -179,7 +230,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/7-23%20%E8%BF%98%E5%8E%9F%E4%BA%8C%E5%8F%89%E6%A0%91%20(25%20%E5%88%86)/">7-23 还原二叉树 (25 分)</a>
+      <a class="p-name article-title" href="/2021/04/12/7-23%20%E8%BF%98%E5%8E%9F%E4%BA%8C%E5%8F%89%E6%A0%91%20(25%20%E5%88%86)/">7-23 还原二叉树 (25 分)</a>
     </h1>
   
 
@@ -192,7 +243,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/7-23%20%E8%BF%98%E5%8E%9F%E4%BA%8C%E5%8F%89%E6%A0%91%20(25%20%E5%88%86)/" data-id="ckoybt44o000bk0tn3yaabqz9" data-title="7-23 还原二叉树 (25 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/04/12/7-23%20%E8%BF%98%E5%8E%9F%E4%BA%8C%E5%8F%89%E6%A0%91%20(25%20%E5%88%86)/" data-id="ckp2dd6wd000b98tnhd9g1d12" data-title="7-23 还原二叉树 (25 分)" class="article-share-link">Share</a>
       
       
       
@@ -206,8 +257,8 @@
   
     <article id="post-L2-004 这是二叉搜索树吗？ (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/21/L2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:30:34.000Z" itemprop="datePublished">2021-05-21</time>
+    <a href="/2021/04/10/L2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-10T08:08:31.000Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   <div class="article-category">
@@ -222,7 +273,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/L2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/">L2-004 这是二叉搜索树吗？ (25 分)</a>
+      <a class="p-name article-title" href="/2021/04/10/L2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/">L2-004 这是二叉搜索树吗？ (25 分)</a>
     </h1>
   
 
@@ -237,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/L2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/" data-id="ckoybt46z002gk0tnbs278ab5" data-title="L2-004 这是二叉搜索树吗？ (25 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/04/10/L2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/" data-id="ckp2dd6yj002g98tn1khb6v6y" data-title="L2-004 这是二叉搜索树吗？ (25 分)" class="article-share-link">Share</a>
       
       
       
@@ -251,8 +302,8 @@
   
     <article id="post-L2-2 小字辈 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/21/L2-2%20%E5%B0%8F%E5%AD%97%E8%BE%88%20(25%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:26:02.000Z" itemprop="datePublished">2021-05-21</time>
+    <a href="/2021/04/07/L2-2%20%E5%B0%8F%E5%AD%97%E8%BE%88%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-07T11:33:20.000Z" itemprop="datePublished">2021-04-07</time>
 </a>
     
   <div class="article-category">
@@ -267,7 +318,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/L2-2%20%E5%B0%8F%E5%AD%97%E8%BE%88%20(25%20%E5%88%86)/">L2-2 小字辈 (25 分)</a>
+      <a class="p-name article-title" href="/2021/04/07/L2-2%20%E5%B0%8F%E5%AD%97%E8%BE%88%20(25%20%E5%88%86)/">L2-2 小字辈 (25 分)</a>
     </h1>
   
 
@@ -281,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/L2-2%20%E5%B0%8F%E5%AD%97%E8%BE%88%20(25%20%E5%88%86)/" data-id="ckoybt47q003ak0tnco4lbczr" data-title="L2-2 小字辈 (25 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/04/07/L2-2%20%E5%B0%8F%E5%AD%97%E8%BE%88%20(25%20%E5%88%86)/" data-id="ckp2dd6z4003a98tn04xbb8kx" data-title="L2-2 小字辈 (25 分)" class="article-share-link">Share</a>
       
       
       
@@ -295,8 +346,8 @@
   
     <article id="post-L1-2 倒数第N个字符串 (15 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/21/L1-2%20%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%20(15%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:23:39.000Z" itemprop="datePublished">2021-05-21</time>
+    <a href="/2021/04/07/L1-2%20%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%20(15%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-07T07:55:16.000Z" itemprop="datePublished">2021-04-07</time>
 </a>
     
   <div class="article-category">
@@ -311,7 +362,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/L1-2%20%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%20(15%20%E5%88%86)/">L1-2 倒数第N个字符串 (15 分)</a>
+      <a class="p-name article-title" href="/2021/04/07/L1-2%20%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%20(15%20%E5%88%86)/">L1-2 倒数第N个字符串 (15 分)</a>
     </h1>
   
 
@@ -326,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/L1-2%20%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%20(15%20%E5%88%86)/" data-id="ckoybt46v002bk0tn9hll3d6m" data-title="L1-2 倒数第N个字符串 (15 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/04/07/L1-2%20%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%20(15%20%E5%88%86)/" data-id="ckp2dd6yg002b98tngffncgtm" data-title="L1-2 倒数第N个字符串 (15 分)" class="article-share-link">Share</a>
       
       
       
@@ -340,8 +391,8 @@
   
     <article id="post-L1-1 天梯赛座位分配 (20 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/21/L1-1%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%BA%A7%E4%BD%8D%E5%88%86%E9%85%8D%20(20%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:22:15.000Z" itemprop="datePublished">2021-05-21</time>
+    <a href="/2021/04/07/L1-1%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%BA%A7%E4%BD%8D%E5%88%86%E9%85%8D%20(20%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-07T07:23:58.000Z" itemprop="datePublished">2021-04-07</time>
 </a>
     
   <div class="article-category">
@@ -356,7 +407,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/L1-1%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%BA%A7%E4%BD%8D%E5%88%86%E9%85%8D%20(20%20%E5%88%86)/">L1-1 天梯赛座位分配 (20 分)</a>
+      <a class="p-name article-title" href="/2021/04/07/L1-1%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%BA%A7%E4%BD%8D%E5%88%86%E9%85%8D%20(20%20%E5%88%86)/">L1-1 天梯赛座位分配 (20 分)</a>
     </h1>
   
 
@@ -371,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/L1-1%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%BA%A7%E4%BD%8D%E5%88%86%E9%85%8D%20(20%20%E5%88%86)/" data-id="ckoybt46m0029k0tn317a1mzx" data-title="L1-1 天梯赛座位分配 (20 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/04/07/L1-1%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%BA%A7%E4%BD%8D%E5%88%86%E9%85%8D%20(20%20%E5%88%86)/" data-id="ckp2dd6yf002998tn52jab20t" data-title="L1-1 天梯赛座位分配 (20 分)" class="article-share-link">Share</a>
       
       
       
@@ -385,8 +436,8 @@
   
     <article id="post-7-13 是否完全二叉搜索树 (30 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/21/7-13%20%E6%98%AF%E5%90%A6%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20(30%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:19:22.000Z" itemprop="datePublished">2021-05-21</time>
+    <a href="/2021/04/05/7-13%20%E6%98%AF%E5%90%A6%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20(30%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-05T11:55:37.000Z" itemprop="datePublished">2021-04-05</time>
 </a>
     
   <div class="article-category">
@@ -401,7 +452,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/7-13%20%E6%98%AF%E5%90%A6%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20(30%20%E5%88%86)/">7-13 是否完全二叉搜索树 (30 分)</a>
+      <a class="p-name article-title" href="/2021/04/05/7-13%20%E6%98%AF%E5%90%A6%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20(30%20%E5%88%86)/">7-13 是否完全二叉搜索树 (30 分)</a>
     </h1>
   
 
@@ -417,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/7-13%20%E6%98%AF%E5%90%A6%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20(30%20%E5%88%86)/" data-id="ckoybt44l000ak0tn4h7beg19" data-title="7-13 是否完全二叉搜索树 (30 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/04/05/7-13%20%E6%98%AF%E5%90%A6%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%20(30%20%E5%88%86)/" data-id="ckp2dd6wb000a98tn5x8g3fct" data-title="7-13 是否完全二叉搜索树 (30 分)" class="article-share-link">Share</a>
       
       
       
@@ -431,8 +482,8 @@
   
     <article id="post-L3-025 那就别担心了 (30 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/21/L3-025%20%E9%82%A3%E5%B0%B1%E5%88%AB%E6%8B%85%E5%BF%83%E4%BA%86%20(30%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:16:00.000Z" itemprop="datePublished">2021-05-21</time>
+    <a href="/2021/04/03/L3-025%20%E9%82%A3%E5%B0%B1%E5%88%AB%E6%8B%85%E5%BF%83%E4%BA%86%20(30%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-04-03T13:24:36.000Z" itemprop="datePublished">2021-04-03</time>
 </a>
     
   <div class="article-category">
@@ -447,7 +498,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/L3-025%20%E9%82%A3%E5%B0%B1%E5%88%AB%E6%8B%85%E5%BF%83%E4%BA%86%20(30%20%E5%88%86)/">L3-025 那就别担心了 (30 分)</a>
+      <a class="p-name article-title" href="/2021/04/03/L3-025%20%E9%82%A3%E5%B0%B1%E5%88%AB%E6%8B%85%E5%BF%83%E4%BA%86%20(30%20%E5%88%86)/">L3-025 那就别担心了 (30 分)</a>
     </h1>
   
 
@@ -463,52 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/L3-025%20%E9%82%A3%E5%B0%B1%E5%88%AB%E6%8B%85%E5%BF%83%E4%BA%86%20(30%20%E5%88%86)/" data-id="ckoybt47y003kk0tnhl7ogz45" data-title="L3-025 那就别担心了 (30 分)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-L3-002 特殊堆栈 (30 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/21/L3-002%20%E7%89%B9%E6%AE%8A%E5%A0%86%E6%A0%88%20(30%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T11:13:59.000Z" itemprop="datePublished">2021-05-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E4%BA%8C%E5%88%86/">二分</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/L3-002%20%E7%89%B9%E6%AE%8A%E5%A0%86%E6%A0%88%20(30%20%E5%88%86)/">L3-002 特殊堆栈 (30 分)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805046380707840/problems/994805053695574016">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20210403202913370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
-<p><img src="https://img-blog.csdnimg.cn/20210403202930512.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>考察二分，这里用了lower_bound函数</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; a;<span class="comment">//用a来模拟栈</span></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; b;<span class="comment">//b保存的是有序的数据</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        string s;</span><br><span class="line">        cin &gt;&gt; s;</span><br><span class="line">        <span class="keyword">if</span> (s == <span class="string">&quot;Pop&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a.<span class="built_in">size</span>() == <span class="number">0</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Invalid\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                it = <span class="built_in">lower_bound</span>(b.<span class="built_in">begin</span>(), b.<span class="built_in">end</span>(), a[a.<span class="built_in">size</span>() - <span class="number">1</span>]);<span class="comment">//找到栈最后一个元素的地址</span></span><br><span class="line">                b.<span class="built_in">erase</span>(it);<span class="comment">//在b中删掉它</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, a[a.<span class="built_in">size</span>() - <span class="number">1</span>]);</span><br><span class="line">                a.<span class="built_in">pop_back</span>();<span class="comment">//在a中删掉，意味着栈弹出这个元素</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s == <span class="string">&quot;Push&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> x;</span><br><span class="line">            cin &gt;&gt; x;</span><br><span class="line">            a.<span class="built_in">push_back</span>(x);</span><br><span class="line">            it = <span class="built_in">lower_bound</span>(b.<span class="built_in">begin</span>(), b.<span class="built_in">end</span>(), x);</span><br><span class="line">            b.<span class="built_in">insert</span>(it, x);<span class="comment">//在b中插入，维护b有序的方法是，插入有序</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s == <span class="string">&quot;PeekMedian&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a.<span class="built_in">size</span>() == <span class="number">0</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Invalid\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (a.<span class="built_in">size</span>() % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, b[a.<span class="built_in">size</span>() / <span class="number">2</span> - <span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, b[a.<span class="built_in">size</span>() / <span class="number">2</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/05/21/L3-002%20%E7%89%B9%E6%AE%8A%E5%A0%86%E6%A0%88%20(30%20%E5%88%86)/" data-id="ckoybt47w003hk0tnbiis0n3f" data-title="L3-002 特殊堆栈 (30 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/04/03/L3-025%20%E9%82%A3%E5%B0%B1%E5%88%AB%E6%8B%85%E5%BF%83%E4%BA%86%20(30%20%E5%88%86)/" data-id="ckp2dd6za003k98tnezr6gaxr" data-title="L3-025 那就别担心了 (30 分)" class="article-share-link">Share</a>
       
       
       
@@ -550,7 +556,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
     </div>
   </div>
 
@@ -563,23 +569,23 @@
       <ul>
         
           <li>
-            <a href="/2021/05/21/C&C++%E4%B8%AD%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%BA%93%E5%87%BD%E6%95%B0/">C&amp;C++中强大的库函数</a>
+            <a href="/2021/05/13/%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F/">数独游戏</a>
           </li>
         
           <li>
-            <a href="/2021/05/21/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E5%90%8D%E8%AF%8D%E5%8F%8A%E5%AE%9A%E4%B9%89/">面向对象开发名词及定义</a>
+            <a href="/2021/04/28/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
           </li>
         
           <li>
-            <a href="/2021/05/21/STL%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/">STL容器总结</a>
+            <a href="/2021/04/26/L2-040%20%E5%93%B2%E5%93%B2%E6%89%93%E6%B8%B8%E6%88%8F%20(25%20%E5%88%86)/">L2-040 哲哲打游戏 (25 分)</a>
           </li>
         
           <li>
-            <a href="/2021/05/21/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
+            <a href="/2021/04/26/L2-038%20%E7%97%85%E6%AF%92%E6%BA%AF%E6%BA%90%20(25%20%E5%88%86)/">L2-038 病毒溯源 (25 分)</a>
           </li>
         
           <li>
-            <a href="/2021/05/21/L2-040%20%E5%93%B2%E5%93%B2%E6%89%93%E6%B8%B8%E6%88%8F%20(25%20%E5%88%86)/">L2-040 哲哲打游戏 (25 分)</a>
+            <a href="/2021/04/21/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/">python中整除与取整的区别</a>
           </li>
         
       </ul>

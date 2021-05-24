@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【NOIP2013模拟】七夕祭（贪心+前缀和） | Dawn&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="吾王yyds！！！ &amp;nbsp; &amp;nbsp; 七夕节因牛郎织女的传说而被扣上了「情人节」的帽子。 于是 TYVJ 今年举办了一次线下七夕祭。 Vani 同学今年成功邀请到了 cl 同学陪他来共度七夕，于是他们决定去 TYVJ 七夕祭游玩。 TYVJ 七夕祭和 11 区的夏祭的形式很像。矩形的祭典会场由 N 排 M 列共计 N×M个摊点组成。 虽然摊点种类繁多，不过 cl 只对其中的一部分摊点感兴">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【NOIP2013模拟】七夕祭（贪心+前缀和）">
+<meta property="og:url" content="https://sun-dawn.github.io/2021/03/04/%E3%80%90NOIP2013%E6%A8%A1%E6%8B%9F%E3%80%91%E4%B8%83%E5%A4%95%E7%A5%AD%EF%BC%88%E8%B4%AA%E5%BF%83+%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="Dawn&#39;s Blog">
+<meta property="og:description" content="吾王yyds！！！ &amp;nbsp; &amp;nbsp; 七夕节因牛郎织女的传说而被扣上了「情人节」的帽子。 于是 TYVJ 今年举办了一次线下七夕祭。 Vani 同学今年成功邀请到了 cl 同学陪他来共度七夕，于是他们决定去 TYVJ 七夕祭游玩。 TYVJ 七夕祭和 11 区的夏祭的形式很像。矩形的祭典会场由 N 排 M 列共计 N×M个摊点组成。 虽然摊点种类繁多，不过 cl 只对其中的一部分摊点感兴">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210304202127695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-03-04T12:41:20.000Z">
+<meta property="article:modified_time" content="2021-05-24T08:17:45.044Z">
+<meta property="article:author" content="Sun-Dawn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210304202127695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70">
+  
+    <link rel="alternate" href="/atom.xml" title="Dawn's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Dawn&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Sun-Dawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-【NOIP2013模拟】七夕祭（贪心+前缀和）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/04/%E3%80%90NOIP2013%E6%A8%A1%E6%8B%9F%E3%80%91%E4%B8%83%E5%A4%95%E7%A5%AD%EF%BC%88%E8%B4%AA%E5%BF%83+%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2021-03-04T12:41:20.000Z" itemprop="datePublished">2021-03-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%89%8D%E7%BC%80%E5%92%8C%E5%B7%AE%E5%88%86/">前缀和差分</a>►<a class="article-category-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【NOIP2013模拟】七夕祭（贪心+前缀和）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://img-blog.csdnimg.cn/20210304202127695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"><br>吾王yyds！！！</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>七夕节因牛郎织女的传说而被扣上了「情人节」的帽子。</p>
+<p>于是 TYVJ 今年举办了一次线下七夕祭。</p>
+<p>Vani 同学今年成功邀请到了 cl 同学陪他来共度七夕，于是他们决定去 TYVJ 七夕祭游玩。</p>
+<p>TYVJ 七夕祭和 11 区的夏祭的形式很像。<br>矩形的祭典会场由 N 排 M 列共计 N×M个摊点组成。</p>
+<p>虽然摊点种类繁多，不过 cl 只对其中的一部分摊点感兴趣，比如章鱼烧、苹果糖、棉花糖、射的屋……什么的。</p>
+<p>Vani 预先联系了七夕祭的负责人 zhq，希望能够通过恰当地布置会场，使得各行中 cl 感兴趣的摊点数一样多，并且各列中 cl 感兴趣的摊点数也一样多。</p>
+<p>不过 zhq 告诉 Vani，摊点已经随意布置完毕了，如果想满足 cl 的要求，唯一的调整方式就是交换两个相邻的摊点。</p>
+<p>两个摊点相邻，当且仅当他们处在同一行或者同一列的相邻位置上。</p>
+<p>由于 zhq 率领的 TYVJ 开发小组成功地扭曲了空间，每一行或每一列的第一个位置和最后一个位置也算作相邻。</p>
+<p>现在 Vani 想知道他的两个要求最多能满足多少个。</p>
+<p>在此前提下，至少需要交换多少次摊点。</p>
+<p>&nbsp;</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>第一行包含三个整数 N 和 M 和 T，T 表示 cl 对多少个摊点感兴趣。</p>
+<p>接下来 T 行，每行两个整数 x,y，表示 cl 对处在第 x 行第 y 列的摊点感兴趣。</p>
+<p>&nbsp;</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>首先输出一个字符串。</p>
+<p>如果能满足 Vani 的全部两个要求，输出 both；</p>
+<p>如果通过调整只能使得各行中 cl 感兴趣的摊点数一样多，输出 row；</p>
+<p>如果只能使各列中 cl 感兴趣的摊点数一样多，输出 column；</p>
+<p>如果均不能满足，输出 impossible。</p>
+<p>如果输出的字符串不是 impossible， 接下来输出最小交换次数，与字符串之间用一个空格隔开。</p>
+<p>&nbsp;</p>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>1≤N,M≤100000,0≤T≤min(N∗M,100000),1≤x≤N,1≤y≤M</p>
+<p>&nbsp;</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">row <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>给出一个n×m的矩阵和t个点，以及t个点在矩阵中的坐标，然后问能否通过移动点使得每一行的点数都相同，每一列的点数都相同，如果两者可以同时做到就输出both和最少移动点的次数，如果前者能做到，后者做不到就输出row和最少移动点的次数，其他情况类似。<br>注意：移动点只能与相邻的位置移动，也就是上下左右四个方向，特别的每行或每列第一个可以与最后一个交换，也就是说这是个环形矩阵。</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>首先分析一下什么时候可以做到每一行的点数都相同，那么就需要t%n==0，因为如果不整除的话是无法做到都相同的。同时每一行的点数都应该是t/n，然后我们假设一个序列a=1,5,6.那么交换完之后应该是4,4,4.我们有很多办法可以达到4,4,4.例如5给1三个点数，然后6给5两个点数，这样总共交换了五个点数，显然不是最优解；如果我们让6给1两个点数，然后5给1一个点数，总共交换三个点数，即使最优解。仔细分析一下这个过程，无非就是贪心的一个过程，首先选定一个位置，然后通过给后面点数，或者从后面拿点数来先满足自己，例如我们首先选定第三个位置6，他多出来2个点数，那么就给后面的1两个点数，然后1变成三个点数，还差一个点数，就向5拿一个点数。<br>所以我们需要确定贪心的起始位置，因为位置不同得到的答案也不同，我们可以暴力每一个起点，然后找一个最小的交换次数，时间复杂度是O(n^2)显然很慢，然后我们可以先更新一下a的值，更新完之后就是 -3,1,2，然后再求一下前缀和-3,2,0。</p>
+<blockquote>
+<p>如果从第 k 个位置开始，那么第 i 堆和第 i+1 堆交换的纸牌数就是|sumi-sumk|（手动模拟即可明白）。总代价就是|sum1-sumk|+|sum2-sumk|+|sum3-sumk|+……+|sumn-sumk|。发现什么了？当sumk是sum1~sumn中位数的时候，上式有最小值！</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">100010</span>],b[<span class="number">100010</span>],sum1[<span class="number">100010</span>],sum2[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,i,x,y,r,s,t,tx=<span class="number">1</span>,ty=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;n,&amp;m,&amp;t);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;t; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x,&amp;y);</span><br><span class="line">        a[x]++;</span><br><span class="line">        b[y]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(t%n)</span><br><span class="line">        tx=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(t%m)</span><br><span class="line">        ty=<span class="number">0</span>;</span><br><span class="line">    r=t/n;</span><br><span class="line">    s=t/m;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        a[i]-=r;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">        b[i]-=s;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        sum1[i]+=sum1[i<span class="number">-1</span>]+a[i];</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">        sum2[i]+=sum2[i<span class="number">-1</span>]+b[i];</span><br><span class="line">    <span class="keyword">int</span> flag;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(tx)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">sort</span>(sum1+<span class="number">1</span>,sum1+<span class="number">1</span>+n);</span><br><span class="line">        flag=sum1[(n+<span class="number">1</span>)/<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">            ans+=(<span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span>)<span class="built_in">abs</span>(sum1[i]-flag);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ty)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">sort</span>(sum2+<span class="number">1</span>,sum2+<span class="number">1</span>+m);</span><br><span class="line">        flag=sum2[(m+<span class="number">1</span>)/<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">            ans+=(<span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span>)<span class="built_in">abs</span>(sum2[i]-flag);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(tx&amp;&amp;ty)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;both %lld\n&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(tx&amp;&amp;!ty)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;row %lld\n&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(!tx&amp;&amp;ty)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;column %lld\n&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;impossible\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/03/04/%E3%80%90NOIP2013%E6%A8%A1%E6%8B%9F%E3%80%91%E4%B8%83%E5%A4%95%E7%A5%AD%EF%BC%88%E8%B4%AA%E5%BF%83+%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/" data-id="ckp2dd715008498tn5jjqdxtj" data-title="【NOIP2013模拟】七夕祭（贪心+前缀和）" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/13/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于c++模板的思考
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/03/%E6%A8%A1%E6%9D%BF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">模板</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/">记忆化搜索</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E4%BA%8C%E5%88%86/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%80%9D%E7%BB%B4/">思维</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/BFS/">BFS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%89%8D%E7%BC%80%E5%92%8C%E5%B7%AE%E5%88%86/">前缀和差分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A0%86/">堆</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/">树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E8%AE%BA/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/13/%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F/">数独游戏</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/28/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/26/L2-040%20%E5%93%B2%E5%93%B2%E6%89%93%E6%B8%B8%E6%88%8F%20(25%20%E5%88%86)/">L2-040 哲哲打游戏 (25 分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/26/L2-038%20%E7%97%85%E6%AF%92%E6%BA%AF%E6%BA%90%20(25%20%E5%88%86)/">L2-038 病毒溯源 (25 分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/21/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/">python中整除与取整的区别</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Sun-Dawn<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

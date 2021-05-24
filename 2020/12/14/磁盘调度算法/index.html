@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>磁盘调度算法 | Dawn&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="以下两种算法的代码均是在c++环境下编译进行SSTF调度初版：12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;bits&#x2F;stdc++.h&gt;#define inf 0x3f3f3f3fusing namespace std;int a[1010],n;bool b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="磁盘调度算法">
+<meta property="og:url" content="https://sun-dawn.github.io/2020/12/14/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Dawn&#39;s Blog">
+<meta property="og:description" content="以下两种算法的代码均是在c++环境下编译进行SSTF调度初版：12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;bits&#x2F;stdc++.h&gt;#define inf 0x3f3f3f3fusing namespace std;int a[1010],n;bool b">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-14T13:01:51.000Z">
+<meta property="article:modified_time" content="2021-05-24T08:25:37.033Z">
+<meta property="article:author" content="Sun-Dawn">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Dawn's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Dawn&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Sun-Dawn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-磁盘调度算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/14/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2020-12-14T13:01:51.000Z" itemprop="datePublished">2020-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      磁盘调度算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="以下两种算法的代码均是在c-环境下编译进行"><a href="#以下两种算法的代码均是在c-环境下编译进行" class="headerlink" title="以下两种算法的代码均是在c++环境下编译进行"></a>以下两种算法的代码均是在c++环境下编译进行</h3><h2 id="SSTF调度"><a href="#SSTF调度" class="headerlink" title="SSTF调度"></a>SSTF调度</h2><h3 id="初版："><a href="#初版：" class="headerlink" title="初版："></a>初版：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1010</span>],n;</span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,num=inf,minn=inf,flag;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(a[i]-u)&lt;minn&amp;&amp;book[i]==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            minn=<span class="built_in">abs</span>(a[i]-u);</span><br><span class="line">            flag=a[i];</span><br><span class="line">            num=i;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(num==inf)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    book[num]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,flag,minn);</span><br><span class="line">    <span class="built_in">change</span>(flag);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,m;</span><br><span class="line">    <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘个数：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘序列：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入当前磁道号：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;被访问的下一个磁道号\t移动距离（磁道数）\n&quot;</span>);</span><br><span class="line">    <span class="built_in">change</span>(m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="最终版："><a href="#最终版：" class="headerlink" title="最终版："></a>最终版：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SSTF调度</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span><span class="comment">//c++万能头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Coding author 孙黎明 19110543033</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f<span class="comment">//定义inf为无穷大</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//下面变量开全局，可以在main函数和自定义函数中同时使用，避免了传参数这一步骤</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1010</span>];<span class="comment">//定义数组a，用来保存访盘序列</span></span><br><span class="line"><span class="keyword">int</span> n;<span class="comment">//n代表访盘个数</span></span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">1010</span>];<span class="comment">//book[a]=1表示标号为a的访盘已经访问过，book[a]=0表示标号为a的访盘没有访问过。用来记录是否访问过，防止重复访问</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> u)</span><span class="comment">//处理函数，用来处理访盘序列，同时给出被访问的下一个磁道号以及移动距离，u代表当前磁道号</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> num=inf;<span class="comment">//用来记录被访问的下一个磁道号的编号，后续将其标记，初始赋值为inf，可以根据后续num的值来判断递归是否结束</span></span><br><span class="line">    <span class="keyword">int</span> minn=inf;<span class="comment">//保存最少的移动距离，初始值赋值为无穷大</span></span><br><span class="line">    <span class="keyword">int</span> flag;<span class="comment">//记录被访问的下一个磁道号</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)<span class="comment">//遍历整个访盘序列</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(a[i]-u)&lt;minn&amp;&amp;book[i]==<span class="number">0</span>)<span class="comment">//如果一个磁道号与当前磁道号的差比最小值还要小，同时这个磁道号没有访问过（abs：绝对值函数）</span></span><br><span class="line">        &#123;</span><br><span class="line">            minn=<span class="built_in">abs</span>(a[i]-u);<span class="comment">//更新最小值</span></span><br><span class="line">            flag=a[i];<span class="comment">//记录被访问的下一个磁道号</span></span><br><span class="line">            num=i;<span class="comment">//记录被访问的下一个磁道号的编号</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(num==inf)<span class="comment">//如果num=inf的话，就说明所有磁盘都访问过了，代表该递归结束</span></span><br><span class="line">        <span class="keyword">return</span>;<span class="comment">//return出去</span></span><br><span class="line">    book[num]=<span class="number">1</span>;<span class="comment">//循环完成后，把最终确定的被访问的下一个磁道号的编号标记，代表这个编号的磁道号已经访问过了，后续不会再访问</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,flag,minn);<span class="comment">//输出被访问的下一个磁道号以及移动距离，\t用来规范格式</span></span><br><span class="line">    <span class="built_in">change</span>(flag);<span class="comment">//递归思想，继续递归处理下一个磁道</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,m;</span><br><span class="line">    <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));<span class="comment">//初始化book数组全为0，代表所有磁道都没访问过</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘个数：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);<span class="comment">//读入访盘个数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘序列：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)<span class="comment">//读入访盘序列</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入当前磁道号：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);<span class="comment">//读入当前磁道号</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;被访问的下一个磁道号\t移动距离（磁道数）\n&quot;</span>);</span><br><span class="line">    <span class="built_in">change</span>(m);<span class="comment">//开始第一次调用处理函数处理数据</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="输入样例1："><a href="#输入样例1：" class="headerlink" title="输入样例1："></a>输入样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">55</span> <span class="number">58</span> <span class="number">39</span> <span class="number">18</span> <span class="number">90</span> <span class="number">160</span> <span class="number">150</span></span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+<h3 id="输出样例1："><a href="#输出样例1：" class="headerlink" title="输出样例1："></a>输出样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">被访问的下一个磁道号	移动距离（磁道数）</span><br><span class="line"><span class="number">90</span>			<span class="number">10</span></span><br><span class="line"><span class="number">58</span>			<span class="number">32</span></span><br><span class="line"><span class="number">55</span>			<span class="number">3</span></span><br><span class="line"><span class="number">39</span>			<span class="number">16</span></span><br><span class="line"><span class="number">18</span>			<span class="number">21</span></span><br><span class="line"><span class="number">150</span>			<span class="number">132</span></span><br><span class="line"><span class="number">160</span>			<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输入样例2："><a href="#输入样例2：" class="headerlink" title="输入样例2："></a>输入样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">5</span> <span class="number">50</span> <span class="number">49</span> <span class="number">55</span> <span class="number">100</span> <span class="number">9</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例2："><a href="#输出样例2：" class="headerlink" title="输出样例2："></a>输出样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">被访问的下一个磁道号	移动距离（磁道数）</span><br><span class="line"><span class="number">3</span>			<span class="number">0</span></span><br><span class="line"><span class="number">1</span>			<span class="number">2</span></span><br><span class="line"><span class="number">5</span>			<span class="number">4</span></span><br><span class="line"><span class="number">9</span>			<span class="number">4</span></span><br><span class="line"><span class="number">49</span>			<span class="number">40</span></span><br><span class="line"><span class="number">50</span>			<span class="number">1</span></span><br><span class="line"><span class="number">55</span>			<span class="number">5</span></span><br><span class="line"><span class="number">100</span>			<span class="number">45</span></span><br></pre></td></tr></table></figure>
+<h2 id="CSCAN调度"><a href="#CSCAN调度" class="headerlink" title="CSCAN调度"></a>CSCAN调度</h2><h3 id="初版：-1"><a href="#初版：-1" class="headerlink" title="初版："></a>初版：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,ans,n,m,a[<span class="number">1010</span>],num,flag;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘个数：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘序列：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">sort</span>(a,a+n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入当前磁道号：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">    ans=m;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="keyword">if</span>(a[i]&gt;=m)</span><br><span class="line">        &#123;</span><br><span class="line">            flag=i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入磁头移动方向（向磁道号增加的方向请输入1，向磁道号减少的方向请输入0）：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;被访问的下一个磁道号\t移动距离（磁道数）\n&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(num==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=flag; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));</span><br><span class="line">            m=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;flag; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));</span><br><span class="line">            m=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=flag<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));</span><br><span class="line">            m=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=n<span class="number">-1</span>; i&gt;=flag; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));</span><br><span class="line">            m=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="最终版：-1"><a href="#最终版：-1" class="headerlink" title="最终版："></a>最终版：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//CSCAN调度</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span><span class="comment">//c++万能头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Coding author 孙黎明 19110543033</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> ans;<span class="comment">//用来保存最开始的那个磁道号</span></span><br><span class="line">    <span class="keyword">int</span> m;<span class="comment">//当前磁道号</span></span><br><span class="line">    <span class="keyword">int</span> n;<span class="comment">//访盘个数</span></span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">1010</span>];<span class="comment">//用来保存访盘序列</span></span><br><span class="line">    <span class="keyword">int</span> num;<span class="comment">//记录磁头移动方向，0代表向磁道号减少的方向移动，1代表向磁道号增加的方向移动</span></span><br><span class="line">    <span class="keyword">int</span> flag;<span class="comment">//记录第一个大于等于当前磁道号的磁道的编号</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘个数：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);<span class="comment">//读入访盘个数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘序列：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)<span class="comment">//读入访盘序列</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">sort</span>(a,a+n);<span class="comment">//利用c++ STL中自带的排序函数排序（默认从小到大排）</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入当前磁道号：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);<span class="comment">//读入当前磁道号</span></span><br><span class="line">    ans=m;<span class="comment">//把最开始的磁道号赋值给ans保存</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)<span class="comment">//遍历整个访盘序列找出第一个大于等于当前磁道号的磁道</span></span><br><span class="line">        <span class="keyword">if</span>(a[i]&gt;=m)</span><br><span class="line">        &#123;</span><br><span class="line">            flag=i;<span class="comment">//标记第一个大于等于当前磁道号的磁道的编号</span></span><br><span class="line">            <span class="keyword">break</span>;<span class="comment">//因为只需要找第一个，所以找到后就break出去</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入磁头移动方向（向磁道号增加的方向请输入1，向磁道号减少的方向请输入0）：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);<span class="comment">//读入磁头移动方向</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;被访问的下一个磁道号\t移动距离（磁道数）\n&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(num==<span class="number">1</span>)<span class="comment">//如果磁头是向磁道号增加的方向移动</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=flag; i&lt;n; i++)<span class="comment">//从第一个大于等于当前磁道号的磁道编号开始，从小到大，遍历整个访盘序列</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));<span class="comment">//输出被访问的下一个磁道号和移动距离（abs绝对值函数，可以直接给出距离）</span></span><br><span class="line">            m=a[i];<span class="comment">//更新当前磁道号，更新为刚才被访问的那个磁道</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;flag; i++)<span class="comment">//如果磁头到达最大处，就再从头开始到flag，遍历访盘序列，寻找被访问的下一个磁道号</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));<span class="comment">//输出被访问的下一个磁道号和移动距离（abs绝对值函数，可以直接给出距离）</span></span><br><span class="line">            m=a[i];<span class="comment">//更新当前磁道号，更新为刚才被访问的那个磁道</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//如果磁头是向磁道号减少的方向移动</span></span><br><span class="line">    &#123;</span><br><span class="line">        a[flag]==ans ? i=flag : i=flag<span class="number">-1</span>;<span class="comment">//判断a[flag]是否等于ans，如果等于i就等于flag，否则i=flag-1。该步判断的意义在于如果a[flag]刚好等于ans的话就从a[flag]开始遍历，否则就代表a[flag-1]是第一个比ans小的磁道，那么就从a[flag-1]开始遍历</span></span><br><span class="line">        <span class="keyword">for</span>(; i&gt;=<span class="number">0</span>; i--)<span class="comment">//道理和上一个差不多</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));<span class="comment">//输出被访问的下一个磁道号和移动距离（abs绝对值函数，可以直接给出距离）</span></span><br><span class="line">            m=a[i];<span class="comment">//更新当前磁道号，更新为刚才被访问的那个磁道</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=n<span class="number">-1</span>; a[flag]==ans ? i&gt;flag : i&gt;=flag; i--) <span class="comment">//从最大的磁道开始遍历</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));<span class="comment">//输出被访问的下一个磁道号和移动距离（abs绝对值函数，可以直接给出距离）</span></span><br><span class="line">            m=a[i];<span class="comment">//更新当前磁道号，更新为刚才被访问的那个磁道</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="输入样例1：-1"><a href="#输入样例1：-1" class="headerlink" title="输入样例1："></a>输入样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">55</span> <span class="number">58</span> <span class="number">39</span> <span class="number">18</span> <span class="number">90</span> <span class="number">160</span> <span class="number">150</span></span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例1：-1"><a href="#输出样例1：-1" class="headerlink" title="输出样例1："></a>输出样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">被访问的下一个磁道号	移动距离（磁道数）</span><br><span class="line"><span class="number">150</span>			<span class="number">50</span></span><br><span class="line"><span class="number">160</span>			<span class="number">10</span></span><br><span class="line"><span class="number">18</span>			<span class="number">142</span></span><br><span class="line"><span class="number">39</span>			<span class="number">21</span></span><br><span class="line"><span class="number">55</span>			<span class="number">16</span></span><br><span class="line"><span class="number">58</span>			<span class="number">3</span></span><br><span class="line"><span class="number">90</span>			<span class="number">32</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输入样例2：-1"><a href="#输入样例2：-1" class="headerlink" title="输入样例2："></a>输入样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">55</span> <span class="number">58</span> <span class="number">39</span> <span class="number">18</span> <span class="number">90</span> <span class="number">160</span> <span class="number">150</span></span><br><span class="line"><span class="number">90</span></span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例2：-1"><a href="#输出样例2：-1" class="headerlink" title="输出样例2："></a>输出样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">被访问的下一个磁道号	移动距离（磁道数）</span><br><span class="line"><span class="number">90</span>			<span class="number">0</span></span><br><span class="line"><span class="number">58</span>			<span class="number">32</span></span><br><span class="line"><span class="number">55</span>			<span class="number">3</span></span><br><span class="line"><span class="number">39</span>			<span class="number">16</span></span><br><span class="line"><span class="number">18</span>			<span class="number">21</span></span><br><span class="line"><span class="number">160</span>			<span class="number">142</span></span><br><span class="line"><span class="number">150</span>			<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="算法或原理的实现思想："><a href="#算法或原理的实现思想：" class="headerlink" title="算法或原理的实现思想："></a>算法或原理的实现思想：</h2><p>算法：<br>算法就是磁盘调度算法，我选择的是SSTF调度算法和CSCAN调度算法。<br>SSTF算法（最短寻道时间优先）：就是先选择一个离当前磁道最近的磁道访问，然后以此类推，我感觉就是递归思想，写一个函数，然后所有过程都是一样的，即上一个磁道和下一个磁道的关系，然后一直递归。<br>CSCAN算法（循环扫描）：就是从当前磁道开始，有两种选择，1.磁头向磁道号增加的方向移动 2.磁头向磁道号减少的方向移动，具体过程就是模拟，但是其中我发现一个坑，这个后面在后面遇到的问题里再说。</p>
+<p>遇到的问题：<br>SSTF算法：<br>第一个算法还好，复习了一下这个过程，然后一遍就敲出来了，和教材上的一模一样（就是我们自己印的那个教材），但是在加注释完注释的时候出现问题了，我找了好一会，又是debug又是单步调试，但是都找不出来错误，最后我发现是我递归的边界没写好。例如，在这个算法中，如果所有的磁道都访问完之后，我原本写的程序没有跳出递归这一步操作，所以程序会输出一些垃圾数，甚至有的时候会导致程序崩溃，最后我加上跳出的那一步操作后就没问题，这里可以参考一下我的原代码，即没有加注释和改错之前的代码（<a href="https://sun-dawn.github.io/">代码查看</a>里面我详细写了每个代码的更改过程 包括原代码和注释更改后的最终代码）<br>CSCAN算法：<br>这个算法我感觉就更简单了，就是单纯的模拟这个过程，从大到小和从小到大，4个for循环就ok了，但是正如我上面说的那样，我发现一个坑，这个坑是在从大到小的过程中，同时当前磁道号就等于访盘序列中某一个磁盘号时，会出现错误，原因是我用flag标记第一个大于等于当前磁道号的时候，因为是大于等于，所以可能会出现等于的情况，这样我从大到小跑的时候会忽略掉那个等于的部分，具体可以看我博客里写的原代码和最终代码的比较（网址在上面提到过），测试数据的话就是这个算法的样例2，如果用我的原代码和最终版代码跑一遍的话就会发现，两种代码输出的结果不一样，显然最终版是对的，所以我做了改动，里面用了三目运算符，感觉还挺好用的。</p>
+<p>参考文献：<br>山东理工大学19级计科（中外）操作系统教材———复印ppt版<br>没有参考网络和其他同学</p>
+<p>感想、体会和收获：<br>和上次的银行家算法一样，在敲代码之前从教材上复习了一下磁盘调度算法的整个过程，在熟知了所有磁盘调度算法的方法后我才开始敲代码，然后敲代码的过程总的来说还是挺顺利的，虽然中间出了一些小差错，但是最后都能改正过来。这个过程不仅让我学习了操作系统的相关知识，也让我提高了敲代码的能力，个人还是挺喜欢大作业的这种形式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/12/14/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" data-id="ckp2dd71l008u98tn2fd53jw3" data-title="磁盘调度算法" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/30/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          面向对象开发笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/12/Problem%20C%20Game%20Map%20(dfs+%E5%89%AA%E6%9E%9D%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Problem C Game Map (dfs+剪枝）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/">记忆化搜索</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E4%BA%8C%E5%88%86/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%80%9D%E7%BB%B4/">思维</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/BFS/">BFS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%89%8D%E7%BC%80%E5%92%8C%E5%B7%AE%E5%88%86/">前缀和差分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A0%86/">堆</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/">树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%95%B0%E8%AE%BA/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/13/%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F/">数独游戏</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/28/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/26/L2-040%20%E5%93%B2%E5%93%B2%E6%89%93%E6%B8%B8%E6%88%8F%20(25%20%E5%88%86)/">L2-040 哲哲打游戏 (25 分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/26/L2-038%20%E7%97%85%E6%AF%92%E6%BA%AF%E6%BA%90%20(25%20%E5%88%86)/">L2-038 病毒溯源 (25 分)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/21/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/">python中整除与取整的区别</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Sun-Dawn<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

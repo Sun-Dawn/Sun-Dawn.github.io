@@ -71,6 +71,97 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-L2-035 完全二叉树的层序遍历 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/24/L2-035%20%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-03-24T11:58:09.000Z" itemprop="datePublished">2021-03-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/">树</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/24/L2-035%20%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%20(25%20%E5%88%86)/">L2-035 完全二叉树的层序遍历 (25 分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805046380707840/problems/1336215880692482058">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20210324195505616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>后序遍历：左-&gt;右-&gt;根，把树存在数组里，如果根节点是u那么他的做儿子就是u*2，右儿子就是u*2+1，完全二叉树存在右儿子就一定存在左儿子，但是存在左儿子不一定存在右儿子，刚好我们的数组也满足这个条件，及可能有u*2（左儿子），但是没有u*2+1（右儿子）；但是如果有u*2+1（右儿子）就一定有u*2（左儿子）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tree[<span class="number">110</span>];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">creat</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(u&gt;n)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">creat</span>(u*<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">creat</span>(u*<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">    cin&gt;&gt;tree[u];</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="built_in">creat</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n<span class="number">-1</span>; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,tree[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,tree[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/03/24/L2-035%20%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%20(25%20%E5%88%86)/" data-id="ckp9sq7qw0035ostn76559k50" data-title="L2-035 完全二叉树的层序遍历 (25 分)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-L2-016 愿天下有情人都是失散多年的兄妹 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/22/L2-016%20%E6%84%BF%E5%A4%A9%E4%B8%8B%E6%9C%89%E6%83%85%E4%BA%BA%E9%83%BD%E6%98%AF%E5%A4%B1%E6%95%A3%E5%A4%9A%E5%B9%B4%E7%9A%84%E5%85%84%E5%A6%B9%20(25%20%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2021-03-22T13:28:57.000Z" itemprop="datePublished">2021-03-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/22/L2-016%20%E6%84%BF%E5%A4%A9%E4%B8%8B%E6%9C%89%E6%83%85%E4%BA%BA%E9%83%BD%E6%98%AF%E5%A4%B1%E6%95%A3%E5%A4%9A%E5%B9%B4%E7%9A%84%E5%85%84%E5%A6%B9%20(25%20%E5%88%86)/">L2-016 愿天下有情人都是失散多年的兄妹 (25 分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805046380707840/problems/994805061769609216">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20210322212316313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"><br><img src="https://img-blog.csdnimg.cn/20210322212333781.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"><br><img src="https://img-blog.csdnimg.cn/20210322212345724.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>用dfs去一层层的搜</p>
+<p>&nbsp;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    string x;</span><br><span class="line">    <span class="keyword">int</span> father_id=<span class="number">-1</span>;<span class="comment">//初始化为-1，如果不初始化的话会默认为0，但是编号也可能刚好为00000</span></span><br><span class="line">    <span class="keyword">int</span> mother_id=<span class="number">-1</span>;</span><br><span class="line">&#125; a[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(u&lt;<span class="number">0</span>||v&lt;<span class="number">0</span>||k&gt;=<span class="number">5</span>)<span class="comment">//如果父母不可考或者出五服</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>((a[u].father_id&gt;=<span class="number">0</span>&amp;&amp;a[u].father_id==a[v].father_id)||(a[u].mother_id&gt;=<span class="number">0</span>&amp;&amp;a[u].mother_id==a[v].mother_id))<span class="comment">//父亲或者母亲为同一个人</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(a[u].father_id,a[v].father_id,k+<span class="number">1</span>)&amp;&amp;<span class="comment">//递归找亲戚</span></span><br><span class="line">        <span class="built_in">dfs</span>(a[u].mother_id,a[v].mother_id,k+<span class="number">1</span>)&amp;&amp;</span><br><span class="line">        <span class="built_in">dfs</span>(a[u].father_id,a[v].mother_id,k+<span class="number">1</span>)&amp;&amp;</span><br><span class="line">        <span class="built_in">dfs</span>(a[u].mother_id,a[v].father_id,k+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> t;</span><br><span class="line">        cin&gt;&gt;t;</span><br><span class="line">        cin&gt;&gt;a[t].x&gt;&gt;a[t].father_id&gt;&gt;a[t].mother_id;</span><br><span class="line">        <span class="keyword">if</span>(a[t].father_id!=<span class="number">-1</span>)<span class="comment">//父母的性别也要记录否则会部分正确</span></span><br><span class="line">            a[a[t].father_id].x=<span class="string">&quot;M&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[t].mother_id!=<span class="number">-1</span>)</span><br><span class="line">            a[a[t].mother_id].x=<span class="string">&quot;F&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    cin&gt;&gt;m;</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> l,r;</span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        <span class="keyword">if</span>(a[l].x==a[r].x)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Never Mind\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">dfs</span>(l,r,<span class="number">1</span>))</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面要记录父母的性别很重要，打个比方，a的父亲是b，c的父亲是d，如果样例只给出了a和c，我们通过a和c知道b是a的父亲，d是c的父亲，但是b和d并没有通过样例直接给出，如果这时候题目询问b和d是否能结婚，如果我们不记录父母的性别那么我们就无法判断b和d能否结婚，如果我们记录了父母的的性别，那我们就可以很清楚的判断不行，因为他们是同性，这就是为什么要记录父母性别的原因。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/03/22/L2-016%20%E6%84%BF%E5%A4%A9%E4%B8%8B%E6%9C%89%E6%83%85%E4%BA%BA%E9%83%BD%E6%98%AF%E5%A4%B1%E6%95%A3%E5%A4%9A%E5%B9%B4%E7%9A%84%E5%85%84%E5%A6%B9%20(25%20%E5%88%86)/" data-id="ckp9sq7qq002vostn84tieuhv" data-title="L2-016 愿天下有情人都是失散多年的兄妹 (25 分)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-L2-014 列车调度 (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/03/21/L2-014%20%E5%88%97%E8%BD%A6%E8%B0%83%E5%BA%A6%20(25%20%E5%88%86)/" class="article-date">
@@ -104,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/21/L2-014%20%E5%88%97%E8%BD%A6%E8%B0%83%E5%BA%A6%20(25%20%E5%88%86)/" data-id="ckp2dnx6r002nuktng1tsfhnt" data-title="L2-014 列车调度 (25 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/03/21/L2-014%20%E5%88%97%E8%BD%A6%E8%B0%83%E5%BA%A6%20(25%20%E5%88%86)/" data-id="ckp9sq7qn002tostnfa1zh51c" data-title="L2-014 列车调度 (25 分)" class="article-share-link">Share</a>
       
       
       
@@ -149,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/20/L1-046%20%E6%95%B4%E9%99%A4%E5%85%89%E6%A3%8D%20(20%20%E5%88%86)/" data-id="ckp2dnx660020uktn5ywx6xc9" data-title="L1-046 整除光棍 (20 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/03/20/L1-046%20%E6%95%B4%E9%99%A4%E5%85%89%E6%A3%8D%20(20%20%E5%88%86)/" data-id="ckp9sq7q80027ostnbqf6ef28" data-title="L1-046 整除光棍 (20 分)" class="article-share-link">Share</a>
       
       
       
@@ -193,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/20/L1-043%20%E9%98%85%E8%A7%88%E5%AE%A4%20(20%20%E5%88%86)/" data-id="ckp2dnx64001yuktn4ermhe1k" data-title="L1-043 阅览室 (20 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/03/20/L1-043%20%E9%98%85%E8%A7%88%E5%AE%A4%20(20%20%E5%88%86)/" data-id="ckp9sq7q30024ostn3plsgfy5" data-title="L1-043 阅览室 (20 分)" class="article-share-link">Share</a>
       
       
       
@@ -239,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/20/L2-036%20%E7%BD%91%E7%BA%A2%E7%82%B9%E6%89%93%E5%8D%A1%E6%94%BB%E7%95%A5%20(25%20%E5%88%86)/" data-id="ckp2dnx730034uktnhnuedkls" data-title="L2-036 网红点打卡攻略 (25 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/03/20/L2-036%20%E7%BD%91%E7%BA%A2%E7%82%B9%E6%89%93%E5%8D%A1%E6%94%BB%E7%95%A5%20(25%20%E5%88%86)/" data-id="ckp9sq7qx0038ostn3s9xft3a" data-title="L2-036 网红点打卡攻略 (25 分)" class="article-share-link">Share</a>
       
       
       
@@ -284,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/20/L2-029%20%E7%89%B9%E7%AB%8B%E7%8B%AC%E8%A1%8C%E7%9A%84%E5%B9%B8%E7%A6%8F%20(25%20%E5%88%86)/" data-id="ckp2dnx6x002uuktn69xu5ssx" data-title="L2-029 特立独行的幸福 (25 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/03/20/L2-029%20%E7%89%B9%E7%AB%8B%E7%8B%AC%E8%A1%8C%E7%9A%84%E5%B9%B8%E7%A6%8F%20(25%20%E5%88%86)/" data-id="ckp9sq7qt0030ostn67w90i2r" data-title="L2-029 特立独行的幸福 (25 分)" class="article-share-link">Share</a>
       
       
       
@@ -336,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/15/STL%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/" data-id="ckp2dnx7k003tuktnb9usawtz" data-title="STL容器总结" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/03/15/STL%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/" data-id="ckp9sq7rf003zostn1ywyd4bo" data-title="STL容器总结" class="article-share-link">Share</a>
       
       
       
@@ -380,7 +471,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/15/L1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/" data-id="ckp2dnx6d0025uktne84deew8" data-title="L1-071 前世档案 (20 分)" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/03/15/L1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/" data-id="ckp9sq7qb002bostn88d29wjc" data-title="L1-071 前世档案 (20 分)" class="article-share-link">Share</a>
       
       
       
@@ -426,100 +517,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/14/L1-009%20N%E4%B8%AA%E6%95%B0%E6%B1%82%E5%92%8C%20(20%20%E5%88%86)/" data-id="ckp2dnx61001tuktnhvzqfsq8" data-title="L1-009 N个数求和 (20 分)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-L1-006 连续因子 (20 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/03/13/L1-006%20%E8%BF%9E%E7%BB%AD%E5%9B%A0%E5%AD%90%20(20%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2021-03-13T12:04:49.000Z" itemprop="datePublished">2021-03-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/03/13/L1-006%20%E8%BF%9E%E7%BB%AD%E5%9B%A0%E5%AD%90%20(20%20%E5%88%86)/">L1-006 连续因子 (20 分)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805046380707840/problems/994805138600869888">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20210313195627798.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
-<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>求最长连续因子。（注：输出的结果相乘不一定等于N）。</p>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>暴力枚举求解</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//x代表最长连续因子的长度</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> sum=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=(<span class="keyword">int</span>)<span class="built_in">sqrt</span>(n); i++)<span class="comment">//sqrt枚举因子</span></span><br><span class="line">    &#123;</span><br><span class="line">        sum=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i; j&lt;i+x; j++)<span class="comment">//连续枚举x个因子</span></span><br><span class="line">            sum*=j;</span><br><span class="line">        <span class="keyword">if</span>(n%sum==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">int</span> i,j,ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">20</span>; i&gt;=<span class="number">1</span>; i--)<span class="comment">//20的阶乘大约在20位左右</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(i)!=<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans=<span class="number">0</span>;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="built_in">check</span>(i); j&lt;<span class="built_in">check</span>(i)+i<span class="number">-1</span>; j++)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d*&quot;</span>,j);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,j);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(ans)<span class="comment">//n有可能为质数</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;1\n%lld\n&quot;</span>,n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/13/L1-006%20%E8%BF%9E%E7%BB%AD%E5%9B%A0%E5%AD%90%20(20%20%E5%88%86)/" data-id="ckp2dnx63001wuktn3koo6lk7" data-title="L1-006 连续因子 (20 分)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-关于c++模板的思考" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/03/13/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/" class="article-date">
-  <time class="dt-published" datetime="2021-03-13T01:07:54.000Z" itemprop="datePublished">2021-03-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>►<a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/">C++</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/03/13/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/">关于c++模板的思考</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="1-如何使用模板提高效率？"><a href="#1-如何使用模板提高效率？" class="headerlink" title="1. 如何使用模板提高效率？"></a>1. 如何使用模板提高效率？</h3><p>模板应该是一类题型的通解，但是模板可能会根据题目要求的不同而做出改变，所以当遇到模板题的时候可以直接把背过的模板套上，从而达到快速解题的效果，所以我们需要了解每一种模板的应用范围以及模板中每个变量所代表的含义，了解了这些我们就可以根据题目的变化来修改我们模板中与题目有出入的地方。所以这就需要把我们一些常见题型的模板烂熟于心。</p>
-<h3 id="2-模板有没有分类？"><a href="#2-模板有没有分类？" class="headerlink" title="2. 模板有没有分类？"></a>2. 模板有没有分类？</h3><p>模板应该是有分类的，根据算法的不同，模板也不尽相同。</p>
-<h3 id="3-分成几类？"><a href="#3-分成几类？" class="headerlink" title="3. 分成几类？"></a>3. 分成几类？</h3><p>从宏观上来看，我觉得应该分成两类。第一类是c++ STL自带的标准类库里的一些函数或容器，例如：vector、map、set、__gcd()，sprintf(),reverse()………；第二类是我们根据做题经验总结或者背过的代码模板，例如：快速幂模板、快排模板、kmp模板、哈希模板………</p>
-<h3 id="4-每类模板如何使用？"><a href="#4-每类模板如何使用？" class="headerlink" title="4. 每类模板如何使用？"></a>4. 每类模板如何使用？</h3><p>（1）c++ STL里面自带的模板：首先我们应该熟悉c++ STL库里面都有些什么容器或函数，然后最重要的是了解每个容器或函数的相关用法以及他们的特性，了解这些容器或函数在哪个头文件里面，看到问题时想一下STL库里面的容器或函数能不能帮助我们更快速的解决问题。</p>
-<p>（2）根据做题经验总结或者背过的代码模板：虽然网上也有不少算法模板，但是我更倾向于自己写，我在总结代码模板的时候都是在多次做过一类题后写出来的，例如dfs，由于写过很多次，所以脑子里基本有了一个dfs框架，看到题目的时候脑海里会快速闪现出模板，然后按照经验敲出基本的模板结构，最后再根据题目的一些细节要求对代码模板做出润色，以求能够达到解题的目的。</p>
-<p>&nbsp;</p>
-<h3 id="一些常见算法需要掌握的模板："><a href="#一些常见算法需要掌握的模板：" class="headerlink" title="一些常见算法需要掌握的模板："></a>一些常见算法需要掌握的模板：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">基础算法：</span><br><span class="line"><span class="number">1.</span>快速排序</span><br><span class="line"><span class="number">2.</span>归并排序</span><br><span class="line"><span class="number">3.</span>二分</span><br><span class="line"><span class="number">4.</span>高精度</span><br><span class="line"><span class="number">5.</span>前缀和与拆分</span><br><span class="line"><span class="number">6.</span>双指针算法</span><br><span class="line"><span class="number">7.</span>位运算</span><br><span class="line"><span class="number">8.</span>离散化</span><br><span class="line"><span class="number">9.</span>区间合并</span><br><span class="line"></span><br><span class="line">数据结构：</span><br><span class="line"><span class="number">1.</span>单链表</span><br><span class="line"><span class="number">2.</span>双链表</span><br><span class="line"><span class="number">3.</span>栈</span><br><span class="line"><span class="number">4.</span>队列</span><br><span class="line"><span class="number">5.</span>单调队列</span><br><span class="line"><span class="number">6.</span>KMP</span><br><span class="line"><span class="number">7.</span>Trie</span><br><span class="line"><span class="number">8.</span>并查集</span><br><span class="line"><span class="number">9.</span>堆</span><br><span class="line"><span class="number">10.</span>哈希表</span><br><span class="line"></span><br><span class="line">搜索与图论：</span><br><span class="line"><span class="number">1.</span>DFS</span><br><span class="line"><span class="number">2.B</span>FS</span><br><span class="line"><span class="number">3.</span>树与图的深度优先遍历</span><br><span class="line"><span class="number">4.</span>树与图的广度优先遍历</span><br><span class="line"><span class="number">5.</span>拓扑排序</span><br><span class="line"><span class="number">6.</span>Dijkstra</span><br><span class="line"><span class="number">7.b</span>ellman-ford</span><br><span class="line"><span class="number">8.</span>spfa</span><br><span class="line"><span class="number">9.F</span>loyd</span><br><span class="line"><span class="number">10.</span>Prim</span><br><span class="line"><span class="number">11.</span>Kruskal</span><br><span class="line"><span class="number">12.</span>染色法判定二分图</span><br><span class="line"><span class="number">13.</span>匈牙利算法</span><br><span class="line"></span><br><span class="line">数论：</span><br><span class="line"><span class="number">1.</span>质数</span><br><span class="line"><span class="number">2.</span>约数</span><br><span class="line"><span class="number">3.</span>欧拉函数</span><br><span class="line"><span class="number">4.</span>快速幂</span><br><span class="line"><span class="number">5.</span>扩展欧几里得算法</span><br><span class="line"><span class="number">6.</span>中国剩余定理</span><br><span class="line"><span class="number">7.</span>高斯消元</span><br><span class="line"><span class="number">8.</span>求组合数</span><br><span class="line"><span class="number">9.</span>容斥原理</span><br><span class="line"><span class="number">10.</span>博弈论</span><br><span class="line"></span><br><span class="line">动态规划：</span><br><span class="line"><span class="number">1.</span>背包问题</span><br><span class="line"><span class="number">2.</span>线性DP</span><br><span class="line"><span class="number">3.</span>区间DP</span><br><span class="line"><span class="number">4.</span>计数类DP</span><br><span class="line"><span class="number">5.</span>数位统计DP</span><br><span class="line"><span class="number">6.</span>状态压缩DP</span><br><span class="line"><span class="number">7.</span>树形DP</span><br><span class="line"><span class="number">8.</span>记忆化搜索</span><br><span class="line"></span><br><span class="line">贪心：</span><br><span class="line"><span class="number">1.</span>区间问题</span><br><span class="line"><span class="number">2.</span>Huffman树</span><br><span class="line"><span class="number">3.</span>排序不等式</span><br><span class="line"><span class="number">4.</span>绝对值不等式</span><br><span class="line"><span class="number">5.</span>推公式</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2021/03/13/%E5%85%B3%E4%BA%8Ec++%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%80%9D%E8%80%83/" data-id="ckp2dnx85004iuktn6qzwg50y" data-title="关于c++模板的思考" class="article-share-link">Share</a>
+      <a data-url="https://sun-dawn.github.io/2021/03/14/L1-009%20N%E4%B8%AA%E6%95%B0%E6%B1%82%E5%92%8C%20(20%20%E5%88%86)/" data-id="ckp9sq7q10022ostncdehdq0k" data-title="L1-009 N个数求和 (20 分)" class="article-share-link">Share</a>
       
       
       
@@ -574,6 +572,14 @@
       <ul>
         
           <li>
+            <a href="/2021/05/29/J%20-%20JOJO's%20Factory%20Gym%20-%20103107J%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">J - JOJO&#39;s Factory Gym - 103107J（思维）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/29/Keep%20Eating%20Gym%20-%20103107K%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">Keep Eating Gym - 103107K（思维）</a>
+          </li>
+        
+          <li>
             <a href="/2021/05/13/%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F/">数独游戏</a>
           </li>
         
@@ -583,14 +589,6 @@
         
           <li>
             <a href="/2021/04/26/L2-040%20%E5%93%B2%E5%93%B2%E6%89%93%E6%B8%B8%E6%88%8F%20(25%20%E5%88%86)/">L2-040 哲哲打游戏 (25 分)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/26/L2-038%20%E7%97%85%E6%AF%92%E6%BA%AF%E6%BA%90%20(25%20%E5%88%86)/">L2-038 病毒溯源 (25 分)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/21/python%E4%B8%AD%E6%95%B4%E9%99%A4%E4%B8%8E%E5%8F%96%E6%95%B4%E7%9A%84%E5%8C%BA%E5%88%AB/">python中整除与取整的区别</a>
           </li>
         
       </ul>

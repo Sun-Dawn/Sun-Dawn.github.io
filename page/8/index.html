@@ -71,6 +71,207 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-J - 程序设计：轻重搭配（贪心）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/10/12/J%20-%20%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%BB%E9%87%8D%E6%90%AD%E9%85%8D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2020-10-12T12:10:18.000Z" itemprop="datePublished">2020-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E8%B4%AA%E5%BF%83/">贪心</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/10/12/J%20-%20%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%BB%E9%87%8D%E6%90%AD%E9%85%8D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%89/">J - 程序设计：轻重搭配（贪心）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>n 个同学去动物园参观，原本每人都需要买一张门票，但售票处推出了一个优惠活动，一个体重为 x 的人可以和体重至少为 2x 配对，这样两人只需买一张票。现在给出了 n个人的体重，请你计算他们最少需要买几张门票？</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>第一行一个整数 n，表示人数。<br>第二行 n个整数，每个整数 ai表示每个人的体重。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>一个整数，表示最少需要购买的门票数目。</p>
+<p>数据范围：</p>
+<p>对于 30%的数据：1≤n≤25，1≤ai≤100。</p>
+<p>对于 60%的数据：1≤n≤10000，1≤ai≤1000。</p>
+<p>对于 100%的数据：1≤n≤5⋅105，1≤ai≤105。</p>
+<h3 id="样例解释"><a href="#样例解释" class="headerlink" title="样例解释:"></a>样例解释:</h3><p>1和 9 配对，7 和 3 配对，剩下 5,5 单独，一共买四张票。</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">1</span> <span class="number">9</span> <span class="number">7</span> <span class="number">3</span> <span class="number">5</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>先排序然后贪心，从中间靠左的那个位置开始贪，与最末尾的数进行比较，如果符合题意，则两个数都左移，如果不符合题意，则左边的那个数左移，右边的数不能浪费。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,i,j,a[<span class="number">500010</span>],sum=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">sort</span>(a,a+n);</span><br><span class="line">    <span class="keyword">for</span>(i=n/<span class="number">2</span><span class="number">-1</span>,j=n<span class="number">-1</span>; i&gt;=<span class="number">0</span>&amp;&amp;j&gt;n/<span class="number">2</span><span class="number">-1</span>;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i]*<span class="number">2</span>&lt;=a[j])</span><br><span class="line">        &#123;</span><br><span class="line">            i--;</span><br><span class="line">            j--;</span><br><span class="line">            sum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            i--;</span><br><span class="line">    &#125;</span><br><span class="line">    sum+=n<span class="number">-2</span>*sum;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/10/12/J%20-%20%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%BB%E9%87%8D%E6%90%AD%E9%85%8D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%89/" data-id="ckrn6s8xc0039jotna5qqdeq5" data-title="J - 程序设计：轻重搭配（贪心）" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-D - Test Cases（暴力）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/10/05/D%20-%20Test%20Cases%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2020-10-05T12:32:31.000Z" itemprop="datePublished">2020-10-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/10/05/D%20-%20Test%20Cases%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/">D - Test Cases（暴力）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>You want to prepare test cases for a problem with the following description:<br>“Given an array of n positive integers, and a number of queries. Each query will ask about a range [l, r] (1 ≤ l ≤ r ≤ n), where each of the values between index l and index r (both inclusive) occurs an even number of times except one value. The answer to each query is the value that occurs an odd number of times in the given range.”<br>You have generated an array of n positive integers, you need to know the number of valid queries you can ask on this array. A query is valid if it has an answer, and that answer is unique.</p>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>The first line of input contains a single integer T (1 ≤ T ≤ 64), the number of test cases.<br>The first line of each test case contains a single integer n (1 ≤ n ≤ 5000), the size of the array.<br>The next line contains n space-separated integers, a1, a2, …, an (1 ≤ ai ≤ 106), the values of the array.<br>The total sum of n overall test cases doesn’t exceed 72000.</p>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>For each test case, print a single line with the number of valid queries you can ask.</p>
+<h3 id="Example："><a href="#Example：" class="headerlink" title="Example："></a>Example：</h3><h3 id="Input-1"><a href="#Input-1" class="headerlink" title="Input"></a>Input</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">9</span> <span class="number">1</span> <span class="number">1</span> <span class="number">2</span> <span class="number">1</span> <span class="number">9</span> <span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Output-1"><a href="#Output-1" class="headerlink" title="Output"></a>Output</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<p>一道题目挺短的题，但是题意非常难懂，我读了接近一个小时题，查了无数单词，最后还是没读懂题意。比完赛补题的时候直接用百度翻译，然而也没翻译出来个所以然来，最后看了下别人博客的题意才理解。</p>
+<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>输入数据的组数，和每组有多少个数据，然后输入这个数组，要求合法区间的个数（合法区间是指这个区间里出现奇数次的数存在且只有一个）</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>思路的话就比较简单了 数据比较小5000，直接两个for循环模拟范围l和r，然后记录当前元素出现的次数，然后看一下是否只有一个元素出现次数是奇数就ok了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> book[<span class="number">1000010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,n,t,a[<span class="number">100010</span>],sum,result;</span><br><span class="line">    <span class="built_in">freopen</span>(<span class="string">&quot;cases.in&quot;</span>,<span class="string">&quot;r&quot;</span>,stdin);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">        result=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));<span class="comment">//在刚开始清空为0</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(j=i; j&lt;n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                book[a[j]]++;</span><br><span class="line">                <span class="keyword">if</span>(book[a[j]]%<span class="number">2</span>!=<span class="number">0</span>)</span><br><span class="line">                    sum++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    sum--;</span><br><span class="line">                <span class="keyword">if</span>(sum==<span class="number">1</span>)</span><br><span class="line">                    result++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(j=i; j&lt;n; j++)<span class="comment">//为下一次区间循环清0</span></span><br><span class="line">                book[a[j]]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/10/05/D%20-%20Test%20Cases%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/" data-id="ckrn6s8wv002ojotnam35hszl" data-title="D - Test Cases（暴力）" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-7-6 排座位 (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/30/7-6%20%E6%8E%92%E5%BA%A7%E4%BD%8D%20(25%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2020-09-30T12:46:59.000Z" itemprop="datePublished">2020-09-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a>►<a class="article-category-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/09/30/7-6%20%E6%8E%92%E5%BA%A7%E4%BD%8D%20(25%E5%88%86)/">7-6 排座位 (25分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>布置宴席最微妙的事情，就是给前来参宴的各位宾客安排座位。无论如何，总不能把两个死对头排到同一张宴会桌旁！这个艰巨任务现在就交给你，对任何一对客人，请编写程序告诉主人他们是否能被安排同席。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出3个正整数：N（≤100），即前来参宴的宾客总人数，则这些人从1到N编号；M为已知两两宾客之间的关系数；K为查询的条数。随后M行，每行给出一对宾客之间的关系，格式为：宾客1 宾客2 关系，其中关系为1表示是朋友，-1表示是死对头。注意两个人不可能既是朋友又是敌人。最后K行，每行给出一对需要查询的宾客编号。<br>这里假设朋友的朋友也是朋友。但敌人的敌人并不一定就是朋友，朋友的敌人也不一定是敌人。只有单纯直接的敌对关系才是绝对不能同席的。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对每个查询输出一行结果：如果两位宾客之间是朋友，且没有敌对关系，则输出No problem；如果他们之间并不是朋友，但也不敌对，则输出OK；如果他们之间有敌对，然而也有共同的朋友，则输出OK but…；如果他们之间只有敌对关系，则输出No way。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span> <span class="number">8</span> <span class="number">4</span></span><br><span class="line"><span class="number">5</span> <span class="number">6</span> <span class="number">1</span></span><br><span class="line"><span class="number">2</span> <span class="number">7</span> <span class="number">-1</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">1</span></span><br><span class="line"><span class="number">3</span> <span class="number">4</span> <span class="number">1</span></span><br><span class="line"><span class="number">6</span> <span class="number">7</span> <span class="number">-1</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">1</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">-1</span></span><br><span class="line"><span class="number">3</span> <span class="number">4</span></span><br><span class="line"><span class="number">5</span> <span class="number">7</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">7</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">No problem</span><br><span class="line">OK</span><br><span class="line">OK but...</span><br><span class="line">No way</span><br></pre></td></tr></table></figure>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>虽说这是搜索专栏里的题，但是这道题其实不一定非要用dfs/bfs，暴力也是可以的，因为这道题数据不大（才100）。值得注意的是，这道题有一个小坑，就是题目中说的：“朋友的朋友也是朋友”这句话，例如A和B原本不认识，如果B和C是好朋友，A和C也是好朋友，那么A和B也将是好朋友，如果查询A和B的话应该输出No problem，所以这里我们需要“预处理”一下。写博客之前我特意去网上搜了一下，绝大多数博客用的都是并查集，其实我感觉可以不用那么麻烦，我们可以利用弗洛伊德思想来处理一下数据，把“能成为朋友”的两个人记录一下，（这里说的能成为朋友的就是我举得那个例子类型的）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,e[<span class="number">110</span>][<span class="number">110</span>],a[<span class="number">110</span>][<span class="number">110</span>],k;<span class="comment">//e代表原本关系，a代表处理后的关系</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,x,y,z,r,l,p;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;n,&amp;m,&amp;k);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;x,&amp;y,&amp;z);</span><br><span class="line">        e[x][y]=a[x][y]=z;<span class="comment">//先把数组e完全赋值给数组a</span></span><br><span class="line">        e[y][x]=a[y][x]=z;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(p=<span class="number">1</span>; p&lt;=n; p++)<span class="comment">//预处理，找出可以成为朋友的两个人，利用了弗洛伊德思想，即如果p是i的朋友同时p也是j的朋友，那么i和j也是朋友</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=n; j++)</span><br><span class="line">                <span class="keyword">if</span>(a[i][p]==<span class="number">1</span>&amp;&amp;a[j][p]==<span class="number">1</span>)</span><br><span class="line">                    a[i][j]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(k--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;l,&amp;r);</span><br><span class="line">        <span class="keyword">if</span>(e[l][r]==<span class="number">1</span>)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;No problem\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(e[l][r]!=<span class="number">1</span>&amp;&amp;e[l][r]!=<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[l][r]==<span class="number">0</span>)<span class="comment">//如果两个人没有共同好友</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;OK\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(a[l][r]==<span class="number">1</span>)<span class="comment">//有共同好友同时原本不认识，意味着这两个人可以成为朋友，所以输出No problem</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;No problem\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(e[l][r]==<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[l][r]==<span class="number">1</span>)<span class="comment">//原本是敌对关系，但是有共同好友</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;OK but...\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span><span class="comment">//没有共同好友</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;No way\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/09/30/7-6%20%E6%8E%92%E5%BA%A7%E4%BD%8D%20(25%E5%88%86)/" data-id="ckrn6s8su000gjotnbri8ghj7" data-title="7-6 排座位 (25分)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Problem D Bus Stop" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/25/Problem%20D%20Bus%20Stop/" class="article-date">
+  <time class="dt-published" datetime="2020-09-25T11:57:27.000Z" itemprop="datePublished">2020-09-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%80%9D%E7%BB%B4/">思维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/09/25/Problem%20D%20Bus%20Stop/">Problem D Bus Stop</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://img-blog.csdnimg.cn/20200925194408308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
+<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>给你n个点，代表一条街上房子的坐标，问你至少修多少个公交车站可以覆盖所有房子（公交车站最多可以覆盖左右10公里）<br>样例一解释：可以在2那建一个，然后在200那建一个<br>样例二解释：在20那建一个，在80和200那各建一个</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>我们建公交车站的时候要尽量建在中间，就例如样例二中的10和30，但其实我们可以不用考虑那么麻烦，我们可以先标记第一个房子的位置，然后找和第一个房子距离&lt;=20的房子，因为车站可以覆盖左右各10公里，如果建在中间的话就是20公里，例如样例二中的10和30，如果找到第一个和标记房子距离&gt;20公里的房子的话就代表我们需要重新建一个车站了，然后让车站数目+1，然后重新标记这个新房子，以此类推。最后还有一点这个题n是可以为0的，即可以有0座房子，这样的话就不需要建车站了（因为这个特判的疏忽我们被罚时了一次）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">2000010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,t,n,sum,book;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        sum=<span class="number">1</span>;<span class="comment">//初始化车站数为1</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)<span class="comment">//特判0</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;0\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)<span class="comment">//存点</span></span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">            book=a[<span class="number">0</span>];<span class="comment">//先标记第一个房子</span></span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;n; i++)</span><br><span class="line">                <span class="keyword">if</span>(a[i]-book&gt;<span class="number">20</span>)<span class="comment">//如果距离&gt;20，即需要建一个新的车站了</span></span><br><span class="line">                &#123;</span><br><span class="line">                    sum++;<span class="comment">//车站数目+1</span></span><br><span class="line">                    book=a[i];<span class="comment">//重新标记这个新房子</span></span><br><span class="line">                &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/09/25/Problem%20D%20Bus%20Stop/" data-id="ckrn6s8ys004zjotn2m4wh36o" data-title="Problem D Bus Stop" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-7-10 功夫传人 (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2020/09/23/7-10%20%E5%8A%9F%E5%A4%AB%E4%BC%A0%E4%BA%BA%20(25%E5%88%86)/" class="article-date">
@@ -373,225 +574,11 @@
 
 
   
-    <article id="post-G - Game Rank(模拟)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/" class="article-date">
-  <time class="dt-published" datetime="2020-09-18T11:27:46.000Z" itemprop="datePublished">2020-09-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/">G - Game Rank(模拟）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="https://img-blog.csdnimg.cn/20200918201533364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"><br><img src="https://img-blog.csdnimg.cn/20200918201556506.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>就是炉石的排位机制……</p>
-<p>共25个等级和传说等级，赢一局一颗星，连续赢三局以上额外多加一颗星（高于5级后不多加星），满星后再多一颗星才能升等级，并且升级后新等级有一颗星。</p>
-<p>输一局减一颗星（21-25级输了不扣星，但是仍会断连胜），输了后没星仍可以保持段位，但是没星后又掉星了会掉等级。传说后不论输赢均不掉段。</p>
-<p>各等级的星星为</p>
-<ul>
-<li><p>Rank 25-21: 2 stars</p>
-</li>
-<li><p>Rank 20-16: 3 stars</p>
-</li>
-<li><p>Rank 15-11: 4 stars</p>
-</li>
-<li><p>Rank 10-1: 5 stars</p>
-</li>
-</ul>
-<p>这个题就是纯粹的模拟了，我们组问题主要出在了段位下降一次之后星也会少一颗，比如现在是Rank2 0颗星，如果输一次的话就变成了Rank3 1颗星（满星为2颗），我们一直以为是变成Rank3 2颗星，还有一个问题就是段位保护那里边界问题，题目描述是Rank21-25处于段为保护 输了不会掉星，所以我们只考虑了处于段位21-25输的时候不掉星，没考虑到如果是Rank20 0颗星的话会怎么样，实际上如果是Rank20 0颗星同时输掉一次的话应该还是Rank20 0颗星，我们之前没考虑到这个样例，所以根据我们的程序会变成Rank21 2颗星（满星为2颗），所以我们一直在WA并且找不出错误- -</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">200</span>]= &#123;<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>&#125;;<span class="comment">//数组a记录每个段位满星的个数，顺序是逆序的，为了和ranks同步</span></span><br><span class="line">    <span class="keyword">int</span> ranks=<span class="number">25</span>,starts=<span class="number">0</span>,times=<span class="number">0</span>,i,len;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">10010</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,str);</span><br><span class="line">    len=<span class="built_in">strlen</span>(str);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ranks==<span class="number">0</span>)<span class="comment">//如果是Rank0的话就说明达到最顶峰了，直接break出去输出Legend就行了</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(str[i]==<span class="string">&#x27;W&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            times++;<span class="comment">//连胜+1</span></span><br><span class="line">            starts++;<span class="comment">//星数+1</span></span><br><span class="line">            <span class="keyword">if</span>(times&gt;=<span class="number">3</span>&amp;&amp;ranks&gt;=<span class="number">6</span>&amp;&amp;ranks&lt;=<span class="number">25</span>)<span class="comment">//如果连胜&gt;3同时段位没有在5之上的话就触发连胜额外加的那一颗星</span></span><br><span class="line">                starts++;</span><br><span class="line">            <span class="keyword">if</span>(starts&gt;a[ranks])<span class="comment">//如果星数&gt;该段位最多星数，即代表晋级段位</span></span><br><span class="line">            &#123;</span><br><span class="line">                starts-=a[ranks];</span><br><span class="line">                ranks--;<span class="comment">//段位上升一个</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            times=<span class="number">0</span>;<span class="comment">//终结连胜</span></span><br><span class="line">            <span class="keyword">if</span>(ranks&gt;=<span class="number">21</span>&amp;&amp;ranks&lt;=<span class="number">25</span>)<span class="comment">//处于段位保护状态，输了也没什么操作，所以直接contin</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            starts--;<span class="comment">//星数-1</span></span><br><span class="line">            <span class="keyword">if</span>(starts&lt;<span class="number">0</span>)<span class="comment">//如果星数为负</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(ranks==<span class="number">20</span>)<span class="comment">//特殊情况，我们队没有想到的情况</span></span><br><span class="line">                    starts=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    ranks++;</span><br><span class="line">                    starts=a[ranks]<span class="number">-1</span>;<span class="comment">//掉段之后星数也要再-1</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ranks)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ranks);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Legend\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/" data-id="ckrn6s8wy002rjotn0dm64ycn" data-title="G - Game Rank(模拟）" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-HDU6514 Monitor(二维差分+二维前缀和)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/" class="article-date">
-  <time class="dt-published" datetime="2020-09-11T13:13:44.000Z" itemprop="datePublished">2020-09-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%89%8D%E7%BC%80%E5%92%8C%E5%B7%AE%E5%88%86/">前缀和差分</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/">HDU6514 Monitor(二维差分+二维前缀和)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/390672#problem/A">题目链接</a></h3><p>Xiaoteng has a large area of land for growing crops, and the land can be seen as a rectangle of n×m.</p>
-<p>But recently Xiaoteng found that his crops were often stolen by a group of people, so he decided to install some monitors to find all the people and then negotiate with them.</p>
-<p>However, Xiao Teng bought bad monitors, each monitor can only monitor the crops inside a rectangle. There are p monitors installed by Xiaoteng, and the rectangle monitored by each monitor is known.</p>
-<p>Xiao Teng guess that the thieves would also steal q times of crops. he also guessed the range they were going to steal, which was also a rectangle. Xiao Teng wants to know if his monitors can see all the thieves at a time.</p>
-<p>&nbsp;</p>
-<p><em>Input</em></p>
-<p>There are mutiple test cases.</p>
-<p>Each case starts with a line containing two integers n,m(1≤n,1≤m,n×m≤107) which represent the area of the land.</p>
-<p>And the secend line contain a integer p(1≤p≤106) which represent the number of the monitor Xiaoteng has installed. This is followed by p lines each describing a rectangle. Each of these lines contains four intergers x1,y1,x2 and y2(1≤x1≤x2≤n,1≤y1≤y2≤m) ,meaning the lower left corner and upper right corner of the rectangle.</p>
-<p>Next line contain a integer q(1≤q≤106) which represent the number of times that thieves will steal the crops.This is followed by q lines each describing a rectangle. Each of these lines contains four intergers x1,y1,x2 and y2(1≤x1≤x2≤n,1≤y1≤y2≤m),meaning the lower left corner and upper right corner of the rectangle.</p>
-<p><em>Output</em></p>
-<p>For each case you should print q lines.</p>
-<p>Each line containing YES or NO mean the all thieves whether can be seen.</p>
-<p><em>Sample Input</em></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> <span class="number">6</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span> <span class="number">4</span> <span class="number">4</span></span><br><span class="line"><span class="number">3</span> <span class="number">3</span> <span class="number">5</span> <span class="number">6</span></span><br><span class="line"><span class="number">5</span> <span class="number">1</span> <span class="number">6</span> <span class="number">2</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span> <span class="number">2</span> <span class="number">5</span> <span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<p><em>Sample Output</em></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
-
-<p><em>Hint</em><br><img src="https://img-blog.csdnimg.cn/20200911211009224.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>二维差分+前缀和</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,i,j,x,y,lx,ly,rx,ry,area;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x);</span><br><span class="line">        vector&lt; vector&lt;<span class="keyword">int</span>&gt; &gt;  <span class="built_in">sum</span>(n+<span class="number">10</span>,vector&lt;<span class="keyword">int</span>&gt;(m+<span class="number">10</span>)),<span class="built_in">ans</span>(n+<span class="number">10</span>,vector&lt;<span class="keyword">int</span>&gt;(m+<span class="number">10</span>));<span class="comment">//sum为拆分数组，ans为原数组</span></span><br><span class="line">        <span class="keyword">while</span>(x--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d%d&quot;</span>,&amp;lx,&amp;ly,&amp;rx,&amp;ry);</span><br><span class="line">            sum[lx][ly]++; <span class="comment">//标记，注意这里lx、ly、rx、ry的位置</span></span><br><span class="line">            sum[rx+<span class="number">1</span>][ly]--;</span><br><span class="line">            sum[lx][ry+<span class="number">1</span>]--;</span><br><span class="line">            sum[rx+<span class="number">1</span>][ry+<span class="number">1</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=m; j++)</span><br><span class="line">                sum[i][j]+=sum[i<span class="number">-1</span>][j]+sum[i][j<span class="number">-1</span>]-sum[i<span class="number">-1</span>][j<span class="number">-1</span>];<span class="comment">//求拆分数组</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=m; j++)</span><br><span class="line">                ans[i][j]+=ans[i][j<span class="number">-1</span>]+ans[i<span class="number">-1</span>][j]-ans[i<span class="number">-1</span>][j<span class="number">-1</span>]+(sum[i][j]&gt;<span class="number">0</span> ? <span class="number">1</span>:<span class="number">0</span>);<span class="comment">//计算原数组</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;y);</span><br><span class="line">        <span class="keyword">while</span>(y--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d%d&quot;</span>,&amp;lx,&amp;ly,&amp;rx,&amp;ry);</span><br><span class="line">            area=ans[rx][ry]-ans[lx<span class="number">-1</span>][ry]-ans[rx][ly<span class="number">-1</span>]+ans[lx<span class="number">-1</span>][ly<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">if</span>(area==(rx-lx+<span class="number">1</span>)*(ry-ly+<span class="number">1</span>))<span class="comment">//如果面积相等，即全覆盖</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/" data-id="ckrn6s8x80032jotn71a51xeq" data-title="HDU6514 Monitor(二维差分+二维前缀和)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-7-6 集合相似度 (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2020-09-09T13:27:38.000Z" itemprop="datePublished">2020-09-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/">7-6 集合相似度 (25分)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>给定两个整数集合，它们的相似度定义为：N​c​​/N​t​​×100%。其中N​c​​是两个集合都有的不相等整数的个数，N​t​​是两个集合一共有的不相等整数的个数。你的任务就是计算任意一对给定集合的相似度。</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个正整数N（≤50），是集合的个数。随后N行，每行对应一个集合。每个集合首先给出一个正整数M（≤10​4​​），是集合中元素的个数；然后跟M个[0,10​9​​]区间内的整数。</p>
-<p>之后一行给出一个正整数K（≤2000），随后K行，每行对应一对需要计算相似度的集合的编号（集合从1到N编号）。数字间以空格分隔。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对每一对需要计算的集合，在一行中输出它们的相似度，为保留小数点后2位的百分比数字。</p>
-<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">99</span> <span class="number">87</span> <span class="number">101</span></span><br><span class="line"><span class="number">4</span> <span class="number">87</span> <span class="number">101</span> <span class="number">5</span> <span class="number">87</span></span><br><span class="line"><span class="number">7</span> <span class="number">99</span> <span class="number">101</span> <span class="number">18</span> <span class="number">5</span> <span class="number">135</span> <span class="number">18</span> <span class="number">99</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">50.00</span>%</span><br><span class="line"><span class="number">33.33</span>%</span><br></pre></td></tr></table></figure>
-
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>用set来做:<br>利用C++ STL中的set，补充一下，里面的find函数，是在集合里挨个查找某个数，例如，如果在集合s里查找x，就是s.find(x)，如果找到就返回该数的位置，找不到就返回s.end()</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">set&lt;<span class="keyword">int</span>&gt;st[<span class="number">60</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,i,j,m,x,y,l,r;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x);</span><br><span class="line">            st[i].<span class="built_in">insert</span>(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;y);</span><br><span class="line">    <span class="keyword">while</span>(y--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;l,&amp;r);</span><br><span class="line">        <span class="keyword">int</span> sum1=st[l].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> sum2=st[r].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(set&lt;<span class="keyword">int</span>&gt;::iterator it=st[l].<span class="built_in">begin</span>(); it!=st[l].<span class="built_in">end</span>(); it++)</span><br><span class="line">            <span class="keyword">if</span>(st[r].<span class="built_in">find</span>(*it)!=st[r].<span class="built_in">end</span>())</span><br><span class="line">                sum++;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2f%%\n&quot;</span>,<span class="number">1.0</span>*sum/(sum1+sum2-sum)*<span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/" data-id="ckrn6s8sw000hjotncw2p61cg" data-title="7-6 集合相似度 (25分)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2020年sdutacm暑假集训总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2020-08-29T02:59:57.000Z" itemprop="datePublished">2020-08-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/">2020年sdutacm暑假集训总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="一、学习内容–暑假新学了哪些专题，每个专题刷了多少题"><a href="#一、学习内容–暑假新学了哪些专题，每个专题刷了多少题" class="headerlink" title="一、学习内容–暑假新学了哪些专题，每个专题刷了多少题"></a>一、学习内容–暑假新学了哪些专题，每个专题刷了多少题</h2><h3 id="1-线段树-amp-字典树-5题"><a href="#1-线段树-amp-字典树-5题" class="headerlink" title="(1) 线段树&amp;字典树 5题"></a>(1) 线段树&amp;字典树 5题</h3><h3 id="2-数论基础-9题"><a href="#2-数论基础-9题" class="headerlink" title="(2) 数论基础 9题"></a>(2) 数论基础 9题</h3><h3 id="3-二分图-4题"><a href="#3-二分图-4题" class="headerlink" title="(3) 二分图 4题"></a>(3) 二分图 4题</h3><h3 id="……"><a href="#……" class="headerlink" title="……"></a>……</h3><h2 id="二、比赛内容总结（2020年7月27日-8月27日个人赛）"><a href="#二、比赛内容总结（2020年7月27日-8月27日个人赛）" class="headerlink" title="二、比赛内容总结（2020年7月27日-8月27日个人赛）"></a>二、比赛内容总结（2020年7月27日-8月27日个人赛）</h2><h3 id="1-VJ先伟老师抓的个人赛（div1-or-div2-参加场次-总场次）-9-9"><a href="#1-VJ先伟老师抓的个人赛（div1-or-div2-参加场次-总场次）-9-9" class="headerlink" title="(1) VJ先伟老师抓的个人赛（div1 or div2 参加场次/总场次） 9/9"></a>(1) VJ先伟老师抓的个人赛（div1 or div2 参加场次/总场次） 9/9</h3><h3 id="2-比赛中AC多少题（AC题数-总题数）-29-105"><a href="#2-比赛中AC多少题（AC题数-总题数）-29-105" class="headerlink" title="(2) 比赛中AC多少题（AC题数/总题数） 29/105"></a>(2) 比赛中AC多少题（AC题数/总题数） 29/105</h3><h3 id="3-比赛后补了多少题（补题数-比赛中未AC题目数）-4-76"><a href="#3-比赛后补了多少题（补题数-比赛中未AC题目数）-4-76" class="headerlink" title="(3) 比赛后补了多少题（补题数/比赛中未AC题目数） 4/76"></a>(3) 比赛后补了多少题（补题数/比赛中未AC题目数） 4/76</h3><h3 id="4-天梯赛分数："><a href="#4-天梯赛分数：" class="headerlink" title="(4) 天梯赛分数："></a>(4) 天梯赛分数：</h3><h3 id="天梯赛1：113"><a href="#天梯赛1：113" class="headerlink" title="天梯赛1：113"></a>天梯赛1：113</h3><h3 id="天梯赛2：149"><a href="#天梯赛2：149" class="headerlink" title="天梯赛2：149"></a>天梯赛2：149</h3><h3 id="天梯赛3：122"><a href="#天梯赛3：122" class="headerlink" title="天梯赛3：122"></a>天梯赛3：122</h3><h3 id="天梯赛4：140"><a href="#天梯赛4：140" class="headerlink" title="天梯赛4：140"></a>天梯赛4：140</h3><h3 id="天梯赛5：124"><a href="#天梯赛5：124" class="headerlink" title="天梯赛5：124"></a>天梯赛5：124</h3><h3 id="……-1"><a href="#……-1" class="headerlink" title="……"></a>……</h3><h2 id="三、训练收获"><a href="#三、训练收获" class="headerlink" title="三、训练收获"></a>三、训练收获</h2><h3 id="1-学习了很多新的算法，开拓了眼界"><a href="#1-学习了很多新的算法，开拓了眼界" class="headerlink" title="(1) 学习了很多新的算法，开拓了眼界"></a>(1) 学习了很多新的算法，开拓了眼界</h3><h3 id="2-每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了"><a href="#2-每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了" class="headerlink" title="(2) 每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了"></a>(2) 每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了</h3><h3 id="3-更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫"><a href="#3-更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫" class="headerlink" title="(3)更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫"></a>(3)更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫</h3><h3 id="……-2"><a href="#……-2" class="headerlink" title="……"></a>……</h3><h2 id="四、比赛收获"><a href="#四、比赛收获" class="headerlink" title="四、比赛收获"></a>四、比赛收获</h2><h3 id="1-现在与暑假之前比较，自己水平有多大提升？"><a href="#1-现在与暑假之前比较，自己水平有多大提升？" class="headerlink" title="(1) 现在与暑假之前比较，自己水平有多大提升？"></a>(1) 现在与暑假之前比较，自己水平有多大提升？</h3><h3 id="提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展"><a href="#提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展" class="headerlink" title="提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展"></a>提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展</h3><h3 id="2-是否符合自己的预期？"><a href="#2-是否符合自己的预期？" class="headerlink" title="(2)是否符合自己的预期？"></a>(2)是否符合自己的预期？</h3><h3 id="不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾"><a href="#不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾" class="headerlink" title="不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾"></a>不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾</h3><h3 id="3-通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？"><a href="#3-通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？" class="headerlink" title="(3)通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？"></a>(3)通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？</h3><h3 id="感觉大约在10-20左右吧"><a href="#感觉大约在10-20左右吧" class="headerlink" title="感觉大约在10-20左右吧"></a>感觉大约在10-20左右吧</h3><h3 id="4-自己感觉变化的主要原因是什么？"><a href="#4-自己感觉变化的主要原因是什么？" class="headerlink" title="(4)自己感觉变化的主要原因是什么？"></a>(4)自己感觉变化的主要原因是什么？</h3><h3 id="1-首先付出了时间，每天按照要求起床、签到……规律的学习"><a href="#1-首先付出了时间，每天按照要求起床、签到……规律的学习" class="headerlink" title="1.首先付出了时间，每天按照要求起床、签到……规律的学习"></a>1.首先付出了时间，每天按照要求起床、签到……规律的学习</h3><h3 id="2-自己的坚持，我也很感谢我自己能够坚持到最后"><a href="#2-自己的坚持，我也很感谢我自己能够坚持到最后" class="headerlink" title="2.自己的坚持，我也很感谢我自己能够坚持到最后"></a>2.自己的坚持，我也很感谢我自己能够坚持到最后</h3><h3 id="3-老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了"><a href="#3-老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了" class="headerlink" title="3.老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了"></a>3.老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了</h3><h3 id="5"><a href="#5" class="headerlink" title="(5)"></a>(5)</h3><h3 id="……-3"><a href="#……-3" class="headerlink" title="……"></a>……</h3><h2 id="五、存在问题"><a href="#五、存在问题" class="headerlink" title="五、存在问题"></a>五、存在问题</h2><h3 id="1-英语不太好是硬伤，很多英文题看不懂题意"><a href="#1-英语不太好是硬伤，很多英文题看不懂题意" class="headerlink" title="(1) 英语不太好是硬伤，很多英文题看不懂题意"></a>(1) 英语不太好是硬伤，很多英文题看不懂题意</h3><h3 id="2-对算法的理解不是特别深入，还无法做到灵活运用"><a href="#2-对算法的理解不是特别深入，还无法做到灵活运用" class="headerlink" title="(2) 对算法的理解不是特别深入，还无法做到灵活运用"></a>(2) 对算法的理解不是特别深入，还无法做到灵活运用</h3><h3 id="……-4"><a href="#……-4" class="headerlink" title="……"></a>……</h3><h2 id="六、下一步目标和计划"><a href="#六、下一步目标和计划" class="headerlink" title="六、下一步目标和计划"></a>六、下一步目标和计划</h2><h3 id="1-加强英语学习，增加词汇积累"><a href="#1-加强英语学习，增加词汇积累" class="headerlink" title="(1) 加强英语学习，增加词汇积累"></a>(1) 加强英语学习，增加词汇积累</h3><h3 id="2-找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用"><a href="#2-找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用" class="headerlink" title="(2) 找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用"></a>(2) 找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用</h3><h3 id="3-加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来"><a href="#3-加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来" class="headerlink" title="(3) 加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来"></a>(3) 加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来</h3><h3 id="……-5"><a href="#……-5" class="headerlink" title="……"></a>……</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" data-id="ckrn6s8rz0004jotnbkvv051c" data-title="2020年sdutacm暑假集训总结" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -630,23 +617,23 @@
       <ul>
         
           <li>
+            <a href="/2021/07/30/D.%20Backspace%EF%BC%88%E6%A8%A1%E6%8B%9F%EF%BC%89/">D. Backspace（模拟）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/30/C%20-%20Penalty%EF%BC%88%E6%A8%A1%E6%8B%9F%EF%BC%89/">C - Penalty（模拟）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/30/B%20-%20Reverse%20String%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/">B - Reverse String（暴力）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/30/A%20-%20Digits%20Sum%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/">A - Digits Sum（暴力）</a>
+          </li>
+        
+          <li>
             <a href="/2021/07/28/AquaMoon%20and%20Strange%20Sort/">AquaMoon and Strange Sort(模拟)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/29/J%20-%20JOJO's%20Factory%20Gym%20-%20103107J%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">J - JOJO&#39;s Factory Gym - 103107J（思维）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/29/Keep%20Eating%20Gym%20-%20103107K%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">Keep Eating Gym - 103107K（思维）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/13/%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F/">数独游戏</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/28/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
           </li>
         
       </ul>

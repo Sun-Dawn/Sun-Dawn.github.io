@@ -71,6 +71,220 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-G - Game Rank(模拟)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/" class="article-date">
+  <time class="dt-published" datetime="2020-09-18T11:27:46.000Z" itemprop="datePublished">2020-09-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/">G - Game Rank(模拟）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://img-blog.csdnimg.cn/20200918201533364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"><br><img src="https://img-blog.csdnimg.cn/20200918201556506.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
+<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>就是炉石的排位机制……</p>
+<p>共25个等级和传说等级，赢一局一颗星，连续赢三局以上额外多加一颗星（高于5级后不多加星），满星后再多一颗星才能升等级，并且升级后新等级有一颗星。</p>
+<p>输一局减一颗星（21-25级输了不扣星，但是仍会断连胜），输了后没星仍可以保持段位，但是没星后又掉星了会掉等级。传说后不论输赢均不掉段。</p>
+<p>各等级的星星为</p>
+<ul>
+<li><p>Rank 25-21: 2 stars</p>
+</li>
+<li><p>Rank 20-16: 3 stars</p>
+</li>
+<li><p>Rank 15-11: 4 stars</p>
+</li>
+<li><p>Rank 10-1: 5 stars</p>
+</li>
+</ul>
+<p>这个题就是纯粹的模拟了，我们组问题主要出在了段位下降一次之后星也会少一颗，比如现在是Rank2 0颗星，如果输一次的话就变成了Rank3 1颗星（满星为2颗），我们一直以为是变成Rank3 2颗星，还有一个问题就是段位保护那里边界问题，题目描述是Rank21-25处于段为保护 输了不会掉星，所以我们只考虑了处于段位21-25输的时候不掉星，没考虑到如果是Rank20 0颗星的话会怎么样，实际上如果是Rank20 0颗星同时输掉一次的话应该还是Rank20 0颗星，我们之前没考虑到这个样例，所以根据我们的程序会变成Rank21 2颗星（满星为2颗），所以我们一直在WA并且找不出错误- -</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">200</span>]= &#123;<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>&#125;;<span class="comment">//数组a记录每个段位满星的个数，顺序是逆序的，为了和ranks同步</span></span><br><span class="line">    <span class="keyword">int</span> ranks=<span class="number">25</span>,starts=<span class="number">0</span>,times=<span class="number">0</span>,i,len;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">10010</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,str);</span><br><span class="line">    len=<span class="built_in">strlen</span>(str);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ranks==<span class="number">0</span>)<span class="comment">//如果是Rank0的话就说明达到最顶峰了，直接break出去输出Legend就行了</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(str[i]==<span class="string">&#x27;W&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            times++;<span class="comment">//连胜+1</span></span><br><span class="line">            starts++;<span class="comment">//星数+1</span></span><br><span class="line">            <span class="keyword">if</span>(times&gt;=<span class="number">3</span>&amp;&amp;ranks&gt;=<span class="number">6</span>&amp;&amp;ranks&lt;=<span class="number">25</span>)<span class="comment">//如果连胜&gt;3同时段位没有在5之上的话就触发连胜额外加的那一颗星</span></span><br><span class="line">                starts++;</span><br><span class="line">            <span class="keyword">if</span>(starts&gt;a[ranks])<span class="comment">//如果星数&gt;该段位最多星数，即代表晋级段位</span></span><br><span class="line">            &#123;</span><br><span class="line">                starts-=a[ranks];</span><br><span class="line">                ranks--;<span class="comment">//段位上升一个</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            times=<span class="number">0</span>;<span class="comment">//终结连胜</span></span><br><span class="line">            <span class="keyword">if</span>(ranks&gt;=<span class="number">21</span>&amp;&amp;ranks&lt;=<span class="number">25</span>)<span class="comment">//处于段位保护状态，输了也没什么操作，所以直接contin</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            starts--;<span class="comment">//星数-1</span></span><br><span class="line">            <span class="keyword">if</span>(starts&lt;<span class="number">0</span>)<span class="comment">//如果星数为负</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(ranks==<span class="number">20</span>)<span class="comment">//特殊情况，我们队没有想到的情况</span></span><br><span class="line">                    starts=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    ranks++;</span><br><span class="line">                    starts=a[ranks]<span class="number">-1</span>;<span class="comment">//掉段之后星数也要再-1</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ranks)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ranks);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Legend\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/" data-id="ckrn6s8wy002rjotn0dm64ycn" data-title="G - Game Rank(模拟）" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-HDU6514 Monitor(二维差分+二维前缀和)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/" class="article-date">
+  <time class="dt-published" datetime="2020-09-11T13:13:44.000Z" itemprop="datePublished">2020-09-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>►<a class="article-category-link" href="/categories/ACM/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%89%8D%E7%BC%80%E5%92%8C%E5%B7%AE%E5%88%86/">前缀和差分</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/">HDU6514 Monitor(二维差分+二维前缀和)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/390672#problem/A">题目链接</a></h3><p>Xiaoteng has a large area of land for growing crops, and the land can be seen as a rectangle of n×m.</p>
+<p>But recently Xiaoteng found that his crops were often stolen by a group of people, so he decided to install some monitors to find all the people and then negotiate with them.</p>
+<p>However, Xiao Teng bought bad monitors, each monitor can only monitor the crops inside a rectangle. There are p monitors installed by Xiaoteng, and the rectangle monitored by each monitor is known.</p>
+<p>Xiao Teng guess that the thieves would also steal q times of crops. he also guessed the range they were going to steal, which was also a rectangle. Xiao Teng wants to know if his monitors can see all the thieves at a time.</p>
+<p>&nbsp;</p>
+<p><em>Input</em></p>
+<p>There are mutiple test cases.</p>
+<p>Each case starts with a line containing two integers n,m(1≤n,1≤m,n×m≤107) which represent the area of the land.</p>
+<p>And the secend line contain a integer p(1≤p≤106) which represent the number of the monitor Xiaoteng has installed. This is followed by p lines each describing a rectangle. Each of these lines contains four intergers x1,y1,x2 and y2(1≤x1≤x2≤n,1≤y1≤y2≤m) ,meaning the lower left corner and upper right corner of the rectangle.</p>
+<p>Next line contain a integer q(1≤q≤106) which represent the number of times that thieves will steal the crops.This is followed by q lines each describing a rectangle. Each of these lines contains four intergers x1,y1,x2 and y2(1≤x1≤x2≤n,1≤y1≤y2≤m),meaning the lower left corner and upper right corner of the rectangle.</p>
+<p><em>Output</em></p>
+<p>For each case you should print q lines.</p>
+<p>Each line containing YES or NO mean the all thieves whether can be seen.</p>
+<p><em>Sample Input</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> <span class="number">6</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span> <span class="number">4</span> <span class="number">4</span></span><br><span class="line"><span class="number">3</span> <span class="number">3</span> <span class="number">5</span> <span class="number">6</span></span><br><span class="line"><span class="number">5</span> <span class="number">1</span> <span class="number">6</span> <span class="number">2</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span> <span class="number">2</span> <span class="number">5</span> <span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Sample Output</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
+
+<p><em>Hint</em><br><img src="https://img-blog.csdnimg.cn/20200911211009224.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>二维差分+前缀和</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,i,j,x,y,lx,ly,rx,ry,area;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x);</span><br><span class="line">        vector&lt; vector&lt;<span class="keyword">int</span>&gt; &gt;  <span class="built_in">sum</span>(n+<span class="number">10</span>,vector&lt;<span class="keyword">int</span>&gt;(m+<span class="number">10</span>)),<span class="built_in">ans</span>(n+<span class="number">10</span>,vector&lt;<span class="keyword">int</span>&gt;(m+<span class="number">10</span>));<span class="comment">//sum为拆分数组，ans为原数组</span></span><br><span class="line">        <span class="keyword">while</span>(x--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d%d&quot;</span>,&amp;lx,&amp;ly,&amp;rx,&amp;ry);</span><br><span class="line">            sum[lx][ly]++; <span class="comment">//标记，注意这里lx、ly、rx、ry的位置</span></span><br><span class="line">            sum[rx+<span class="number">1</span>][ly]--;</span><br><span class="line">            sum[lx][ry+<span class="number">1</span>]--;</span><br><span class="line">            sum[rx+<span class="number">1</span>][ry+<span class="number">1</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=m; j++)</span><br><span class="line">                sum[i][j]+=sum[i<span class="number">-1</span>][j]+sum[i][j<span class="number">-1</span>]-sum[i<span class="number">-1</span>][j<span class="number">-1</span>];<span class="comment">//求拆分数组</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=m; j++)</span><br><span class="line">                ans[i][j]+=ans[i][j<span class="number">-1</span>]+ans[i<span class="number">-1</span>][j]-ans[i<span class="number">-1</span>][j<span class="number">-1</span>]+(sum[i][j]&gt;<span class="number">0</span> ? <span class="number">1</span>:<span class="number">0</span>);<span class="comment">//计算原数组</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;y);</span><br><span class="line">        <span class="keyword">while</span>(y--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d%d&quot;</span>,&amp;lx,&amp;ly,&amp;rx,&amp;ry);</span><br><span class="line">            area=ans[rx][ry]-ans[lx<span class="number">-1</span>][ry]-ans[rx][ly<span class="number">-1</span>]+ans[lx<span class="number">-1</span>][ly<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">if</span>(area==(rx-lx+<span class="number">1</span>)*(ry-ly+<span class="number">1</span>))<span class="comment">//如果面积相等，即全覆盖</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/" data-id="ckrn6s8x80032jotn71a51xeq" data-title="HDU6514 Monitor(二维差分+二维前缀和)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-7-6 集合相似度 (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/" class="article-date">
+  <time class="dt-published" datetime="2020-09-09T13:27:38.000Z" itemprop="datePublished">2020-09-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/">7-6 集合相似度 (25分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>给定两个整数集合，它们的相似度定义为：N​c​​/N​t​​×100%。其中N​c​​是两个集合都有的不相等整数的个数，N​t​​是两个集合一共有的不相等整数的个数。你的任务就是计算任意一对给定集合的相似度。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个正整数N（≤50），是集合的个数。随后N行，每行对应一个集合。每个集合首先给出一个正整数M（≤10​4​​），是集合中元素的个数；然后跟M个[0,10​9​​]区间内的整数。</p>
+<p>之后一行给出一个正整数K（≤2000），随后K行，每行对应一对需要计算相似度的集合的编号（集合从1到N编号）。数字间以空格分隔。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对每一对需要计算的集合，在一行中输出它们的相似度，为保留小数点后2位的百分比数字。</p>
+<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">99</span> <span class="number">87</span> <span class="number">101</span></span><br><span class="line"><span class="number">4</span> <span class="number">87</span> <span class="number">101</span> <span class="number">5</span> <span class="number">87</span></span><br><span class="line"><span class="number">7</span> <span class="number">99</span> <span class="number">101</span> <span class="number">18</span> <span class="number">5</span> <span class="number">135</span> <span class="number">18</span> <span class="number">99</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">50.00</span>%</span><br><span class="line"><span class="number">33.33</span>%</span><br></pre></td></tr></table></figure>
+
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>用set来做:<br>利用C++ STL中的set，补充一下，里面的find函数，是在集合里挨个查找某个数，例如，如果在集合s里查找x，就是s.find(x)，如果找到就返回该数的位置，找不到就返回s.end()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">set&lt;<span class="keyword">int</span>&gt;st[<span class="number">60</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,i,j,m,x,y,l,r;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x);</span><br><span class="line">            st[i].<span class="built_in">insert</span>(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;y);</span><br><span class="line">    <span class="keyword">while</span>(y--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;l,&amp;r);</span><br><span class="line">        <span class="keyword">int</span> sum1=st[l].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> sum2=st[r].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(set&lt;<span class="keyword">int</span>&gt;::iterator it=st[l].<span class="built_in">begin</span>(); it!=st[l].<span class="built_in">end</span>(); it++)</span><br><span class="line">            <span class="keyword">if</span>(st[r].<span class="built_in">find</span>(*it)!=st[r].<span class="built_in">end</span>())</span><br><span class="line">                sum++;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2f%%\n&quot;</span>,<span class="number">1.0</span>*sum/(sum1+sum2-sum)*<span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/" data-id="ckrn6s8sw000hjotncw2p61cg" data-title="7-6 集合相似度 (25分)" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020年sdutacm暑假集训总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2020-08-29T02:59:57.000Z" itemprop="datePublished">2020-08-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E8%AE%B0%E5%BD%95/">记录</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/">2020年sdutacm暑假集训总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、学习内容–暑假新学了哪些专题，每个专题刷了多少题"><a href="#一、学习内容–暑假新学了哪些专题，每个专题刷了多少题" class="headerlink" title="一、学习内容–暑假新学了哪些专题，每个专题刷了多少题"></a>一、学习内容–暑假新学了哪些专题，每个专题刷了多少题</h2><h3 id="1-线段树-amp-字典树-5题"><a href="#1-线段树-amp-字典树-5题" class="headerlink" title="(1) 线段树&amp;字典树 5题"></a>(1) 线段树&amp;字典树 5题</h3><h3 id="2-数论基础-9题"><a href="#2-数论基础-9题" class="headerlink" title="(2) 数论基础 9题"></a>(2) 数论基础 9题</h3><h3 id="3-二分图-4题"><a href="#3-二分图-4题" class="headerlink" title="(3) 二分图 4题"></a>(3) 二分图 4题</h3><h3 id="……"><a href="#……" class="headerlink" title="……"></a>……</h3><h2 id="二、比赛内容总结（2020年7月27日-8月27日个人赛）"><a href="#二、比赛内容总结（2020年7月27日-8月27日个人赛）" class="headerlink" title="二、比赛内容总结（2020年7月27日-8月27日个人赛）"></a>二、比赛内容总结（2020年7月27日-8月27日个人赛）</h2><h3 id="1-VJ先伟老师抓的个人赛（div1-or-div2-参加场次-总场次）-9-9"><a href="#1-VJ先伟老师抓的个人赛（div1-or-div2-参加场次-总场次）-9-9" class="headerlink" title="(1) VJ先伟老师抓的个人赛（div1 or div2 参加场次/总场次） 9/9"></a>(1) VJ先伟老师抓的个人赛（div1 or div2 参加场次/总场次） 9/9</h3><h3 id="2-比赛中AC多少题（AC题数-总题数）-29-105"><a href="#2-比赛中AC多少题（AC题数-总题数）-29-105" class="headerlink" title="(2) 比赛中AC多少题（AC题数/总题数） 29/105"></a>(2) 比赛中AC多少题（AC题数/总题数） 29/105</h3><h3 id="3-比赛后补了多少题（补题数-比赛中未AC题目数）-4-76"><a href="#3-比赛后补了多少题（补题数-比赛中未AC题目数）-4-76" class="headerlink" title="(3) 比赛后补了多少题（补题数/比赛中未AC题目数） 4/76"></a>(3) 比赛后补了多少题（补题数/比赛中未AC题目数） 4/76</h3><h3 id="4-天梯赛分数："><a href="#4-天梯赛分数：" class="headerlink" title="(4) 天梯赛分数："></a>(4) 天梯赛分数：</h3><h3 id="天梯赛1：113"><a href="#天梯赛1：113" class="headerlink" title="天梯赛1：113"></a>天梯赛1：113</h3><h3 id="天梯赛2：149"><a href="#天梯赛2：149" class="headerlink" title="天梯赛2：149"></a>天梯赛2：149</h3><h3 id="天梯赛3：122"><a href="#天梯赛3：122" class="headerlink" title="天梯赛3：122"></a>天梯赛3：122</h3><h3 id="天梯赛4：140"><a href="#天梯赛4：140" class="headerlink" title="天梯赛4：140"></a>天梯赛4：140</h3><h3 id="天梯赛5：124"><a href="#天梯赛5：124" class="headerlink" title="天梯赛5：124"></a>天梯赛5：124</h3><h3 id="……-1"><a href="#……-1" class="headerlink" title="……"></a>……</h3><h2 id="三、训练收获"><a href="#三、训练收获" class="headerlink" title="三、训练收获"></a>三、训练收获</h2><h3 id="1-学习了很多新的算法，开拓了眼界"><a href="#1-学习了很多新的算法，开拓了眼界" class="headerlink" title="(1) 学习了很多新的算法，开拓了眼界"></a>(1) 学习了很多新的算法，开拓了眼界</h3><h3 id="2-每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了"><a href="#2-每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了" class="headerlink" title="(2) 每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了"></a>(2) 每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了</h3><h3 id="3-更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫"><a href="#3-更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫" class="headerlink" title="(3)更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫"></a>(3)更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫</h3><h3 id="……-2"><a href="#……-2" class="headerlink" title="……"></a>……</h3><h2 id="四、比赛收获"><a href="#四、比赛收获" class="headerlink" title="四、比赛收获"></a>四、比赛收获</h2><h3 id="1-现在与暑假之前比较，自己水平有多大提升？"><a href="#1-现在与暑假之前比较，自己水平有多大提升？" class="headerlink" title="(1) 现在与暑假之前比较，自己水平有多大提升？"></a>(1) 现在与暑假之前比较，自己水平有多大提升？</h3><h3 id="提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展"><a href="#提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展" class="headerlink" title="提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展"></a>提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展</h3><h3 id="2-是否符合自己的预期？"><a href="#2-是否符合自己的预期？" class="headerlink" title="(2)是否符合自己的预期？"></a>(2)是否符合自己的预期？</h3><h3 id="不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾"><a href="#不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾" class="headerlink" title="不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾"></a>不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾</h3><h3 id="3-通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？"><a href="#3-通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？" class="headerlink" title="(3)通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？"></a>(3)通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？</h3><h3 id="感觉大约在10-20左右吧"><a href="#感觉大约在10-20左右吧" class="headerlink" title="感觉大约在10-20左右吧"></a>感觉大约在10-20左右吧</h3><h3 id="4-自己感觉变化的主要原因是什么？"><a href="#4-自己感觉变化的主要原因是什么？" class="headerlink" title="(4)自己感觉变化的主要原因是什么？"></a>(4)自己感觉变化的主要原因是什么？</h3><h3 id="1-首先付出了时间，每天按照要求起床、签到……规律的学习"><a href="#1-首先付出了时间，每天按照要求起床、签到……规律的学习" class="headerlink" title="1.首先付出了时间，每天按照要求起床、签到……规律的学习"></a>1.首先付出了时间，每天按照要求起床、签到……规律的学习</h3><h3 id="2-自己的坚持，我也很感谢我自己能够坚持到最后"><a href="#2-自己的坚持，我也很感谢我自己能够坚持到最后" class="headerlink" title="2.自己的坚持，我也很感谢我自己能够坚持到最后"></a>2.自己的坚持，我也很感谢我自己能够坚持到最后</h3><h3 id="3-老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了"><a href="#3-老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了" class="headerlink" title="3.老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了"></a>3.老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了</h3><h3 id="5"><a href="#5" class="headerlink" title="(5)"></a>(5)</h3><h3 id="……-3"><a href="#……-3" class="headerlink" title="……"></a>……</h3><h2 id="五、存在问题"><a href="#五、存在问题" class="headerlink" title="五、存在问题"></a>五、存在问题</h2><h3 id="1-英语不太好是硬伤，很多英文题看不懂题意"><a href="#1-英语不太好是硬伤，很多英文题看不懂题意" class="headerlink" title="(1) 英语不太好是硬伤，很多英文题看不懂题意"></a>(1) 英语不太好是硬伤，很多英文题看不懂题意</h3><h3 id="2-对算法的理解不是特别深入，还无法做到灵活运用"><a href="#2-对算法的理解不是特别深入，还无法做到灵活运用" class="headerlink" title="(2) 对算法的理解不是特别深入，还无法做到灵活运用"></a>(2) 对算法的理解不是特别深入，还无法做到灵活运用</h3><h3 id="……-4"><a href="#……-4" class="headerlink" title="……"></a>……</h3><h2 id="六、下一步目标和计划"><a href="#六、下一步目标和计划" class="headerlink" title="六、下一步目标和计划"></a>六、下一步目标和计划</h2><h3 id="1-加强英语学习，增加词汇积累"><a href="#1-加强英语学习，增加词汇积累" class="headerlink" title="(1) 加强英语学习，增加词汇积累"></a>(1) 加强英语学习，增加词汇积累</h3><h3 id="2-找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用"><a href="#2-找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用" class="headerlink" title="(2) 找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用"></a>(2) 找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用</h3><h3 id="3-加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来"><a href="#3-加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来" class="headerlink" title="(3) 加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来"></a>(3) 加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来</h3><h3 id="……-5"><a href="#……-5" class="headerlink" title="……"></a>……</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" data-id="ckrn6s8rz0004jotnbkvv051c" data-title="2020年sdutacm暑假集训总结" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-VJ HDU 1083 Courses（二分图最大匹配）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2020/07/31/VJ%20HDU%201083%20Courses%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/" class="article-date">
@@ -397,96 +611,11 @@
 
 
   
-    <article id="post-数组列表-多维数组列表-java" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/05/21/%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-java/" class="article-date">
-  <time class="dt-published" datetime="2020-05-21T08:15:59.000Z" itemprop="datePublished">2020-05-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>►<a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/05/21/%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-java/">数组列表+多维数组列表(java)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Array-list-数组列表"><a href="#Array-list-数组列表" class="headerlink" title="Array list(数组列表)"></a>Array list(数组列表)</h1><h3 id="数组列表在英文中的解释是："><a href="#数组列表在英文中的解释是：" class="headerlink" title="数组列表在英文中的解释是："></a>数组列表在英文中的解释是：</h3><blockquote>
-<p><strong>similar to an array but an ArrayList object’s size is automatically</strong><br><strong>adjusted to accommodate the number of items being stored.</strong></p>
-</blockquote>
-<h3 id="翻译过来就是：类似于数组，但ArrayList对象的大小会自动调整以适应存储的项目数"><a href="#翻译过来就是：类似于数组，但ArrayList对象的大小会自动调整以适应存储的项目数" class="headerlink" title="翻译过来就是：类似于数组，但ArrayList对象的大小会自动调整以适应存储的项目数."></a>翻译过来就是：类似于数组，但ArrayList对象的大小会自动调整以适应存储的项目数.</h3><p>&nbsp;</p>
-<h3 id="由此可知这是一个类似数组的东西，但是它是动态存储，有点像c语言中的链表，但与链表不同的是它可以根据数组下标直接找到对应元素，不必像链表一样遍历。"><a href="#由此可知这是一个类似数组的东西，但是它是动态存储，有点像c语言中的链表，但与链表不同的是它可以根据数组下标直接找到对应元素，不必像链表一样遍历。" class="headerlink" title="由此可知这是一个类似数组的东西，但是它是动态存储，有点像c语言中的链表，但与链表不同的是它可以根据数组下标直接找到对应元素，不必像链表一样遍历。"></a>由此可知这是一个类似数组的东西，但是它是动态存储，有点像c语言中的链表，但与链表不同的是它可以根据数组下标直接找到对应元素，不必像链表一样遍历。</h3><h3 id="Array-list-数组列表-包含在java-util-package中"><a href="#Array-list-数组列表-包含在java-util-package中" class="headerlink" title="Array list(数组列表)包含在java.util package中"></a>Array list(数组列表)包含在java.util package中</h3><p>&nbsp;</p>
-<h2 id="接下来说一下数组列表的一些有关方法："><a href="#接下来说一下数组列表的一些有关方法：" class="headerlink" title="接下来说一下数组列表的一些有关方法："></a>接下来说一下数组列表的一些有关方法：</h2><ul>
-<li><h3 id="ArrayList-aList-new-ArrayList-这是数组列表的一个声明"><a href="#ArrayList-aList-new-ArrayList-这是数组列表的一个声明" class="headerlink" title="ArrayList aList = new ArrayList(); 这是数组列表的一个声明"></a>ArrayList aList = new ArrayList(); 这是数组列表的一个声明</h3></li>
-<li><h3 id="add-items-next-item-or-at-a-particular-position-添加数据"><a href="#add-items-next-item-or-at-a-particular-position-添加数据" class="headerlink" title="add items (next item or at a particular position)//添加数据"></a>add items (next item or at a particular position)//添加数据</h3>例如：aList.add(“apple”); //如果插入的前方没有数字，则默认插入到数组列表的尾端。<br>aList.add(1, “pear”);//表示在下标为1的地方插入字符串“pear”，同时后面的元素依次后移。</li>
-<li><h3 id="get-an-item-at-a-particular-position-读取数据"><a href="#get-an-item-at-a-particular-position-读取数据" class="headerlink" title="get an item at a particular position//读取数据"></a>get an item at a particular position//读取数据</h3>例如：aList.get(0); //读取下标为0的元素<br>aList.get(1);//读取下标为1的元素</li>
-<li><h3 id="get-the-size-of-the-list-获取数组长度"><a href="#get-the-size-of-the-list-获取数组长度" class="headerlink" title="get the size of the list//获取数组长度"></a>get the size of the list//获取数组长度</h3>例如：aList.size();//这里的size()还有一个妙用，我会在下面进行说明</li>
-<li><h3 id="write-out-the-entire-list-without-having-to-visit-each-element"><a href="#write-out-the-entire-list-without-having-to-visit-each-element" class="headerlink" title="write out the entire list without having to visit each element"></a>write out the entire list without having to visit each element</h3>例如：System.out.print(aList);//将列表中值全部输出，这里不需要像数组一样用for循环逐一输出，这也是数组列表的一个优点。</li>
-</ul>
-<p>&nbsp;</p>
-<h3 id="下面是一个实例，可以帮助大家理解数组列表动态的过程："><a href="#下面是一个实例，可以帮助大家理解数组列表动态的过程：" class="headerlink" title="下面是一个实例，可以帮助大家理解数组列表动态的过程："></a>下面是一个实例，可以帮助大家理解数组列表动态的过程：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JOptionPane;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task2</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		ArrayList&lt;String&gt; aList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		<span class="comment">//不同类型的数组列表需要加上不同的类型名称，如果是int型我们则需要：ArrayList&lt;Integer&gt;aList = new ArrayList&lt;Integer&gt;();来表示</span></span><br><span class="line">         aList.add(<span class="string">&quot;blue&quot;</span>);</span><br><span class="line">         aList.add(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">         aList.add(<span class="string">&quot;red&quot;</span>);</span><br><span class="line">         aList.add(<span class="number">1</span>, <span class="string">&quot;yellow&quot;</span>);</span><br><span class="line">         aList.add((aList.size() - <span class="number">1</span>), <span class="string">&quot;green&quot;</span>);</span><br><span class="line">		 System.out.println(aList);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="输出结果：-blue-yellow-black-green-red"><a href="#输出结果：-blue-yellow-black-green-red" class="headerlink" title="输出结果：[blue, yellow, black, green, red]"></a>输出结果：[blue, yellow, black, green, red]</h3><h3 id="过程讲解："><a href="#过程讲解：" class="headerlink" title="过程讲解："></a>过程讲解：</h3><ol>
-<li>首先我们在这个列表中插入了一个”blue”，这时候列表只有唯一一个元素：blue</li>
-<li>我们再次插入了一个”black”在列表尾端，此时列表元素为：blue、black.</li>
-<li>再次在尾端插入”red”，此时列表元素为:blue、black、red.</li>
-<li>在下标为1的地方插入一个”yellow”，此时列表元素为：blue、yellow、black、red.//值得注意的是：列表是以下标0为开始，所以yellow会插入到第2位，同时后面的元素依次后移一位。</li>
-<li>此时列表中共有4个元素，所以(aList.size() - 1)=3，也就是在下标为3的地方插入”green”，由于列表下表从0开始，所以下表为3的地方也就是元素”red”的位置，此时我们会将”green“插入到原本”red“的位置，同时将”red“后移一位，所以最有也就形成了[blue, yellow, black, green, red]的输出。</li>
-</ol>
-<p>&nbsp;</p>
-<h3 id="其实数组列表还有很多方法在这里就不一一详细讲解了："><a href="#其实数组列表还有很多方法在这里就不一一详细讲解了：" class="headerlink" title="其实数组列表还有很多方法在这里就不一一详细讲解了："></a>其实数组列表还有很多方法在这里就不一一详细讲解了：</h3><ul>
-<li><h3 id="aList-remove-1-删除数据"><a href="#aList-remove-1-删除数据" class="headerlink" title="aList.remove(1); //删除数据"></a>aList.remove(1); //删除数据</h3></li>
-<li><h3 id="aList-clear-删除所有元素"><a href="#aList-clear-删除所有元素" class="headerlink" title="aList.clear(); //删除所有元素"></a>aList.clear(); //删除所有元素</h3></li>
-<li><h3 id="aList-set-1-“pink”-修改"><a href="#aList-set-1-“pink”-修改" class="headerlink" title="aList.set(1, “pink”);//修改"></a>aList.set(1, “pink”);//修改</h3></li>
-<li><h3 id="System-out-println-aList-contains-“red”-查找"><a href="#System-out-println-aList-contains-“red”-查找" class="headerlink" title="System.out.println(aList.contains(“red”));//查找"></a>System.out.println(aList.contains(“red”));//查找</h3></li>
-<li><h3 id="System-out-println-aList-indexOf-“black”-返回表中第一个匹配元素的下标"><a href="#System-out-println-aList-indexOf-“black”-返回表中第一个匹配元素的下标" class="headerlink" title="System.out.println(aList.indexOf(“black”));//返回表中第一个匹配元素的下标"></a>System.out.println(aList.indexOf(“black”));//返回表中第一个匹配元素的下标</h3></li>
-<li><h3 id="System-out-println-aList-lastIndexOf-“red”-返回最后一个匹配的元素的下标"><a href="#System-out-println-aList-lastIndexOf-“red”-返回最后一个匹配的元素的下标" class="headerlink" title="System.out.println(aList.lastIndexOf(“red”));//返回最后一个匹配的元素的下标"></a>System.out.println(aList.lastIndexOf(“red”));//返回最后一个匹配的元素的下标</h3></li>
-<li><h3 id="contains-“red”-如果此列表中包含指定的元素，则返回true"><a href="#contains-“red”-如果此列表中包含指定的元素，则返回true" class="headerlink" title="contains(“red”);//如果此列表中包含指定的元素，则返回true"></a>contains(“red”);//如果此列表中包含指定的元素，则返回true</h3></li>
-<li><h3 id="indexOf-“black”-返回此列表中首次出现的指定元素的索引，或如果此列表不包含元素，则返回-1"><a href="#indexOf-“black”-返回此列表中首次出现的指定元素的索引，或如果此列表不包含元素，则返回-1" class="headerlink" title="indexOf(“black”);//返回此列表中首次出现的指定元素的索引，或如果此列表不包含元素，则返回-1"></a>indexOf(“black”);//返回此列表中首次出现的指定元素的索引，或如果此列表不包含元素，则返回-1</h3></li>
-<li><h3 id="lastIndexOf-“red”-返回此列表中最后一次出现的指定元素的索引，或如果此列表不包含索引，则返回-1"><a href="#lastIndexOf-“red”-返回此列表中最后一次出现的指定元素的索引，或如果此列表不包含索引，则返回-1" class="headerlink" title="lastIndexOf(“red”);//返回此列表中最后一次出现的指定元素的索引，或如果此列表不包含索引，则返回-1"></a>lastIndexOf(“red”);//返回此列表中最后一次出现的指定元素的索引，或如果此列表不包含索引，则返回-1</h3></li>
-<li><h3 id="isEmpty-如果此列表中没有元素，则返回true-。这里也可以用size-，如果size-0则也代表列表中没有元素"><a href="#isEmpty-如果此列表中没有元素，则返回true-。这里也可以用size-，如果size-0则也代表列表中没有元素" class="headerlink" title="isEmpty();//如果此列表中没有元素，则返回true 。这里也可以用size()，如果size()=0则也代表列表中没有元素"></a>isEmpty();//如果此列表中没有元素，则返回true 。这里也可以用size()，如果size()=0则也代表列表中没有元素</h3></li>
-<li><h3 id="System-out-print-aList-输出"><a href="#System-out-print-aList-输出" class="headerlink" title="System.out.print(aList);//输出"></a>System.out.print(aList);//输出</h3></li>
-<li><h3 id="for-int-i-0-i-lt-aList-size-i-输出"><a href="#for-int-i-0-i-lt-aList-size-i-输出" class="headerlink" title="for (int i = 0; i &lt; aList.size(); i++) //输出"></a>for (int i = 0; i &lt; aList.size(); i++) //输出</h3><h3 id="emsp-emsp-emsp-System-out-println-aList-get-i"><a href="#emsp-emsp-emsp-System-out-println-aList-get-i" class="headerlink" title="&emsp;&emsp;&emsp;System.out.println(aList.get(i));"></a>&emsp;&emsp;&emsp;System.out.println(aList.get(i));</h3>&nbsp;<h3 id="下面附上几个程序希望能够帮助更好的理解这些方法。"><a href="#下面附上几个程序希望能够帮助更好的理解这些方法。" class="headerlink" title="下面附上几个程序希望能够帮助更好的理解这些方法。"></a>下面附上几个程序希望能够帮助更好的理解这些方法。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList3</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    ArrayList&lt;String&gt; aList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    aList.add(<span class="string">&quot;blue&quot;</span>);		</span><br><span class="line">    aList.add(<span class="string">&quot;black&quot;</span>);</span><br><span class="line">    aList.add(<span class="string">&quot;red&quot;</span>);		</span><br><span class="line">    aList.add(<span class="number">1</span>, <span class="string">&quot;yellow&quot;</span>);</span><br><span class="line">    aList.add((aList.size() - <span class="number">1</span>), <span class="string">&quot;green&quot;</span>);    </span><br><span class="line">    aList.remove(<span class="number">1</span>);</span><br><span class="line">    aList.set(<span class="number">1</span>, <span class="string">&quot;pink&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; aList.size(); i++)</span><br><span class="line">      System.out.print(aList.get(i) + <span class="string">&quot;\t&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="输出结果：blue-pink-green-red"><a href="#输出结果：blue-pink-green-red" class="headerlink" title="输出结果：blue pink green red"></a>输出结果：blue pink green red</h3>&nbsp;<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList4</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    ArrayList&lt;String&gt; aList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="keyword">int</span> position;	aList.add(<span class="string">&quot;blue&quot;</span>);	aList.clear();	</span><br><span class="line">    System.out.println(aList.isEmpty());</span><br><span class="line">    aList.add(<span class="string">&quot;black&quot;</span>);	aList.add(<span class="string">&quot;red&quot;</span>);</span><br><span class="line">    System.out.println(aList.contains(<span class="string">&quot;red&quot;</span>));</span><br><span class="line">    position = aList.indexOf(<span class="string">&quot;black&quot;</span>);    </span><br><span class="line">    System.out.println(position);</span><br><span class="line">    position = aList.lastIndexOf(<span class="string">&quot;red&quot;</span>);    </span><br><span class="line">    System.out.println(position); </span><br><span class="line">    System.out.println(aList);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="输出结果："><a href="#输出结果：" class="headerlink" title="输出结果："></a>输出结果：</h3><h3 id="true"><a href="#true" class="headerlink" title="true"></a>true</h3><h3 id="true-1"><a href="#true-1" class="headerlink" title="true"></a>true</h3><h3 id="0"><a href="#0" class="headerlink" title="0"></a>0</h3><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><h3 id="black-red"><a href="#black-red" class="headerlink" title="[black, red]"></a>[black, red]</h3>&nbsp;<h1 id="Multi-Dimensional-Array-List-多维数组列表"><a href="#Multi-Dimensional-Array-List-多维数组列表" class="headerlink" title="Multi Dimensional Array List(多维数组列表)"></a>Multi Dimensional Array List(多维数组列表)</h1></li>
-<li><h3 id="public-static-ArrayList-contactsList-多维数组列表的声明"><a href="#public-static-ArrayList-contactsList-多维数组列表的声明" class="headerlink" title="public static ArrayList contactsList;//多维数组列表的声明"></a>public static ArrayList<ArrayList> contactsList;//多维数组列表的声明</h3></li>
-<li><h3 id="多维数组列表创建-，该函数会创建一个n列的多维数组列表，每一列可以看做一个单独的数组列表"><a href="#多维数组列表创建-，该函数会创建一个n列的多维数组列表，每一列可以看做一个单独的数组列表" class="headerlink" title="多维数组列表创建 ，该函数会创建一个n列的多维数组列表，每一列可以看做一个单独的数组列表"></a>多维数组列表创建 ，该函数会创建一个n列的多维数组列表，每一列可以看做一个单独的数组列表</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createArrayList</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> numberOfSubLists = n;  </span><br><span class="line">    contactsList = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;String&gt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= numberOfSubLists; i++)</span><br><span class="line">	contactsList.add(i, <span class="keyword">new</span> ArrayList&lt;String&gt;());</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
-<li><h3 id="contactsList-get-i-add-0-“yellow”-提取第i列数组列表，并在下标为0的位置添加”yellow”元素"><a href="#contactsList-get-i-add-0-“yellow”-提取第i列数组列表，并在下标为0的位置添加”yellow”元素" class="headerlink" title="contactsList.get(i).add(0, “yellow”);//提取第i列数组列表，并在下标为0的位置添加”yellow”元素"></a>contactsList.get(i).add(0, “yellow”);//提取第i列数组列表，并在下标为0的位置添加”yellow”元素</h3></li>
-<li><h3 id="if-contactsList-get-i-size-0-可以用来判断第i列数组列表是否为空列表"><a href="#if-contactsList-get-i-size-0-可以用来判断第i列数组列表是否为空列表" class="headerlink" title="if (contactsList.get(i).size() == 0)//可以用来判断第i列数组列表是否为空列表"></a>if (contactsList.get(i).size() == 0)//可以用来判断第i列数组列表是否为空列表</h3></li>
-<li><h3 id="result-contactsList-get-n-get-m-提取第n列数组列表中下标为m的元素，并把该元素赋值给result"><a href="#result-contactsList-get-n-get-m-提取第n列数组列表中下标为m的元素，并把该元素赋值给result" class="headerlink" title="result=contactsList.get(n).get(m)//提取第n列数组列表中下标为m的元素，并把该元素赋值给result"></a>result=contactsList.get(n).get(m)//提取第n列数组列表中下标为m的元素，并把该元素赋值给result</h3></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/05/21/%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8-java/" data-id="ckrn6s8ze005zjotn9drmef7z" data-title="数组列表+多维数组列表(java)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -525,23 +654,23 @@
       <ul>
         
           <li>
+            <a href="/2021/07/30/D.%20Backspace%EF%BC%88%E6%A8%A1%E6%8B%9F%EF%BC%89/">D. Backspace（模拟）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/30/C%20-%20Penalty%EF%BC%88%E6%A8%A1%E6%8B%9F%EF%BC%89/">C - Penalty（模拟）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/30/B%20-%20Reverse%20String%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/">B - Reverse String（暴力）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/30/A%20-%20Digits%20Sum%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/">A - Digits Sum（暴力）</a>
+          </li>
+        
+          <li>
             <a href="/2021/07/28/AquaMoon%20and%20Strange%20Sort/">AquaMoon and Strange Sort(模拟)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/29/J%20-%20JOJO's%20Factory%20Gym%20-%20103107J%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">J - JOJO&#39;s Factory Gym - 103107J（思维）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/29/Keep%20Eating%20Gym%20-%20103107K%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">Keep Eating Gym - 103107K（思维）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/13/%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F/">数独游戏</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/28/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
           </li>
         
       </ul>

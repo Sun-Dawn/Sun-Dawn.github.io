@@ -71,6 +71,390 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-SDUT 2021 Winter Individual Contest - M" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/22/SDUT%202021%20Winter%20Individual%20Contest%20-%20M/" class="article-date">
+  <time class="dt-published" datetime="2021-02-22T11:28:57.000Z" itemprop="datePublished">2021-02-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%80%9D%E7%BB%B4/">思维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/22/SDUT%202021%20Winter%20Individual%20Contest%20-%20M/">SDUT 2021 Winter Individual Contest - M</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://img-blog.csdnimg.cn/2021022219260754.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210222192632592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>给一个n*m的矩阵，每行为1～m的一个排列，需要你找一个以第一列为起点的n*x的子矩阵，使之其中的元素在子矩阵外未出现。x应该尽可能小，最后输出子矩阵里不同元素的个数以及将子矩阵的元素从小到大输出。</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>由题意可知，每行为1～m的一个排列，如果一个元素只在子矩阵出现，那么代表这个元素必须在子矩阵里出现n次（即该元素都在子矩阵中出现，这样一来除了子矩阵外的矩阵就必然没有该元素了）。<br>所以我们可以从第一列开始向右遍历，统计未标记的元素个数，如果出现过的元素个数达到n个则从统计个数减去，每遍历一列就判断统计个数是否为0，如果为0代表符合条件，否则继续遍历。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; a[<span class="number">1000010</span>];</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; num;</span><br><span class="line"><span class="keyword">int</span> book[<span class="number">1000010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m, i, j, x, sum = <span class="number">0</span>, result;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; m; j++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">            a[i].<span class="built_in">push_back</span>(x);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (book[a[j][i]] == <span class="number">0</span>) &#123;</span><br><span class="line">                num.<span class="built_in">push_back</span>(a[j][i]);</span><br><span class="line">                sum++;</span><br><span class="line">            &#125;</span><br><span class="line">            book[a[j][i]]++;</span><br><span class="line">            <span class="keyword">if</span> (book[a[j][i]] == n) sum--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">            result = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, result);</span><br><span class="line">    <span class="built_in">sort</span>(num.<span class="built_in">begin</span>(), num.<span class="built_in">end</span>());</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; num.<span class="built_in">size</span>(); i++) <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, num[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2021/02/22/SDUT%202021%20Winter%20Individual%20Contest%20-%20M/" data-id="ckrn6s8yu0052jotn4f6k0k19" data-title="SDUT 2021 Winter Individual Contest - M" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-面向对象开发名词及定义" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/30/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E5%90%8D%E8%AF%8D%E5%8F%8A%E5%AE%9A%E4%B9%89/" class="article-date">
+  <time class="dt-published" datetime="2020-12-30T10:39:52.000Z" itemprop="datePublished">2020-12-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/12/30/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E5%90%8D%E8%AF%8D%E5%8F%8A%E5%AE%9A%E4%B9%89/">面向对象开发名词及定义</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>Class 类</li>
+</ul>
+<p>定义：Describe the behavior and state of a class of objects.（描述一类对象的行为和状态）</p>
+<hr>
+<ul>
+<li>Object 对象</li>
+</ul>
+<p>定义：An object has a unique identity,state,and behaviours.（一个对象具有唯一的身份，状态和行为）</p>
+<hr>
+<ul>
+<li>类和对象的关系</li>
+</ul>
+<p>Classes are composed of objects, and classes can contain objects.（类由对象组成，并且类可以包含对象）</p>
+<hr>
+<ul>
+<li>Construction method 构造方法</li>
+</ul>
+<p>定义：The construction method is a special method, it is a method with the same name as the class.（构造方法是一种特殊的方法，它是一个与类同名的方法）</p>
+<hr>
+<ul>
+<li>Abstract method 抽象方法</li>
+</ul>
+<p>定义：Refers to a method without a method body（指没有方法体的方法）</p>
+<hr>
+<ul>
+<li>Abstract class 抽象类</li>
+</ul>
+<p>定义：A class does not contain enough information to describe a specific object（一个类中没有包含足够的信息来描绘一个具体的对象）</p>
+<hr>
+<ul>
+<li>Instance variable 实例变量</li>
+</ul>
+<p>定义：In the declaration of the class, attributes are represented by variables（在类的声明中，属性是用变量来表示的）</p>
+<hr>
+<ul>
+<li>Member variables 成员变量</li>
+</ul>
+<p>定义：Member variables are defined in the class, outside the method body（成员变量是定义在类中，方法体之外的变量）</p>
+<hr>
+<ul>
+<li>Local variable 局部变量</li>
+</ul>
+<p>定义：Variables defined in methods, construction methods, or statement blocks are called local variables.（在方法、构造方法或者语句块中定义的变量被称为局部变量）</p>
+<hr>
+<ul>
+<li>Dynamic binding 动态绑定</li>
+</ul>
+<p>定义：The process of combining the function call and the code needed to respond to the call（函数调用与响应调用所需要的代码相结合的过程）</p>
+<hr>
+<ul>
+<li>interface 接口</li>
+</ul>
+<p>定义：An abstract type is a collection of abstract methods（一个抽象类型，是抽象方法的集合）</p>
+<hr>
+<ul>
+<li>Exception handling 异常处理</li>
+</ul>
+<p>定义：Deal with abnormal conditions in software or information systems（处理软件或信息系统中出现的异常状况）</p>
+<hr>
+<ul>
+<li>Event-driven programming 事件驱动编程</li>
+</ul>
+<p>定义：Write corresponding event handlers for events that need to be handled（为需要处理的事件编写相应的事件处理程序）</p>
+<hr>
+<ul>
+<li>initialize 初始化</li>
+</ul>
+<hr>
+<ul>
+<li>Overloading 重载</li>
+</ul>
+<p>定义：In a class, the method names are the same, but the parameters are different. The return type can be the same or different（在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同）</p>
+<hr>
+<ul>
+<li>Overriding 覆盖（重写）</li>
+</ul>
+<p>定义：The subclass rewrites the implementation process of the parent class’s allowed access method（子类对父类的允许访问的方法的实现过程进行重新编写）</p>
+<hr>
+<ul>
+<li>immutable 不可修改的</li>
+</ul>
+<hr>
+<ul>
+<li>polymorphism 多态</li>
+</ul>
+<p>定义：Polymorphism is the ability to have multiple different manifestations or forms of the same behavior.（多态是同一个行为具有多个不同表现形式或形态的能力。）</p>
+<hr>
+<ul>
+<li>superclass 父类</li>
+</ul>
+<hr>
+<ul>
+<li>subclass 子类</li>
+</ul>
+<hr>
+<ul>
+<li>encapsulation 封装</li>
+</ul>
+<p>定义：Ways to package and hide the implementation details of abstract functional interfaces（将抽象性函式接口的实现细节部分包装、隐藏起来的方法）</p>
+<hr>
+<ul>
+<li>inherit 继承</li>
+</ul>
+<p>定义：The subclass inherits the characteristics and behavior of the parent class, so that the subclass object (instance) has the instance domain and methods of the parent class, or the subclass inherits methods from the parent class, so that the subclass has the same behavior as the parent class.（子类继承父类的特征和行为，使得子类对象（实例）具有父类的实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为。）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/12/30/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E5%90%8D%E8%AF%8D%E5%8F%8A%E5%AE%9A%E4%B9%89/" data-id="ckrn6s8zk006bjotnhph90sku" data-title="面向对象开发名词及定义" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-面向对象开发笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/30/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2020-12-30T10:39:52.000Z" itemprop="datePublished">2020-12-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91/">面向对象开发</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/12/30/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">面向对象开发笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="专业名词汉英对照："><a href="#专业名词汉英对照：" class="headerlink" title="专业名词汉英对照："></a>专业名词汉英对照：</h3><p><img src="https://img-blog.csdnimg.cn/20201228160416259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<p>&nbsp;</p>
+<ul>
+<li>对象:An object has a unique identidy,state,and behaviour</li>
+<li>类: a class is a template that describes the behavior and state of a class of objects.</li>
+<li>封装：a method of wrapping and hiding the implementation details of abstract function interface</li>
+<li>继承：a subclass inherits the characteristics and behaviors of the parent class, so that the subclass object (instance) has the instance domain and methods of the parent class, or the subclass inherits methods from the parent class, so that the subclass has the same behavior as the parent class.</li>
+<li>抽象类：If a class does not contain enough information to describe a specific object, such a class is an abstract class.</li>
+<li>多态：Polymorphism is the ability of the same behavior to have multiple different forms or forms.</li>
+<li>重写（覆盖）：a process in which a subclass rewrites the implementation of a method that a parent class allows access to</li>
+<li>重载：Overloading is in a class with the same method name but different parameters.</li>
+</ul>
+<p>&nbsp;</p>
+<h2 id="1-类和对象："><a href="#1-类和对象：" class="headerlink" title="1.类和对象："></a>1.类和对象：</h2><blockquote>
+<p>类：类是一个模板，它描述一类对象的行为和状态。</p>
+</blockquote>
+<blockquote>
+<p>对象：对象是类的一个实例，有状态和行为。</p>
+</blockquote>
+<p>一个类可以包含以下类型变量：</p>
+<blockquote>
+<p>局部变量：在方法、构造方法或者语句块中定义的变量被称为局部变量。变量声明和初始化都是在方法中，方法结束后，变量就会自动销毁。</p>
+</blockquote>
+<blockquote>
+<p>成员变量：成员变量是定义在类中，方法体之外的变量。这种变量在创建对象的时候实例化。成员变量可以被类中方法、构造方法和特定类的语句块访问。</p>
+</blockquote>
+<blockquote>
+<p>类变量：类变量也声明在类中，方法体之外，但必须声明为 static 类型。</p>
+</blockquote>
+<p>&nbsp;</p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><blockquote>
+<p>每个类都有构造方法。如果没有显式地为类定义构造方法，Java 编译器将会为该类提供一个默认构造方法。<br>在创建一个对象的时候，至少要调用一个构造方法。构造方法的名称必须与类同名，一个类可以有多个构造方法。</p>
+</blockquote>
+<p>&nbsp;</p>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>对象是根据类创建的。在Java中，使用关键字 new 来创建一个新的对象。创建对象需要以下三步：</p>
+<blockquote>
+<p>声明：声明一个对象，包括对象名称和对象类型。</p>
+</blockquote>
+<blockquote>
+<p>实例化：使用关键字 new 来创建一个对象。</p>
+</blockquote>
+<blockquote>
+<p>初始化：使用 new创建对象时，会调用构造方法初始化对象。</p>
+</blockquote>
+<p>&nbsp;</p>
+<h2 id="2-Java-抽象类"><a href="#2-Java-抽象类" class="headerlink" title="2.Java 抽象类:"></a>2.Java 抽象类:</h2><blockquote>
+<p>在面向对象的概念中，所有的对象都是通过类来描绘的，但是反过来，并不是所有的类都是用来描绘对象的，如果一个类中没有包含足够的信息来描绘一个具体的对象，这样的类就是抽象类。<br>抽象类除了不能实例化对象之外，类的其它功能依然存在，成员变量、成员方法和构造方法的访问方式和普通类一样。<br>由于抽象类不能实例化对象，所以抽象类必须被继承，才能被使用。也是因为这个原因，通常在设计阶段决定要不要设计抽象类。<br>父类包含了子类集合的常见的方法，但是由于父类本身是抽象的，所以不能使用这些方法。<br>在Java中抽象类表示的是一种继承关系，一个类只能继承一个抽象类，而一个类却可以实现多个接口。</p>
+</blockquote>
+<h3 id="抽象方法："><a href="#抽象方法：" class="headerlink" title="抽象方法："></a>抽象方法：</h3><blockquote>
+<p>如果你想设计这样一个类，该类包含一个特别的成员方法，该方法的具体实现由它的子类确定，那么你可以在父类中声明该方法为抽象方法。<br>Abstract 关键字同样可以用来声明抽象方法，抽象方法只包含一个方法名，而没有方法体。</p>
+</blockquote>
+<p>抽象方法没有定义，方法名后面直接跟一个分号，而不是花括号。</p>
+<h3 id="例如："><a href="#例如：" class="headerlink" title="例如："></a>例如：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">private</span> String name;</span><br><span class="line">   <span class="keyword">private</span> String address;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> number;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">computePay</span><span class="params">()</span></span>;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">//其余代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>声明<strong>抽象方法</strong>会造成以下两个结果：</p>
+<ol>
+<li><p>如果一个类包含抽象方法，那么该类必须是抽象类。</p>
+</li>
+<li><p>任何子类必须重写父类的抽象方法，或者声明自身为抽象类。</p>
+</li>
+</ol>
+<p>继承抽象方法的子类必须重写该方法。否则，该子类也必须声明为抽象类。最终，必须有子类实现该抽象方法，否则，从最初的父类到最终的子类都不能用来实例化对象。</p>
+<h3 id="抽象类总结规定"><a href="#抽象类总结规定" class="headerlink" title="抽象类总结规定"></a>抽象类总结规定</h3><ol>
+<li><p>抽象类不能被实例化(初学者很容易犯的错)，如果被实例化，就会报错，编译无法通过。只有抽象类的非抽象子类可以创建对象。</p>
+</li>
+<li><p>抽象类中不一定包含抽象方法，但是有抽象方法的类必定是抽象类。</p>
+</li>
+<li><p>抽象类中的抽象方法只是声明，不包含方法体，就是不给出方法的具体实现也就是方法的具体功能。</p>
+</li>
+<li><p>构造方法，类方法（用 static 修饰的方法）不能声明为抽象方法。</p>
+</li>
+<li><p>抽象类的子类必须给出抽象类中的抽象方法的具体实现，除非该子类也是抽象类。</p>
+</li>
+</ol>
+<p>&nbsp;</p>
+<h1 id="3-Java-封装"><a href="#3-Java-封装" class="headerlink" title="3.Java 封装:"></a>3.Java 封装:</h1><blockquote>
+<p>在面向对象程式设计方法中，封装（英语：Encapsulation）是指一种将抽象性函式接口的实现细节部分包装、隐藏起来的方法。<br>封装可以被认为是一个保护屏障，防止该类的代码和数据被外部类定义的代码随机访问。<br>要访问该类的代码和数据，必须通过严格的接口控制。<br>封装最主要的功能在于我们能修改自己的实现代码，而不用修改那些调用我们代码的程序片段。<br>适当的封装可以让程式码更容易理解与维护，也加强了程式码的安全性。</p>
+</blockquote>
+<h3 id="封装的优点："><a href="#封装的优点：" class="headerlink" title="封装的优点："></a>封装的优点：</h3><ol>
+<li>良好的封装能够减少耦合。</li>
+<li>类内部的结构可以自由修改。</li>
+<li>可以对成员变量进行更精确的控制。</li>
+<li>隐藏信息，实现细节。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/12/30/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-id="ckrn6s8zm006ejotn4fkdguru" data-title="面向对象开发笔记" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-磁盘调度算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/14/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2020-12-14T13:01:51.000Z" itemprop="datePublished">2020-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/12/14/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/">磁盘调度算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="以下两种算法的代码均是在c-环境下编译进行"><a href="#以下两种算法的代码均是在c-环境下编译进行" class="headerlink" title="以下两种算法的代码均是在c++环境下编译进行"></a>以下两种算法的代码均是在c++环境下编译进行</h3><h2 id="SSTF调度"><a href="#SSTF调度" class="headerlink" title="SSTF调度"></a>SSTF调度</h2><h3 id="初版："><a href="#初版：" class="headerlink" title="初版："></a>初版：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1010</span>],n;</span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,num=inf,minn=inf,flag;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(a[i]-u)&lt;minn&amp;&amp;book[i]==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            minn=<span class="built_in">abs</span>(a[i]-u);</span><br><span class="line">            flag=a[i];</span><br><span class="line">            num=i;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(num==inf)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    book[num]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,flag,minn);</span><br><span class="line">    <span class="built_in">change</span>(flag);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,m;</span><br><span class="line">    <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘个数：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘序列：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入当前磁道号：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;被访问的下一个磁道号\t移动距离（磁道数）\n&quot;</span>);</span><br><span class="line">    <span class="built_in">change</span>(m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="最终版："><a href="#最终版：" class="headerlink" title="最终版："></a>最终版：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SSTF调度</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span><span class="comment">//c++万能头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Coding author 孙黎明 19110543033</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f<span class="comment">//定义inf为无穷大</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//下面变量开全局，可以在main函数和自定义函数中同时使用，避免了传参数这一步骤</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1010</span>];<span class="comment">//定义数组a，用来保存访盘序列</span></span><br><span class="line"><span class="keyword">int</span> n;<span class="comment">//n代表访盘个数</span></span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">1010</span>];<span class="comment">//book[a]=1表示标号为a的访盘已经访问过，book[a]=0表示标号为a的访盘没有访问过。用来记录是否访问过，防止重复访问</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> u)</span><span class="comment">//处理函数，用来处理访盘序列，同时给出被访问的下一个磁道号以及移动距离，u代表当前磁道号</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> num=inf;<span class="comment">//用来记录被访问的下一个磁道号的编号，后续将其标记，初始赋值为inf，可以根据后续num的值来判断递归是否结束</span></span><br><span class="line">    <span class="keyword">int</span> minn=inf;<span class="comment">//保存最少的移动距离，初始值赋值为无穷大</span></span><br><span class="line">    <span class="keyword">int</span> flag;<span class="comment">//记录被访问的下一个磁道号</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)<span class="comment">//遍历整个访盘序列</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(a[i]-u)&lt;minn&amp;&amp;book[i]==<span class="number">0</span>)<span class="comment">//如果一个磁道号与当前磁道号的差比最小值还要小，同时这个磁道号没有访问过（abs：绝对值函数）</span></span><br><span class="line">        &#123;</span><br><span class="line">            minn=<span class="built_in">abs</span>(a[i]-u);<span class="comment">//更新最小值</span></span><br><span class="line">            flag=a[i];<span class="comment">//记录被访问的下一个磁道号</span></span><br><span class="line">            num=i;<span class="comment">//记录被访问的下一个磁道号的编号</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span>(num==inf)<span class="comment">//如果num=inf的话，就说明所有磁盘都访问过了，代表该递归结束</span></span><br><span class="line">        <span class="keyword">return</span>;<span class="comment">//return出去</span></span><br><span class="line">    book[num]=<span class="number">1</span>;<span class="comment">//循环完成后，把最终确定的被访问的下一个磁道号的编号标记，代表这个编号的磁道号已经访问过了，后续不会再访问</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,flag,minn);<span class="comment">//输出被访问的下一个磁道号以及移动距离，\t用来规范格式</span></span><br><span class="line">    <span class="built_in">change</span>(flag);<span class="comment">//递归思想，继续递归处理下一个磁道</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,m;</span><br><span class="line">    <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));<span class="comment">//初始化book数组全为0，代表所有磁道都没访问过</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘个数：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);<span class="comment">//读入访盘个数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘序列：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)<span class="comment">//读入访盘序列</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入当前磁道号：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);<span class="comment">//读入当前磁道号</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;被访问的下一个磁道号\t移动距离（磁道数）\n&quot;</span>);</span><br><span class="line">    <span class="built_in">change</span>(m);<span class="comment">//开始第一次调用处理函数处理数据</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="输入样例1："><a href="#输入样例1：" class="headerlink" title="输入样例1："></a>输入样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">55</span> <span class="number">58</span> <span class="number">39</span> <span class="number">18</span> <span class="number">90</span> <span class="number">160</span> <span class="number">150</span></span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+<h3 id="输出样例1："><a href="#输出样例1：" class="headerlink" title="输出样例1："></a>输出样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">被访问的下一个磁道号	移动距离（磁道数）</span><br><span class="line"><span class="number">90</span>			<span class="number">10</span></span><br><span class="line"><span class="number">58</span>			<span class="number">32</span></span><br><span class="line"><span class="number">55</span>			<span class="number">3</span></span><br><span class="line"><span class="number">39</span>			<span class="number">16</span></span><br><span class="line"><span class="number">18</span>			<span class="number">21</span></span><br><span class="line"><span class="number">150</span>			<span class="number">132</span></span><br><span class="line"><span class="number">160</span>			<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输入样例2："><a href="#输入样例2：" class="headerlink" title="输入样例2："></a>输入样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">5</span> <span class="number">50</span> <span class="number">49</span> <span class="number">55</span> <span class="number">100</span> <span class="number">9</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例2："><a href="#输出样例2：" class="headerlink" title="输出样例2："></a>输出样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">被访问的下一个磁道号	移动距离（磁道数）</span><br><span class="line"><span class="number">3</span>			<span class="number">0</span></span><br><span class="line"><span class="number">1</span>			<span class="number">2</span></span><br><span class="line"><span class="number">5</span>			<span class="number">4</span></span><br><span class="line"><span class="number">9</span>			<span class="number">4</span></span><br><span class="line"><span class="number">49</span>			<span class="number">40</span></span><br><span class="line"><span class="number">50</span>			<span class="number">1</span></span><br><span class="line"><span class="number">55</span>			<span class="number">5</span></span><br><span class="line"><span class="number">100</span>			<span class="number">45</span></span><br></pre></td></tr></table></figure>
+<h2 id="CSCAN调度"><a href="#CSCAN调度" class="headerlink" title="CSCAN调度"></a>CSCAN调度</h2><h3 id="初版：-1"><a href="#初版：-1" class="headerlink" title="初版："></a>初版：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,ans,n,m,a[<span class="number">1010</span>],num,flag;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘个数：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘序列：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">sort</span>(a,a+n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入当前磁道号：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">    ans=m;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="keyword">if</span>(a[i]&gt;=m)</span><br><span class="line">        &#123;</span><br><span class="line">            flag=i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入磁头移动方向（向磁道号增加的方向请输入1，向磁道号减少的方向请输入0）：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;被访问的下一个磁道号\t移动距离（磁道数）\n&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(num==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=flag; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));</span><br><span class="line">            m=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;flag; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));</span><br><span class="line">            m=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=flag<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));</span><br><span class="line">            m=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=n<span class="number">-1</span>; i&gt;=flag; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));</span><br><span class="line">            m=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="最终版：-1"><a href="#最终版：-1" class="headerlink" title="最终版："></a>最终版：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//CSCAN调度</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span><span class="comment">//c++万能头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Coding author 孙黎明 19110543033</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> ans;<span class="comment">//用来保存最开始的那个磁道号</span></span><br><span class="line">    <span class="keyword">int</span> m;<span class="comment">//当前磁道号</span></span><br><span class="line">    <span class="keyword">int</span> n;<span class="comment">//访盘个数</span></span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">1010</span>];<span class="comment">//用来保存访盘序列</span></span><br><span class="line">    <span class="keyword">int</span> num;<span class="comment">//记录磁头移动方向，0代表向磁道号减少的方向移动，1代表向磁道号增加的方向移动</span></span><br><span class="line">    <span class="keyword">int</span> flag;<span class="comment">//记录第一个大于等于当前磁道号的磁道的编号</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘个数：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);<span class="comment">//读入访盘个数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入访盘序列：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)<span class="comment">//读入访盘序列</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="built_in">sort</span>(a,a+n);<span class="comment">//利用c++ STL中自带的排序函数排序（默认从小到大排）</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入当前磁道号：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);<span class="comment">//读入当前磁道号</span></span><br><span class="line">    ans=m;<span class="comment">//把最开始的磁道号赋值给ans保存</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)<span class="comment">//遍历整个访盘序列找出第一个大于等于当前磁道号的磁道</span></span><br><span class="line">        <span class="keyword">if</span>(a[i]&gt;=m)</span><br><span class="line">        &#123;</span><br><span class="line">            flag=i;<span class="comment">//标记第一个大于等于当前磁道号的磁道的编号</span></span><br><span class="line">            <span class="keyword">break</span>;<span class="comment">//因为只需要找第一个，所以找到后就break出去</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入磁头移动方向（向磁道号增加的方向请输入1，向磁道号减少的方向请输入0）：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);<span class="comment">//读入磁头移动方向</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;被访问的下一个磁道号\t移动距离（磁道数）\n&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(num==<span class="number">1</span>)<span class="comment">//如果磁头是向磁道号增加的方向移动</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=flag; i&lt;n; i++)<span class="comment">//从第一个大于等于当前磁道号的磁道编号开始，从小到大，遍历整个访盘序列</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));<span class="comment">//输出被访问的下一个磁道号和移动距离（abs绝对值函数，可以直接给出距离）</span></span><br><span class="line">            m=a[i];<span class="comment">//更新当前磁道号，更新为刚才被访问的那个磁道</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;flag; i++)<span class="comment">//如果磁头到达最大处，就再从头开始到flag，遍历访盘序列，寻找被访问的下一个磁道号</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));<span class="comment">//输出被访问的下一个磁道号和移动距离（abs绝对值函数，可以直接给出距离）</span></span><br><span class="line">            m=a[i];<span class="comment">//更新当前磁道号，更新为刚才被访问的那个磁道</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//如果磁头是向磁道号减少的方向移动</span></span><br><span class="line">    &#123;</span><br><span class="line">        a[flag]==ans ? i=flag : i=flag<span class="number">-1</span>;<span class="comment">//判断a[flag]是否等于ans，如果等于i就等于flag，否则i=flag-1。该步判断的意义在于如果a[flag]刚好等于ans的话就从a[flag]开始遍历，否则就代表a[flag-1]是第一个比ans小的磁道，那么就从a[flag-1]开始遍历</span></span><br><span class="line">        <span class="keyword">for</span>(; i&gt;=<span class="number">0</span>; i--)<span class="comment">//道理和上一个差不多</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));<span class="comment">//输出被访问的下一个磁道号和移动距离（abs绝对值函数，可以直接给出距离）</span></span><br><span class="line">            m=a[i];<span class="comment">//更新当前磁道号，更新为刚才被访问的那个磁道</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=n<span class="number">-1</span>; a[flag]==ans ? i&gt;flag : i&gt;=flag; i--) <span class="comment">//从最大的磁道开始遍历</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t\t%d\n&quot;</span>,a[i],<span class="built_in">abs</span>(a[i]-m));<span class="comment">//输出被访问的下一个磁道号和移动距离（abs绝对值函数，可以直接给出距离）</span></span><br><span class="line">            m=a[i];<span class="comment">//更新当前磁道号，更新为刚才被访问的那个磁道</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="输入样例1：-1"><a href="#输入样例1：-1" class="headerlink" title="输入样例1："></a>输入样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">55</span> <span class="number">58</span> <span class="number">39</span> <span class="number">18</span> <span class="number">90</span> <span class="number">160</span> <span class="number">150</span></span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例1：-1"><a href="#输出样例1：-1" class="headerlink" title="输出样例1："></a>输出样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">被访问的下一个磁道号	移动距离（磁道数）</span><br><span class="line"><span class="number">150</span>			<span class="number">50</span></span><br><span class="line"><span class="number">160</span>			<span class="number">10</span></span><br><span class="line"><span class="number">18</span>			<span class="number">142</span></span><br><span class="line"><span class="number">39</span>			<span class="number">21</span></span><br><span class="line"><span class="number">55</span>			<span class="number">16</span></span><br><span class="line"><span class="number">58</span>			<span class="number">3</span></span><br><span class="line"><span class="number">90</span>			<span class="number">32</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输入样例2：-1"><a href="#输入样例2：-1" class="headerlink" title="输入样例2："></a>输入样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">55</span> <span class="number">58</span> <span class="number">39</span> <span class="number">18</span> <span class="number">90</span> <span class="number">160</span> <span class="number">150</span></span><br><span class="line"><span class="number">90</span></span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例2：-1"><a href="#输出样例2：-1" class="headerlink" title="输出样例2："></a>输出样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">被访问的下一个磁道号	移动距离（磁道数）</span><br><span class="line"><span class="number">90</span>			<span class="number">0</span></span><br><span class="line"><span class="number">58</span>			<span class="number">32</span></span><br><span class="line"><span class="number">55</span>			<span class="number">3</span></span><br><span class="line"><span class="number">39</span>			<span class="number">16</span></span><br><span class="line"><span class="number">18</span>			<span class="number">21</span></span><br><span class="line"><span class="number">160</span>			<span class="number">142</span></span><br><span class="line"><span class="number">150</span>			<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="算法或原理的实现思想："><a href="#算法或原理的实现思想：" class="headerlink" title="算法或原理的实现思想："></a>算法或原理的实现思想：</h2><p>算法：<br>算法就是磁盘调度算法，我选择的是SSTF调度算法和CSCAN调度算法。<br>SSTF算法（最短寻道时间优先）：就是先选择一个离当前磁道最近的磁道访问，然后以此类推，我感觉就是递归思想，写一个函数，然后所有过程都是一样的，即上一个磁道和下一个磁道的关系，然后一直递归。<br>CSCAN算法（循环扫描）：就是从当前磁道开始，有两种选择，1.磁头向磁道号增加的方向移动 2.磁头向磁道号减少的方向移动，具体过程就是模拟，但是其中我发现一个坑，这个后面在后面遇到的问题里再说。</p>
+<p>遇到的问题：<br>SSTF算法：<br>第一个算法还好，复习了一下这个过程，然后一遍就敲出来了，和教材上的一模一样（就是我们自己印的那个教材），但是在加注释完注释的时候出现问题了，我找了好一会，又是debug又是单步调试，但是都找不出来错误，最后我发现是我递归的边界没写好。例如，在这个算法中，如果所有的磁道都访问完之后，我原本写的程序没有跳出递归这一步操作，所以程序会输出一些垃圾数，甚至有的时候会导致程序崩溃，最后我加上跳出的那一步操作后就没问题，这里可以参考一下我的原代码，即没有加注释和改错之前的代码（<a href="https://sun-dawn.github.io/">代码查看</a>里面我详细写了每个代码的更改过程 包括原代码和注释更改后的最终代码）<br>CSCAN算法：<br>这个算法我感觉就更简单了，就是单纯的模拟这个过程，从大到小和从小到大，4个for循环就ok了，但是正如我上面说的那样，我发现一个坑，这个坑是在从大到小的过程中，同时当前磁道号就等于访盘序列中某一个磁盘号时，会出现错误，原因是我用flag标记第一个大于等于当前磁道号的时候，因为是大于等于，所以可能会出现等于的情况，这样我从大到小跑的时候会忽略掉那个等于的部分，具体可以看我博客里写的原代码和最终代码的比较（网址在上面提到过），测试数据的话就是这个算法的样例2，如果用我的原代码和最终版代码跑一遍的话就会发现，两种代码输出的结果不一样，显然最终版是对的，所以我做了改动，里面用了三目运算符，感觉还挺好用的。</p>
+<p>参考文献：<br>山东理工大学19级计科（中外）操作系统教材———复印ppt版<br>没有参考网络和其他同学</p>
+<p>感想、体会和收获：<br>和上次的银行家算法一样，在敲代码之前从教材上复习了一下磁盘调度算法的整个过程，在熟知了所有磁盘调度算法的方法后我才开始敲代码，然后敲代码的过程总的来说还是挺顺利的，虽然中间出了一些小差错，但是最后都能改正过来。这个过程不仅让我学习了操作系统的相关知识，也让我提高了敲代码的能力，个人还是挺喜欢大作业的这种形式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/12/14/%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" data-id="ckrn6s8zj0069jotn483l4al5" data-title="磁盘调度算法" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Problem C Game Map (dfs+剪枝）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2020/12/12/Problem%20C%20Game%20Map%20(dfs+%E5%89%AA%E6%9E%9D%EF%BC%89/" class="article-date">
@@ -505,229 +889,11 @@
 
 
   
-    <article id="post-A - AD 2020 Gym - 102770A" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/11/02/A%20-%20AD%202020%20Gym%20-%20102770A/" class="article-date">
-  <time class="dt-published" datetime="2020-11-02T13:30:56.000Z" itemprop="datePublished">2020-11-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/11/02/A%20-%20AD%202020%20Gym%20-%20102770A/">A - AD 2020 Gym - 102770A</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/402565#problem/A">题目链接</a></h3><p>2020 is the current year and is a leap year starting on Wednesday of the Gregorian calendar, the 2020th year of the Common Era (CE) and Anno Domini (AD) designations, the 20th year of the 3rd millennium, the 20th year of the 21st century, and the 1st year of the 2020s decade.</p>
-<p>2020 has been designated as Year of the Nurse and Midwife by the World Health Organization. The United Nations has declared 2020 as the International Year of Plant Health. 2020 has been designated as International Year of Sound by the International Commission for Acoustics.</p>
-<p>Because there are so many unforgettable things happening in 2020, somebody has now proposed that all dates with a substring containing “202” to be designated as the Day for Disaster Reduction. We represent a date in the format YYYYMMDD (for example, 21110202), then if 202 is a substring of this date, this day is the Day for Disaster Reduction.</p>
-<p>Please write a program to compute how many Days for Disaster Reduction are there in all the dates between Y1<br>M1D1 and Y2M2D2 (both inclusive)? Note that you should take leap years into consideration. A leap year is a year that can be divided by 400 or can be divided by 4 but can’t be divided by 100. A leap year has 29 days in February, instead of the normal 28 days.</p>
-<h3 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h3><p>The input contains multiple cases. The first line of the input contains a single positive integer T (1≤T≤105), the number of cases.</p>
-<p>The first and only line of each case contains six integers Y1,M1,D1,Y2,M2,D2, which are described in the problem statement above.</p>
-<p>It’s guaranteed that Y1M1D1 is not larger than Y2M2D2. Both Y1M1D1 and Y2M2D2 are between 20000101 and 99991231, and both dates are valid.</p>
-<p>We kindly remind you that the size of the input and output of this problem can be large, so it’s recommended to use a faster I/O method. For example, in C++, you can use scanf/printf instead of cin/cout.</p>
-<h3 id="输出："><a href="#输出：" class="headerlink" title="输出："></a>输出：</h3><p>For each case, print a single line containing a single integer, the answer.</p>
-<h3 id="样例输入："><a href="#样例输入：" class="headerlink" title="样例输入："></a>样例输入：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2111</span> <span class="number">02</span> <span class="number">01</span> <span class="number">2111</span> <span class="number">02</span> <span class="number">03</span></span><br><span class="line"><span class="number">2202</span> <span class="number">01</span> <span class="number">01</span> <span class="number">2202</span> <span class="number">12</span> <span class="number">31</span></span><br><span class="line"><span class="number">2000</span> <span class="number">01</span> <span class="number">01</span> <span class="number">9999</span> <span class="number">12</span> <span class="number">31</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="样例输出："><a href="#样例输出：" class="headerlink" title="样例输出："></a>样例输出：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">365</span></span><br><span class="line"><span class="number">44294</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>如果给定一个年份我们就可以直接得知这一年中有多少个日期含有202，所以我们把所给区间大体分为3部分，第一部分就是位于两个日期之间的整年，例如2000 01 01和2002 01 01，那么位于两个日期中的整年就是2001年，第二三部分就是2000这一年和2002这一年中所有日期中包含202的个数，最后把他们相加。（如果第一个日期和第二个日期的年份相同的话就只有1部分了，就是他们中间的那部分日期）</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> data)</span><span class="comment">//判断是否闰年</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(data%<span class="number">4</span>==<span class="number">0</span>||(data%<span class="number">100</span>==<span class="number">0</span>&amp;&amp;data%<span class="number">400</span>!=<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">checkyear</span><span class="params">(<span class="keyword">int</span> year)</span><span class="comment">//判断年份是否含有202</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(year/<span class="number">10</span>==<span class="number">202</span>||year%<span class="number">1000</span>==<span class="number">202</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">checktwo</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//判断所给日期（包含年月日）是否含有202</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> year=x/<span class="number">10000</span>;</span><br><span class="line">    <span class="keyword">int</span> month=(x%<span class="number">10000</span>)/<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">int</span> day=x%<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">if</span>(year/<span class="number">10</span>==<span class="number">202</span>||year%<span class="number">1000</span>==<span class="number">202</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(year%<span class="number">10</span>==<span class="number">2</span>&amp;&amp;month==<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(month%<span class="number">10</span>==<span class="number">2</span>&amp;&amp;day==<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> yue[<span class="number">13</span>] = &#123;<span class="number">0</span>, <span class="number">31</span>, <span class="number">28</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t,i,j,l,year1,month1,day1,year2,month2,day2,sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        sum=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d%d%d%d&quot;</span>,&amp;year1,&amp;month1,&amp;day1,&amp;year2,&amp;month2,&amp;day2);</span><br><span class="line">        <span class="keyword">for</span>(i=year1+<span class="number">1</span>; i&lt;=year2<span class="number">-1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">checkyear</span>(i))<span class="comment">//如果这年份中含有202，那么这一整年都是</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">check</span>(i))<span class="comment">//如果是闰年就是366天</span></span><br><span class="line">                    sum+=<span class="number">366</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    sum+=<span class="number">365</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(i%<span class="number">10</span>==<span class="number">2</span>)<span class="comment">//如果是XXX2 XX XX类型的话</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="built_in">check</span>(i))<span class="comment">//如果是闰年就是2月的29天+12月02号</span></span><br><span class="line">                        sum+=<span class="number">30</span>;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        sum+=<span class="number">29</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span><span class="comment">//其余只有02月02号和12月02号符合要求</span></span><br><span class="line">                    sum+=<span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(year1!=year2)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(j=month1; j&lt;=<span class="number">12</span>; j++)<span class="comment">//第一个日期所在的年</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(j==<span class="number">2</span>&amp;&amp;<span class="built_in">check</span>(year1))</span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=<span class="number">29</span>; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month1&amp;&amp;l&lt;day1)<span class="comment">//如果枚举的日期比第一个日期小</span></span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year1*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=yue[j]; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month1&amp;&amp;l&lt;day1)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year1*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=month2; j++)<span class="comment">//第二个日期所在的年</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(j==<span class="number">2</span>&amp;&amp;<span class="built_in">check</span>(year2))</span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=<span class="number">29</span>; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month2&amp;&amp;l&gt;day2)<span class="comment">//如果日期超过第二个日期的话</span></span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year2*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=yue[j]; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month2&amp;&amp;l&gt;day2)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year2*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(year1==year2)</span><br><span class="line">            <span class="keyword">for</span>(j=month1; j&lt;=month2; j++)</span><br><span class="line">                <span class="keyword">if</span>(j==<span class="number">2</span>&amp;&amp;<span class="built_in">check</span>(year1))</span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=<span class="number">29</span>; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month1&amp;&amp;l&lt;day1)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(j==month2&amp;&amp;l&gt;day2)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year1*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">for</span>(l=<span class="number">1</span>; l&lt;=yue[j]; l++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(j==month1&amp;&amp;l&lt;day1)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(j==month2&amp;&amp;l&gt;day2)</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="built_in">checktwo</span>(year1*<span class="number">10000</span>+j*<span class="number">100</span>+l))</span><br><span class="line">                            sum++;</span><br><span class="line">                    &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/11/02/A%20-%20AD%202020%20Gym%20-%20102770A/" data-id="ckrn6s8we0025jotn7c25fbsk" data-title="A - AD 2020 Gym - 102770A" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-回文日期" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/11/02/%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/" class="article-date">
-  <time class="dt-published" datetime="2020-11-02T13:30:56.000Z" itemprop="datePublished">2020-11-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/11/02/%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/">回文日期</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/468/">题目链接</a></h3><p>在日常生活中，通过年、月、日这三个要素可以表示出一个唯一确定的日期。</p>
-<p>牛牛习惯用 8 位数字表示一个日期，其中，前 4 位代表年份，接下来 2 位代表月份，最后 2 位代表日期。</p>
-<p>显然：一个日期只有一种表示方法，而两个不同的日期的表示方法不会相同。</p>
-<p>牛牛认为，一个日期是回文的，当且仅当表示这个日期的8位数字是回文的。</p>
-<p>现在，牛牛想知道：在他指定的两个日期之间（包含这两个日期本身），有多少个真实存在的日期是回文的。</p>
-<p>一个 8 位数字是回文的，当且仅当对于所有的 i(1≤i≤8) 从左向右数的第i个数字和第 9−i 个数字（即从右向左数的第 i 个数字）是相同的。</p>
-<p>例如：</p>
-<ul>
-<li><p>对于2016年11月19日，用 8 位数字 20161119 表示，它不是回文的。</p>
-</li>
-<li><p>对于2010年1月2日，用 8 位数字 20100102 表示，它是回文的。</p>
-</li>
-<li><p>对于2010年10月2日，用 8 位数字 20101002 表示，它不是回文的。</p>
-</li>
-</ul>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入包括两行，每行包括一个8位数字。</p>
-<p>第一行表示牛牛指定的起始日期date1，第二行表示牛牛指定的终止日期date2。保证date1和date2都是真实存在的日期，且年份部分一定为4位数字，且首位数字不为0。</p>
-<p>保证date1一定不晚于date2。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>输出共一行，包含一个整数，表示在date1和date2之间，有多少个日期是回文的。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">20110101</span></span><br><span class="line"><span class="number">20111231</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>由于是8位数，所以我们只枚举前4位，也就是年，然后根据年的对称把月和日补全，这样一来这个日期必定是回文的（因为我们就是这么构造的），然后我们只需要判断构造出来的这个日期是不是合法的就行，并且保证这个日期在所给定的两个日期中间即可。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> yue[<span class="number">13</span>] = &#123;<span class="number">0</span>, <span class="number">31</span>, <span class="number">28</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> year=data/<span class="number">10000</span>;</span><br><span class="line">    <span class="keyword">int</span> month=(data%<span class="number">10000</span>)/<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">int</span> day=data%<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">int</span> flag=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(year&lt;<span class="number">1000</span>||year&gt;=<span class="number">10000</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(month&lt;<span class="number">1</span>||month&gt;<span class="number">12</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(year%<span class="number">4</span>==<span class="number">0</span>||(year%<span class="number">400</span>!=<span class="number">0</span>&amp;&amp;year%<span class="number">100</span>==<span class="number">0</span>))</span><br><span class="line">        flag=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(flag==<span class="number">1</span>&amp;&amp;month==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(day&lt;<span class="number">1</span>||day&gt;<span class="number">29</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(day&lt;<span class="number">1</span>||day&gt;yue[month])</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,i,data,sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1000</span>; i&lt;<span class="number">10000</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">sprintf</span>(str,<span class="string">&quot;%d&quot;</span>,i);</span><br><span class="line">        <span class="built_in">reverse</span>(str,str+<span class="built_in">strlen</span>(str));</span><br><span class="line">        data=<span class="built_in">atoi</span>(str);</span><br><span class="line">        data+=i*<span class="number">10000</span>;</span><br><span class="line">        <span class="keyword">if</span>(data&gt;=n&amp;&amp;data&lt;=m&amp;&amp;<span class="built_in">check</span>(data))</span><br><span class="line">            sum++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/11/02/%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/" data-id="ckrn6s8za005vjotnfoo1hi6h" data-title="回文日期" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-1047 Student List for Course (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/10/28/1047%20Student%20List%20for%20Course%20(25%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2020-10-28T12:28:33.000Z" itemprop="datePublished">2020-10-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%A8%A1%E6%8B%9F/">模拟</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/10/28/1047%20Student%20List%20for%20Course%20(25%E5%88%86)/">1047 Student List for Course (25分)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/problems/994805433955368960">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20201028201852449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> <span class="number">5</span></span><br><span class="line">ZOE1 <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">ANN0 <span class="number">3</span> <span class="number">5</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line">BOB5 <span class="number">5</span> <span class="number">3</span> <span class="number">4</span> <span class="number">2</span> <span class="number">1</span> <span class="number">5</span></span><br><span class="line">JOE4 <span class="number">1</span> <span class="number">2</span></span><br><span class="line">JAY9 <span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">5</span> <span class="number">4</span></span><br><span class="line">FRA8 <span class="number">3</span> <span class="number">4</span> <span class="number">2</span> <span class="number">5</span></span><br><span class="line">DON2 <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">AMY7 <span class="number">1</span> <span class="number">5</span></span><br><span class="line">KAT3 <span class="number">3</span> <span class="number">5</span> <span class="number">4</span> <span class="number">2</span></span><br><span class="line">LOR6 <span class="number">4</span> <span class="number">2</span> <span class="number">4</span> <span class="number">1</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">4</span></span><br><span class="line">ANN0</span><br><span class="line">BOB5</span><br><span class="line">JAY9</span><br><span class="line">LOR6</span><br><span class="line"><span class="number">2</span> <span class="number">7</span></span><br><span class="line">ANN0</span><br><span class="line">BOB5</span><br><span class="line">FRA8</span><br><span class="line">JAY9</span><br><span class="line">JOE4</span><br><span class="line">KAT3</span><br><span class="line">LOR6</span><br><span class="line"><span class="number">3</span> <span class="number">1</span></span><br><span class="line">BOB5</span><br><span class="line"><span class="number">4</span> <span class="number">7</span></span><br><span class="line">BOB5</span><br><span class="line">DON2</span><br><span class="line">FRA8</span><br><span class="line">JAY9</span><br><span class="line">KAT3</span><br><span class="line">LOR6</span><br><span class="line">ZOE1</span><br><span class="line"><span class="number">5</span> <span class="number">9</span></span><br><span class="line">AMY7</span><br><span class="line">ANN0</span><br><span class="line">BOB5</span><br><span class="line">DON2</span><br><span class="line">FRA8</span><br><span class="line">JAY9</span><br><span class="line">KAT3</span><br><span class="line">LOR6</span><br><span class="line">ZOE1</span><br></pre></td></tr></table></figure>
-
-<h2 id="方法1：（设置一个并行数组，每次存进去人名的标号，然后记录人名，输出的时候利用人名标号找到相应的人名）"><a href="#方法1：（设置一个并行数组，每次存进去人名的标号，然后记录人名，输出的时候利用人名标号找到相应的人名）" class="headerlink" title="方法1：（设置一个并行数组，每次存进去人名的标号，然后记录人名，输出的时候利用人名标号找到相应的人名）"></a>方法1：（设置一个并行数组，每次存进去人名的标号，然后记录人名，输出的时候利用人名标号找到相应的人名）</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt;a[<span class="number">2600</span>];</span><br><span class="line"><span class="keyword">char</span> str[<span class="number">41000</span>][<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(str[a],str[b])&lt;<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,i,j,x,y;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s %d&quot;</span>,str[i],&amp;x);</span><br><span class="line">        <span class="keyword">while</span>(x--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;y);</span><br><span class="line">            a[y].<span class="built_in">push_back</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,a[i].<span class="built_in">size</span>());</span><br><span class="line">        <span class="built_in">sort</span>(a[i].<span class="built_in">begin</span>(),a[i].<span class="built_in">end</span>(),cmp);</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;a[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,str[a[i][j]]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="方法二：（把人名化成数字存起来，然后输出的时候再把数字转化成相应的人名）"><a href="#方法二：（把人名化成数字存起来，然后输出的时候再把数字转化成相应的人名）" class="headerlink" title="方法二：（把人名化成数字存起来，然后输出的时候再把数字转化成相应的人名）"></a>方法二：（把人名化成数字存起来，然后输出的时候再把数字转化成相应的人名）</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt;a[<span class="number">26</span>*<span class="number">26</span>*<span class="number">26</span>+<span class="number">15</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a&lt;b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_id</span><span class="params">(<span class="keyword">char</span> str[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id=<span class="number">0</span>,i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++)</span><br><span class="line">        id=id*<span class="number">26</span>+str[i]-<span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">    id=id*<span class="number">10</span>+str[<span class="number">3</span>]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,i,j,x,y;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">5</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s %d&quot;</span>,str,&amp;x);</span><br><span class="line">        <span class="keyword">while</span>(x--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;y);</span><br><span class="line">            <span class="keyword">int</span> id=<span class="built_in">get_id</span>(str);</span><br><span class="line">            a[y].<span class="built_in">push_back</span>(id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,a[i].<span class="built_in">size</span>());</span><br><span class="line">        <span class="built_in">sort</span>(a[i].<span class="built_in">begin</span>(),a[i].<span class="built_in">end</span>(),cmp);</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;a[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,a[i][j]/<span class="number">10</span>/<span class="number">26</span>/<span class="number">26</span>%<span class="number">26</span>+<span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,a[i][j]/<span class="number">10</span>/<span class="number">26</span>%<span class="number">26</span>+<span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,a[i][j]/<span class="number">10</span>%<span class="number">26</span>+<span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,a[i][j]%<span class="number">10</span>+<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/10/28/1047%20Student%20List%20for%20Course%20(25%E5%88%86)/" data-id="ckrn6s8rm0001jotn6jp6gsch" data-title="1047 Student List for Course (25分)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-1039 Course List for Student (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/10/26/1039%20Course%20List%20for%20Student%20(25%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2020-10-26T13:25:10.000Z" itemprop="datePublished">2020-10-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/10/26/1039%20Course%20List%20for%20Student%20(25%20%E5%88%86)/">1039 Course List for Student (25 分)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/problems/994805447855292416">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20201026212105259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h3 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span> <span class="number">5</span></span><br><span class="line"><span class="number">4</span> <span class="number">7</span></span><br><span class="line">BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1</span><br><span class="line"><span class="number">1</span> <span class="number">4</span></span><br><span class="line">ANN0 BOB5 JAY9 LOR6</span><br><span class="line"><span class="number">2</span> <span class="number">7</span></span><br><span class="line">ANN0 BOB5 FRA8 JAY9 JOE4 KAT3 LOR6</span><br><span class="line"><span class="number">3</span> <span class="number">1</span></span><br><span class="line">BOB5</span><br><span class="line"><span class="number">5</span> <span class="number">9</span></span><br><span class="line">AMY7 ANN0 BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1</span><br><span class="line">ZOE1 ANN0 BOB5 JOE4 JAY9 FRA8 DON2 AMY7 KAT3 LOR6 NON9</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出："><a href="#输出：" class="headerlink" title="输出："></a>输出：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ZOE1 <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">ANN0 <span class="number">3</span> <span class="number">1</span> <span class="number">2</span> <span class="number">5</span></span><br><span class="line">BOB5 <span class="number">5</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">JOE4 <span class="number">1</span> <span class="number">2</span></span><br><span class="line">JAY9 <span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">FRA8 <span class="number">3</span> <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">DON2 <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">AMY7 <span class="number">1</span> <span class="number">5</span></span><br><span class="line">KAT3 <span class="number">3</span> <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">LOR6 <span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">NON9 <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p><img src="https://img-blog.csdnimg.cn/20201026212609382.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>用vector暴力，给每一个名字赋一个值，保证每个名字的值唯一且不会重复，然后暴力去找就行了</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">vector &lt;<span class="keyword">int</span>&gt; a[<span class="number">26</span>*<span class="number">26</span>*<span class="number">26</span>*<span class="number">10</span>+<span class="number">1</span>];<span class="comment">//用来记录名字，3个大写字母+1个数字</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getid</span><span class="params">(<span class="keyword">char</span> str[])</span><span class="comment">//把名字转换成数字记录</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id=<span class="number">0</span>,i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++)</span><br><span class="line">        id=id*<span class="number">26</span>+str[i]-<span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">    id=id*<span class="number">10</span>+str[<span class="number">3</span>]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,i,num,sum,id;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">50</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);<span class="comment">//n个学生</span></span><br><span class="line">    <span class="keyword">while</span>(m--)<span class="comment">//m个课程</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;num,&amp;sum);<span class="comment">//课程号是num，选课人数是sum</span></span><br><span class="line">        <span class="keyword">while</span>(sum--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,str);<span class="comment">//选课学生的名字</span></span><br><span class="line">            id=<span class="built_in">getid</span>(str);<span class="comment">//转换成数字</span></span><br><span class="line">            a[id].<span class="built_in">push_back</span>(num);<span class="comment">//存进vector里面</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(n--)<span class="comment">//遍历n个学生</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,str);<span class="comment">//读入学生的名字</span></span><br><span class="line">        id=<span class="built_in">getid</span>(str);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>,str);</span><br><span class="line">        <span class="built_in">sort</span>(a[id].<span class="built_in">begin</span>(),a[id].<span class="built_in">end</span>());<span class="comment">//把该学生选的课程按课程号从小到大排序</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot; %d&quot;</span>,a[id].<span class="built_in">size</span>());<span class="comment">//输出该学生一共选了多少课程</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;a[id].<span class="built_in">size</span>(); i++)<span class="comment">//分别输出课程对应的课程号</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot; %d&quot;</span>,a[id][i]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/10/26/1039%20Course%20List%20for%20Student%20(25%20%E5%88%86)/" data-id="ckrn6s8r70000jotn8rta561d" data-title="1039 Course List for Student (25 分)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -766,23 +932,23 @@
       <ul>
         
           <li>
+            <a href="/2021/07/30/D.%20Backspace%EF%BC%88%E6%A8%A1%E6%8B%9F%EF%BC%89/">D. Backspace（模拟）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/30/C%20-%20Penalty%EF%BC%88%E6%A8%A1%E6%8B%9F%EF%BC%89/">C - Penalty（模拟）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/30/B%20-%20Reverse%20String%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/">B - Reverse String（暴力）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/30/A%20-%20Digits%20Sum%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89/">A - Digits Sum（暴力）</a>
+          </li>
+        
+          <li>
             <a href="/2021/07/28/AquaMoon%20and%20Strange%20Sort/">AquaMoon and Strange Sort(模拟)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/29/J%20-%20JOJO's%20Factory%20Gym%20-%20103107J%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">J - JOJO&#39;s Factory Gym - 103107J（思维）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/29/Keep%20Eating%20Gym%20-%20103107K%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">Keep Eating Gym - 103107K（思维）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/13/%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F/">数独游戏</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/28/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
           </li>
         
       </ul>

@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   
+
   
   <title>Dawn&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Dawn&#39;s Blog">
 <meta property="og:url" content="https://sun-dawn.github.io/page/8/index.html">
@@ -14,24 +15,17 @@
 <meta property="article:author" content="Sun-Dawn">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Dawn's Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Dawn&#39;s Blog" type="application/atom+xml">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.png">
   
   
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
@@ -67,64 +61,13 @@
     </div>
   </div>
 </header>
-
       <div class="outer">
         <section id="main">
   
-    <article id="post-7-11 图着色问题 (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-7-10 功夫传人 (25分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/09/23/7-11%20%E5%9B%BE%E7%9D%80%E8%89%B2%E9%97%AE%E9%A2%98%20(25%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2020-09-23T13:27:57.000Z" itemprop="datePublished">2020-09-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/23/7-11%20%E5%9B%BE%E7%9D%80%E8%89%B2%E9%97%AE%E9%A2%98%20(25%E5%88%86)/">7-11 图着色问题 (25分)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>图着色问题是一个著名的NP完全问题。给定无向图G=(V,E)，问可否用K种颜色为V中的每一个顶点分配一种颜色，使得不会有两个相邻顶点具有同一种颜色？</p>
-<p>但本题并不是要你解决这个着色问题，而是对给定的一种颜色分配，请你判断这是否是图着色问题的一个解。</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出3个整数V（0&lt;V≤500）、E（≥0）和K（0&lt;K≤V），分别是无向图的顶点数、边数、以及颜色数。顶点和颜色都从1到V编号。随后E行，每行给出一条边的两个端点的编号。在图的信息给出之后，给出了一个正整数N（≤20），是待检查的颜色分配方案的个数。随后N行，每行顺次给出V个顶点的颜色（第i个数字表示第i个顶点的颜色），数字间以空格分隔。题目保证给定的无向图是合法的（即不存在自回路和重边）。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对每种颜色分配方案，如果是图着色问题的一个解则输出Yes，否则输出No，每句占一行。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> <span class="number">8</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">4</span> <span class="number">6</span></span><br><span class="line"><span class="number">2</span> <span class="number">5</span></span><br><span class="line"><span class="number">2</span> <span class="number">4</span></span><br><span class="line"><span class="number">5</span> <span class="number">4</span></span><br><span class="line"><span class="number">5</span> <span class="number">6</span></span><br><span class="line"><span class="number">3</span> <span class="number">6</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span> <span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">6</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Yes</span><br><span class="line">Yes</span><br><span class="line">No</span><br><span class="line">No</span><br></pre></td></tr></table></figure>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>这道题虽然是搜索专题里的，这暗示我们要用bfs/dfs求解，但是做题的时候发现这道题的数据并不大，而且题意十分简单，于是我想直接暴力做，果然这道题暴力也是可以A的。</p>
-<p>先用两个数组x和y把点都存起来，然后再用一个数组book代表每个点的颜色，从样例可以看出来如果颜色数大于或者小于k都不算是图着色问题，所以我们用数组c来记录一下该种颜色之前出没出现过，最后从头开始遍历每个点如果那个点的颜色和相邻点的颜色相同就直接break，然后输出No，否则就是Yes。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> x[<span class="number">1000010</span>],y[<span class="number">1000010</span>],book[<span class="number">1000010</span>],c[<span class="number">1000010</span>];<span class="comment">//如思路分析所示</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> n,m,k,i,j,g,sum,flag;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>,&amp;n,&amp;m,&amp;k);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>,&amp;x[i],&amp;y[i]);<span class="comment">//记录所有点</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;g);</span><br><span class="line">    <span class="keyword">while</span>(g--)</span><br><span class="line">    &#123;</span><br><span class="line">        sum=<span class="number">0</span>;<span class="comment">//初始化颜色数为0</span></span><br><span class="line">        <span class="built_in">memset</span>(c,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br><span class="line">        <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;flag);</span><br><span class="line">            book[j]=flag;<span class="comment">//标记点j的颜色为flag</span></span><br><span class="line">            <span class="keyword">if</span>(c[flag]==<span class="number">0</span>)<span class="comment">//如果这个颜色是第一次出现</span></span><br><span class="line">            &#123;</span><br><span class="line">                sum++;<span class="comment">//颜色数+1</span></span><br><span class="line">                c[flag]=<span class="number">1</span>;<span class="comment">//标记这个颜色，表明已经出现过了</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(sum!=k)<span class="comment">//如果颜色数不等于k就直接输出No（题意）</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)<span class="comment">//从头开始遍历所有点</span></span><br><span class="line">                <span class="keyword">if</span>(book[x[i]]==book[y[i]]&amp;&amp;book[x[i]]!=<span class="number">0</span>&amp;&amp;book[y[i]]!=<span class="number">0</span>)<span class="comment">//如果相邻的两个点颜色相同就直接break</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span>(i==m)<span class="comment">//如果前面break的话i就不会等于m了，所以这里的言外之意就是前面遍历的所有点中没有相邻的点颜色相同</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/23/7-11%20%E5%9B%BE%E7%9D%80%E8%89%B2%E9%97%AE%E9%A2%98%20(25%E5%88%86)/" data-id="ckp9sq7om0007ostne7s7afcd" data-title="7-11 图着色问题 (25分)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-7-12 拯救007 (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/09/23/7-12%20%E6%8B%AF%E6%95%91007%20(25%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2020-09-23T13:27:57.000Z" itemprop="datePublished">2020-09-23</time>
+    <a href="/2020/09/23/7-10%20%E5%8A%9F%E5%A4%AB%E4%BC%A0%E4%BA%BA%20(25%E5%88%86)/" class="article-date">
+  <time datetime="2020-09-23T13:27:57.000Z" itemprop="datePublished">2020-09-23</time>
 </a>
     
   <div class="article-category">
@@ -139,13 +82,111 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/23/7-12%20%E6%8B%AF%E6%95%91007%20(25%E5%88%86)/">7-12 拯救007 (25分)</a>
+      <a class="article-title" href="/2020/09/23/7-10%20%E5%8A%9F%E5%A4%AB%E4%BC%A0%E4%BA%BA%20(25%E5%88%86)/">7-10 功夫传人 (25分)</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一门武功能否传承久远并被发扬光大，是要看缘分的。一般来说，师傅传授给徒弟的武功总要打个折扣，于是越往后传，弟子们的功夫就越弱…… 直到某一支的某一代突然出现一个天分特别高的弟子（或者是吃到了灵丹、挖到了特别的秘笈），会将功夫的威力一下子放大N倍 —— 我们称这种弟子为“得道者”。</p>
+<p>这里我们来考察某一位祖师爷门下的徒子徒孙家谱：假设家谱中的每个人只有1位师傅（除了祖师爷没有师傅）；每位师傅可以带很多徒弟；并且假设辈分严格有序，即祖师爷这门武功的每个第i代传人只能在第i-1代传人中拜1个师傅。我们假设已知祖师爷的功力值为Z，每向下传承一代，就会减弱r%，除非某一代弟子得道。现给出师门谱系关系，要求你算出所有得道者的功力总值。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出3个正整数，分别是：N（≤10​5​​）——整个师门的总人数（于是每个人从0到N−1编号，祖师爷的编号为0）；Z——祖师爷的功力值（不一定是整数，但起码是正数）；r ——每传一代功夫所打的折扣百分比值（不超过100的正数）。接下来有N行，第i行（i=0,⋯,N−1）描述编号为i的人所传的徒弟，格式为：K​i​​ ID[1] ID[2] ⋯ ID[K​i​​]</p>
+<p>其中K​i​​是徒弟的个数，后面跟的是各位徒弟的编号，数字间以空格间隔。K​i​​为零表示这是一位得道者，这时后面跟的一个数字表示其武功被放大的倍数。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出所有得道者的功力总值，只保留其整数部分。题目保证输入和正确的输出都不超过10​10​​。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> <span class="number">18.0</span> <span class="number">1.00</span></span><br><span class="line"><span class="number">3</span> <span class="number">2</span> <span class="number">3</span> <span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="number">9</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">7</span></span><br><span class="line"><span class="number">0</span> <span class="number">7</span></span><br><span class="line"><span class="number">2</span> <span class="number">6</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">8</span></span><br><span class="line"><span class="number">0</span> <span class="number">9</span></span><br><span class="line"><span class="number">0</span> <span class="number">4</span></span><br><span class="line"><span class="number">0</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">404</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; mp[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">double</span> ans;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">double</span> z,<span class="keyword">double</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;mp[s].<span class="built_in">size</span>(); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mp[s][<span class="number">0</span>]==<span class="number">0</span>)<span class="comment">//得道者</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans+=mp[s][<span class="number">1</span>]*z;<span class="comment">//求和</span></span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">dfs</span>(mp[s][i],(z*(<span class="number">1</span>-r/<span class="number">100</span>)),r);<span class="comment">//z得削弱</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,i,m,num;</span><br><span class="line">    <span class="keyword">double</span> z,r;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%lf%lf&quot;</span>,&amp;n,&amp;z,&amp;r);</span><br><span class="line">    ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">        <span class="keyword">if</span>(m==<span class="number">0</span>)<span class="comment">//得道者</span></span><br><span class="line">        &#123;</span><br><span class="line">            mp[i].<span class="built_in">push_back</span>(<span class="number">0</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">            mp[i].<span class="built_in">push_back</span>(num);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(m--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);<span class="comment">//正常第子</span></span><br><span class="line">                mp[i].<span class="built_in">push_back</span>(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">0</span>,z,r);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,(<span class="keyword">int</span>)ans);<span class="comment">//输出</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/09/23/7-10%20%E5%8A%9F%E5%A4%AB%E4%BC%A0%E4%BA%BA%20(25%E5%88%86)/" data-id="ckp9sq7oj0005ostn9gkqcs10" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-7-11 图着色问题 (25分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/23/7-11%20%E5%9B%BE%E7%9D%80%E8%89%B2%E9%97%AE%E9%A2%98%20(25%E5%88%86)/" class="article-date">
+  <time datetime="2020-09-23T13:27:57.000Z" itemprop="datePublished">2020-09-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%9A%B4%E5%8A%9B/">暴力</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/23/7-11%20%E5%9B%BE%E7%9D%80%E8%89%B2%E9%97%AE%E9%A2%98%20(25%E5%88%86)/">7-11 图着色问题 (25分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>图着色问题是一个著名的NP完全问题。给定无向图G=(V,E)，问可否用K种颜色为V中的每一个顶点分配一种颜色，使得不会有两个相邻顶点具有同一种颜色？</p>
+<p>但本题并不是要你解决这个着色问题，而是对给定的一种颜色分配，请你判断这是否是图着色问题的一个解。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出3个整数V（0&lt;V≤500）、E（≥0）和K（0&lt;K≤V），分别是无向图的顶点数、边数、以及颜色数。顶点和颜色都从1到V编号。随后E行，每行给出一条边的两个端点的编号。在图的信息给出之后，给出了一个正整数N（≤20），是待检查的颜色分配方案的个数。随后N行，每行顺次给出V个顶点的颜色（第i个数字表示第i个顶点的颜色），数字间以空格分隔。题目保证给定的无向图是合法的（即不存在自回路和重边）。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对每种颜色分配方案，如果是图着色问题的一个解则输出Yes，否则输出No，每句占一行。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> <span class="number">8</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">4</span> <span class="number">6</span></span><br><span class="line"><span class="number">2</span> <span class="number">5</span></span><br><span class="line"><span class="number">2</span> <span class="number">4</span></span><br><span class="line"><span class="number">5</span> <span class="number">4</span></span><br><span class="line"><span class="number">5</span> <span class="number">6</span></span><br><span class="line"><span class="number">3</span> <span class="number">6</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span> <span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">6</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Yes</span><br><span class="line">Yes</span><br><span class="line">No</span><br><span class="line">No</span><br></pre></td></tr></table></figure>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>这道题虽然是搜索专题里的，这暗示我们要用bfs/dfs求解，但是做题的时候发现这道题的数据并不大，而且题意十分简单，于是我想直接暴力做，果然这道题暴力也是可以A的。</p>
+<p>先用两个数组x和y把点都存起来，然后再用一个数组book代表每个点的颜色，从样例可以看出来如果颜色数大于或者小于k都不算是图着色问题，所以我们用数组c来记录一下该种颜色之前出没出现过，最后从头开始遍历每个点如果那个点的颜色和相邻点的颜色相同就直接break，然后输出No，否则就是Yes。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> x[<span class="number">1000010</span>],y[<span class="number">1000010</span>],book[<span class="number">1000010</span>],c[<span class="number">1000010</span>];<span class="comment">//如思路分析所示</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> n,m,k,i,j,g,sum,flag;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>,&amp;n,&amp;m,&amp;k);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>,&amp;x[i],&amp;y[i]);<span class="comment">//记录所有点</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;g);</span><br><span class="line">    <span class="keyword">while</span>(g--)</span><br><span class="line">    &#123;</span><br><span class="line">        sum=<span class="number">0</span>;<span class="comment">//初始化颜色数为0</span></span><br><span class="line">        <span class="built_in">memset</span>(c,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br><span class="line">        <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;flag);</span><br><span class="line">            book[j]=flag;<span class="comment">//标记点j的颜色为flag</span></span><br><span class="line">            <span class="keyword">if</span>(c[flag]==<span class="number">0</span>)<span class="comment">//如果这个颜色是第一次出现</span></span><br><span class="line">            &#123;</span><br><span class="line">                sum++;<span class="comment">//颜色数+1</span></span><br><span class="line">                c[flag]=<span class="number">1</span>;<span class="comment">//标记这个颜色，表明已经出现过了</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(sum!=k)<span class="comment">//如果颜色数不等于k就直接输出No（题意）</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)<span class="comment">//从头开始遍历所有点</span></span><br><span class="line">                <span class="keyword">if</span>(book[x[i]]==book[y[i]]&amp;&amp;book[x[i]]!=<span class="number">0</span>&amp;&amp;book[y[i]]!=<span class="number">0</span>)<span class="comment">//如果相邻的两个点颜色相同就直接break</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span>(i==m)<span class="comment">//如果前面break的话i就不会等于m了，所以这里的言外之意就是前面遍历的所有点中没有相邻的点颜色相同</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/09/23/7-11%20%E5%9B%BE%E7%9D%80%E8%89%B2%E9%97%AE%E9%A2%98%20(25%E5%88%86)/" data-id="ckp9sq7om0007ostne7s7afcd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-7-12 拯救007 (25分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/23/7-12%20%E6%8B%AF%E6%95%91007%20(25%E5%88%86)/" class="article-date">
+  <time datetime="2020-09-23T13:27:57.000Z" itemprop="datePublished">2020-09-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/23/7-12%20%E6%8B%AF%E6%95%91007%20(25%E5%88%86)/">7-12 拯救007 (25分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
       
         <p>在老电影“007之生死关头”（Live and Let Die）中有一个情节，007被毒贩抓到一个鳄鱼池中心的小岛上，他用了一种极为大胆的方法逃脱 —— 直接踩着池子里一系列鳄鱼的大脑袋跳上岸去！（据说当年替身演员被最后一条鳄鱼咬住了脚，幸好穿的是特别加厚的靴子才逃过一劫。）</p>
 <p>设鳄鱼池是长宽为100米的方形，中心坐标为 (0, 0)，且东北角坐标为 (50, 50)。池心岛是以 (0, 0) 为圆心、直径15米的圆。给定池中分布的鳄鱼的坐标、以及007一次能跳跃的最大距离，你需要告诉他是否有可能逃出生天。</p>
@@ -164,8 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/23/7-12%20%E6%8B%AF%E6%95%91007%20(25%E5%88%86)/" data-id="ckp9sq7on0008ostn065hf2qy" data-title="7-12 拯救007 (25分)" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/09/23/7-12%20%E6%8B%AF%E6%95%91007%20(25%E5%88%86)/" data-id="ckp9sq7on0008ostn065hf2qy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -174,12 +214,11 @@
 </article>
 
 
-
   
-    <article id="post-7-7 红色警报 (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-7-7 红色警报 (25分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/09/23/7-7%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2020-09-23T13:27:57.000Z" itemprop="datePublished">2020-09-23</time>
+  <time datetime="2020-09-23T13:27:57.000Z" itemprop="datePublished">2020-09-23</time>
 </a>
     
   <div class="article-category">
@@ -194,13 +233,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/23/7-7%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%E5%88%86)/">7-7 红色警报 (25分)</a>
+      <a class="article-title" href="/2020/09/23/7-7%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%E5%88%86)/">7-7 红色警报 (25分)</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>战争中保持各个城市间的连通性非常重要。本题要求你编写一个报警程序，当失去一个城市导致国家被分裂为多个无法连通的区域时，就发出红色警报。注意：若该国本来就不完全连通，是分裂的k个区域，而失去一个城市并不改变其他城市之间的连通性，则不要发出警报。</p>
 <h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出两个整数N（0 &lt; N ≤ 500）和M（≤ 5000），分别为城市个数（于是默认城市从0到N-1编号）和连接两城市的通路条数。随后M行，每行给出一条通路所连接的两个城市的编号，其间以1个空格分隔。在城市信息之后给出被攻占的信息，即一个正整数K和随后的K个被攻占的城市的编号。</p>
@@ -215,8 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/23/7-7%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%E5%88%86)/" data-id="ckp9sq7p1000lostnaze1h769" data-title="7-7 红色警报 (25分)" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/09/23/7-7%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%E5%88%86)/" data-id="ckp9sq7p1000lostnaze1h769" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,12 +263,11 @@
 </article>
 
 
-
   
-    <article id="post-D - Find Integer（数论）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-D - Find Integer（数论）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/09/19/D%20-%20Find%20Integer%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2020-09-19T13:23:29.000Z" itemprop="datePublished">2020-09-19</time>
+  <time datetime="2020-09-19T13:23:29.000Z" itemprop="datePublished">2020-09-19</time>
 </a>
     
   <div class="article-category">
@@ -245,13 +282,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/19/D%20-%20Find%20Integer%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/">D - Find Integer（数论）</a>
+      <a class="article-title" href="/2020/09/19/D%20-%20Find%20Integer%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/">D - Find Integer（数论）</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p><img src="https://img-blog.csdnimg.cn/20200919211845311.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
 <h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p><img src="https://img-blog.csdnimg.cn/20200919211945772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
@@ -262,8 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/19/D%20-%20Find%20Integer%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/" data-id="ckp9sq7pe0015ostn1atbhe51" data-title="D - Find Integer（数论）" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/09/19/D%20-%20Find%20Integer%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/" data-id="ckp9sq7pe0015ostn1atbhe51" class="article-share-link">Share</a>
       
       
     </footer>
@@ -272,12 +308,11 @@
 </article>
 
 
-
   
-    <article id="post-D - Daydreaming Stockbroker(模拟）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-D - Daydreaming Stockbroker(模拟）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/09/18/D%20-%20Daydreaming%20Stockbroker(%E6%A8%A1%E6%8B%9F%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2020-09-18T11:27:46.000Z" itemprop="datePublished">2020-09-18</time>
+  <time datetime="2020-09-18T11:27:46.000Z" itemprop="datePublished">2020-09-18</time>
 </a>
     
   <div class="article-category">
@@ -292,13 +327,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/18/D%20-%20Daydreaming%20Stockbroker(%E6%A8%A1%E6%8B%9F%EF%BC%89/">D - Daydreaming Stockbroker(模拟）</a>
+      <a class="article-title" href="/2020/09/18/D%20-%20Daydreaming%20Stockbroker(%E6%A8%A1%E6%8B%9F%EF%BC%89/">D - Daydreaming Stockbroker(模拟）</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p><img src="https://img-blog.csdnimg.cn/20200918190251713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"><br><img src="https://img-blog.csdnimg.cn/20200918185817701.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
 <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>你刚开始有100本金，然后给出n天的股票价格（可以以这个价格买入，也可以以这个价格卖出），但是你手上的股票最多有10w股，求你最多能挣多少钱。</p>
@@ -309,8 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/18/D%20-%20Daydreaming%20Stockbroker(%E6%A8%A1%E6%8B%9F%EF%BC%89/" data-id="ckp9sq7pd0013ostn9hpya6cu" data-title="D - Daydreaming Stockbroker(模拟）" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/09/18/D%20-%20Daydreaming%20Stockbroker(%E6%A8%A1%E6%8B%9F%EF%BC%89/" data-id="ckp9sq7pd0013ostn9hpya6cu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -319,12 +353,11 @@
 </article>
 
 
-
   
-    <article id="post-G - Game Rank(模拟)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-G - Game Rank(模拟)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/" class="article-date">
-  <time class="dt-published" datetime="2020-09-18T11:27:46.000Z" itemprop="datePublished">2020-09-18</time>
+  <time datetime="2020-09-18T11:27:46.000Z" itemprop="datePublished">2020-09-18</time>
 </a>
     
   <div class="article-category">
@@ -339,13 +372,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/">G - Game Rank(模拟）</a>
+      <a class="article-title" href="/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/">G - Game Rank(模拟）</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p><img src="https://img-blog.csdnimg.cn/20200918201533364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"><br><img src="https://img-blog.csdnimg.cn/20200918201556506.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
 <h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>就是炉石的排位机制……</p>
@@ -367,8 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/" data-id="ckp9sq7ph001aostn7d617q5t" data-title="G - Game Rank(模拟）" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/09/18/G%20-%20Game%20Rank(%E6%A8%A1%E6%8B%9F)/" data-id="ckp9sq7ph001aostn7d617q5t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -377,12 +409,11 @@
 </article>
 
 
-
   
-    <article id="post-HDU6514 Monitor(二维差分+二维前缀和)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-HDU6514 Monitor(二维差分+二维前缀和)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/" class="article-date">
-  <time class="dt-published" datetime="2020-09-11T13:13:44.000Z" itemprop="datePublished">2020-09-11</time>
+  <time datetime="2020-09-11T13:13:44.000Z" itemprop="datePublished">2020-09-11</time>
 </a>
     
   <div class="article-category">
@@ -397,13 +428,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/">HDU6514 Monitor(二维差分+二维前缀和)</a>
+      <a class="article-title" href="/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/">HDU6514 Monitor(二维差分+二维前缀和)</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/390672#problem/A">题目链接</a></h3><p>Xiaoteng has a large area of land for growing crops, and the land can be seen as a rectangle of n×m.</p>
 <p>But recently Xiaoteng found that his crops were often stolen by a group of people, so he decided to install some monitors to find all the people and then negotiate with them.</p>
@@ -430,8 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/" data-id="ckp9sq7pq001nostn6p3hbun1" data-title="HDU6514 Monitor(二维差分+二维前缀和)" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/09/11/HDU6514%20Monitor(%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86+%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C)/" data-id="ckp9sq7pq001nostn6p3hbun1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -440,12 +470,11 @@
 </article>
 
 
-
   
-    <article id="post-7-6 集合相似度 (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-7-6 集合相似度 (25分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2020-09-09T13:27:38.000Z" itemprop="datePublished">2020-09-09</time>
+  <time datetime="2020-09-09T13:27:38.000Z" itemprop="datePublished">2020-09-09</time>
 </a>
     
   <div class="article-category">
@@ -460,13 +489,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/">7-6 集合相似度 (25分)</a>
+      <a class="article-title" href="/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/">7-6 集合相似度 (25分)</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <p>给定两个整数集合，它们的相似度定义为：N​c​​/N​t​​×100%。其中N​c​​是两个集合都有的不相等整数的个数，N​t​​是两个集合一共有的不相等整数的个数。你的任务就是计算任意一对给定集合的相似度。</p>
 <h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个正整数N（≤50），是集合的个数。随后N行，每行对应一个集合。每个集合首先给出一个正整数M（≤10​4​​），是集合中元素的个数；然后跟M个[0,10​9​​]区间内的整数。</p>
@@ -481,8 +510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/" data-id="ckp9sq7oy000hostnhp744mvm" data-title="7-6 集合相似度 (25分)" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/09/09/7-6%20%E9%9B%86%E5%90%88%E7%9B%B8%E4%BC%BC%E5%BA%A6%20(25%E5%88%86)/" data-id="ckp9sq7oy000hostnhp744mvm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -491,12 +519,11 @@
 </article>
 
 
-
   
-    <article id="post-2020年sdutacm暑假集训总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2020年sdutacm暑假集训总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2020-08-29T02:59:57.000Z" itemprop="datePublished">2020-08-29</time>
+  <time datetime="2020-08-29T02:59:57.000Z" itemprop="datePublished">2020-08-29</time>
 </a>
     
   <div class="article-category">
@@ -511,93 +538,25 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/">2020年sdutacm暑假集训总结</a>
+      <a class="article-title" href="/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/">2020年sdutacm暑假集训总结</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一、学习内容–暑假新学了哪些专题，每个专题刷了多少题"><a href="#一、学习内容–暑假新学了哪些专题，每个专题刷了多少题" class="headerlink" title="一、学习内容–暑假新学了哪些专题，每个专题刷了多少题"></a>一、学习内容–暑假新学了哪些专题，每个专题刷了多少题</h2><h3 id="1-线段树-amp-字典树-5题"><a href="#1-线段树-amp-字典树-5题" class="headerlink" title="(1) 线段树&amp;字典树 5题"></a>(1) 线段树&amp;字典树 5题</h3><h3 id="2-数论基础-9题"><a href="#2-数论基础-9题" class="headerlink" title="(2) 数论基础 9题"></a>(2) 数论基础 9题</h3><h3 id="3-二分图-4题"><a href="#3-二分图-4题" class="headerlink" title="(3) 二分图 4题"></a>(3) 二分图 4题</h3><h3 id="……"><a href="#……" class="headerlink" title="……"></a>……</h3><h2 id="二、比赛内容总结（2020年7月27日-8月27日个人赛）"><a href="#二、比赛内容总结（2020年7月27日-8月27日个人赛）" class="headerlink" title="二、比赛内容总结（2020年7月27日-8月27日个人赛）"></a>二、比赛内容总结（2020年7月27日-8月27日个人赛）</h2><h3 id="1-VJ先伟老师抓的个人赛（div1-or-div2-参加场次-总场次）-9-9"><a href="#1-VJ先伟老师抓的个人赛（div1-or-div2-参加场次-总场次）-9-9" class="headerlink" title="(1) VJ先伟老师抓的个人赛（div1 or div2 参加场次/总场次） 9/9"></a>(1) VJ先伟老师抓的个人赛（div1 or div2 参加场次/总场次） 9/9</h3><h3 id="2-比赛中AC多少题（AC题数-总题数）-29-105"><a href="#2-比赛中AC多少题（AC题数-总题数）-29-105" class="headerlink" title="(2) 比赛中AC多少题（AC题数/总题数） 29/105"></a>(2) 比赛中AC多少题（AC题数/总题数） 29/105</h3><h3 id="3-比赛后补了多少题（补题数-比赛中未AC题目数）-4-76"><a href="#3-比赛后补了多少题（补题数-比赛中未AC题目数）-4-76" class="headerlink" title="(3) 比赛后补了多少题（补题数/比赛中未AC题目数） 4/76"></a>(3) 比赛后补了多少题（补题数/比赛中未AC题目数） 4/76</h3><h3 id="4-天梯赛分数："><a href="#4-天梯赛分数：" class="headerlink" title="(4) 天梯赛分数："></a>(4) 天梯赛分数：</h3><h3 id="天梯赛1：113"><a href="#天梯赛1：113" class="headerlink" title="天梯赛1：113"></a>天梯赛1：113</h3><h3 id="天梯赛2：149"><a href="#天梯赛2：149" class="headerlink" title="天梯赛2：149"></a>天梯赛2：149</h3><h3 id="天梯赛3：122"><a href="#天梯赛3：122" class="headerlink" title="天梯赛3：122"></a>天梯赛3：122</h3><h3 id="天梯赛4：140"><a href="#天梯赛4：140" class="headerlink" title="天梯赛4：140"></a>天梯赛4：140</h3><h3 id="天梯赛5：124"><a href="#天梯赛5：124" class="headerlink" title="天梯赛5：124"></a>天梯赛5：124</h3><h3 id="……-1"><a href="#……-1" class="headerlink" title="……"></a>……</h3><h2 id="三、训练收获"><a href="#三、训练收获" class="headerlink" title="三、训练收获"></a>三、训练收获</h2><h3 id="1-学习了很多新的算法，开拓了眼界"><a href="#1-学习了很多新的算法，开拓了眼界" class="headerlink" title="(1) 学习了很多新的算法，开拓了眼界"></a>(1) 学习了很多新的算法，开拓了眼界</h3><h3 id="2-每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了"><a href="#2-每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了" class="headerlink" title="(2) 每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了"></a>(2) 每天不仅学习算法，也在刘老师的号召下运动，身体素质也变好了</h3><h3 id="3-更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫"><a href="#3-更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫" class="headerlink" title="(3)更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫"></a>(3)更深一步了解了制定计划的意义，以后做任何事都会列一个计划表，做到心中有数从容不迫</h3><h3 id="……-2"><a href="#……-2" class="headerlink" title="……"></a>……</h3><h2 id="四、比赛收获"><a href="#四、比赛收获" class="headerlink" title="四、比赛收获"></a>四、比赛收获</h2><h3 id="1-现在与暑假之前比较，自己水平有多大提升？"><a href="#1-现在与暑假之前比较，自己水平有多大提升？" class="headerlink" title="(1) 现在与暑假之前比较，自己水平有多大提升？"></a>(1) 现在与暑假之前比较，自己水平有多大提升？</h3><h3 id="提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展"><a href="#提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展" class="headerlink" title="提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展"></a>提升蛮大的吧，学习了很多新的算法，自己能解的题变多了，思维也得到了扩展</h3><h3 id="2-是否符合自己的预期？"><a href="#2-是否符合自己的预期？" class="headerlink" title="(2)是否符合自己的预期？"></a>(2)是否符合自己的预期？</h3><h3 id="不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾"><a href="#不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾" class="headerlink" title="不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾"></a>不是特别符合吧，感觉自己可以做的更好，在一些正式比赛总会出现一些小错误，导致排名不是很好，在这方面有些遗憾</h3><h3 id="3-通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？"><a href="#3-通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？" class="headerlink" title="(3)通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？"></a>(3)通过一系列训练赛，根据多场比赛排名，自我感觉现在自己在集训队的排名位次？</h3><h3 id="感觉大约在10-20左右吧"><a href="#感觉大约在10-20左右吧" class="headerlink" title="感觉大约在10-20左右吧"></a>感觉大约在10-20左右吧</h3><h3 id="4-自己感觉变化的主要原因是什么？"><a href="#4-自己感觉变化的主要原因是什么？" class="headerlink" title="(4)自己感觉变化的主要原因是什么？"></a>(4)自己感觉变化的主要原因是什么？</h3><h3 id="1-首先付出了时间，每天按照要求起床、签到……规律的学习"><a href="#1-首先付出了时间，每天按照要求起床、签到……规律的学习" class="headerlink" title="1.首先付出了时间，每天按照要求起床、签到……规律的学习"></a>1.首先付出了时间，每天按照要求起床、签到……规律的学习</h3><h3 id="2-自己的坚持，我也很感谢我自己能够坚持到最后"><a href="#2-自己的坚持，我也很感谢我自己能够坚持到最后" class="headerlink" title="2.自己的坚持，我也很感谢我自己能够坚持到最后"></a>2.自己的坚持，我也很感谢我自己能够坚持到最后</h3><h3 id="3-老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了"><a href="#3-老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了" class="headerlink" title="3.老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了"></a>3.老师们制定的科学合理的计划（每天的作息表、每晚比赛的安排……），有了计划做起事来就心中有数了</h3><h3 id="5"><a href="#5" class="headerlink" title="(5)"></a>(5)</h3><h3 id="……-3"><a href="#……-3" class="headerlink" title="……"></a>……</h3><h2 id="五、存在问题"><a href="#五、存在问题" class="headerlink" title="五、存在问题"></a>五、存在问题</h2><h3 id="1-英语不太好是硬伤，很多英文题看不懂题意"><a href="#1-英语不太好是硬伤，很多英文题看不懂题意" class="headerlink" title="(1) 英语不太好是硬伤，很多英文题看不懂题意"></a>(1) 英语不太好是硬伤，很多英文题看不懂题意</h3><h3 id="2-对算法的理解不是特别深入，还无法做到灵活运用"><a href="#2-对算法的理解不是特别深入，还无法做到灵活运用" class="headerlink" title="(2) 对算法的理解不是特别深入，还无法做到灵活运用"></a>(2) 对算法的理解不是特别深入，还无法做到灵活运用</h3><h3 id="……-4"><a href="#……-4" class="headerlink" title="……"></a>……</h3><h2 id="六、下一步目标和计划"><a href="#六、下一步目标和计划" class="headerlink" title="六、下一步目标和计划"></a>六、下一步目标和计划</h2><h3 id="1-加强英语学习，增加词汇积累"><a href="#1-加强英语学习，增加词汇积累" class="headerlink" title="(1) 加强英语学习，增加词汇积累"></a>(1) 加强英语学习，增加词汇积累</h3><h3 id="2-找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用"><a href="#2-找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用" class="headerlink" title="(2) 找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用"></a>(2) 找时间把以前学习的算法重新复习一遍，深入理解从而做到灵活运用</h3><h3 id="3-加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来"><a href="#3-加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来" class="headerlink" title="(3) 加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来"></a>(3) 加强赛后的补题，这个暑假感觉赛后补题太少，没有好好利用起来</h3><h3 id="……-5"><a href="#……-5" class="headerlink" title="……"></a>……</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" data-id="ckp9sq7oh0004ostn9v0egztq" data-title="2020年sdutacm暑假集训总结" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-VJ HDU 1083 Courses（二分图最大匹配）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/31/VJ%20HDU%201083%20Courses%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2020-07-31T02:44:22.000Z" itemprop="datePublished">2020-07-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/">图论</a>►<a class="article-category-link" href="/categories/ACM/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/31/VJ%20HDU%201083%20Courses%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/">VJ HDU 1083 Courses（二分图最大匹配）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Consider a group of N students and P courses. Each student visits zero, one or more than one courses. Your task is to determine whether it is possible to form a committee of exactly P students that satisfies simultaneously the conditions:</p>
-<ul>
-<li><p>every student in the committee represents a different course (a student can represent a course if he/she visits that course)</p>
-</li>
-<li><p>each course has a representative in the committee</p>
-</li>
-</ul>
-<p>Your program should read sets of data from a text file. The first line of the input file contains the number of the data sets. Each data set is presented in the following format:</p>
-<p>P N</p>
-<p>Count1 Student1 1 Student1 2 … Student1 Count1</p>
-<p>Count2 Student2 1 Student2 2 … Student2 Count2</p>
-<p>…</p>
-<p>CountP StudentP 1 StudentP 2 … StudentP CountP</p>
-<p>The first line in each data set contains two positive integers separated by one blank: P (1 &lt;= P &lt;= 100) - the number of courses and N (1 &lt;= N &lt;= 300) - the number of students. The next P lines describe in sequence of the courses . from course 1 to course P, each line describing a course. The description of course i is a line that starts with an integer Count i (0 &lt;= Count i &lt;= N) representing the number of students visiting course i. Next, after a blank, you’ll find the Count i students, visiting the course, each two consecutive separated by one blank. Students are numbered with the positive integers from 1 to N.</p>
-<p>There are no blank lines between consecutive sets of data. Input data are correct.</p>
-<p>The result of the program is on the standard output. For each input data set the program prints on a single line “YES” if it is possible to form a committee and “NO” otherwise. There should not be any leading blanks at the start of the line.</p>
-<p>An example of program input and output:</p>
-<p><em>Input</em></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><em>Output</em></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
-
-<h3 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h3><p>一共有P门课程，N名学生，每名学生可以选任意多门课程，但不能选两门一样的课程。<br>是否可以满足：<br>1.每个学生选的都是不同的课(即不能有两个学生选同一门课)<br>2.每门课都有一个代表(即P门课都被成功选过)<br>如果可以满足就输出YES，否则就输出NO。</p>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>一道二分图最大匹配的模板题，题目的关键在于最大匹配数和课程数P是否相等，即是否每门课都被成功选过。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, p, match[<span class="number">500</span>];</span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">500</span>], e[<span class="number">500</span>][<span class="number">500</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;<span class="comment">//匈牙利算法</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= p; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e[u][i] == <span class="number">1</span> &amp;&amp; book[i] == <span class="number">0</span>) &#123;</span><br><span class="line">            book[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (match[i] == <span class="number">0</span> || <span class="built_in">dfs</span>(match[i])) &#123;</span><br><span class="line">                match[i] = u;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, i, j, x, y, sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        sum = <span class="number">0</span>;<span class="comment">//注意每组数据的初始化</span></span><br><span class="line">        <span class="built_in">memset</span>(e, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(e));</span><br><span class="line">        <span class="built_in">memset</span>(match, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(match));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;p, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= p; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">            <span class="keyword">while</span> (x--) &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;y);</span><br><span class="line">                e[y][i] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">memset</span>(book, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">dfs</span>(i)) sum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sum == p)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/07/31/VJ%20HDU%201083%20Courses%EF%BC%88%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%EF%BC%89/" data-id="ckp9sq7ri0041ostn4evjhxur" data-title="VJ HDU 1083 Courses（二分图最大匹配）" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/08/29/2020%E5%B9%B4sdutacm%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" data-id="ckp9sq7oh0004ostn9v0egztq" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
 </article>
-
 
 
   
@@ -605,7 +564,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -631,7 +590,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
     </div>
   </div>
 
@@ -642,6 +601,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/04/12/hello-world/">Hello World</a>
+          </li>
         
           <li>
             <a href="/2021/05/29/J%20-%20JOJO's%20Factory%20Gym%20-%20103107J%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">J - JOJO&#39;s Factory Gym - 103107J（思维）</a>
@@ -659,10 +622,6 @@
             <a href="/2021/04/28/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
           </li>
         
-          <li>
-            <a href="/2021/04/26/L2-040%20%E5%93%B2%E5%93%B2%E6%89%93%E6%B8%B8%E6%88%8F%20(25%20%E5%88%86)/">L2-040 哲哲打游戏 (25 分)</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -675,13 +634,11 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      
-      &copy; 2021 Sun-Dawn<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2023 Sun-Dawn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
-
     </div>
     <nav id="mobile-nav">
   
@@ -692,19 +649,19 @@
 </nav>
     
 
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
 <script src="/js/script.js"></script>
-
 
 
 

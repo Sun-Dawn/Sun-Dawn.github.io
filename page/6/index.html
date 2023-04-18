@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   
+
   
   <title>Dawn&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Dawn&#39;s Blog">
 <meta property="og:url" content="https://sun-dawn.github.io/page/6/index.html">
@@ -14,24 +15,17 @@
 <meta property="article:author" content="Sun-Dawn">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Dawn's Blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Dawn&#39;s Blog" type="application/atom+xml">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.png">
   
   
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
@@ -67,14 +61,59 @@
     </div>
   </div>
 </header>
-
       <div class="outer">
         <section id="main">
   
-    <article id="post-银行家算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-Problem C Game Map (dfs+剪枝）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/12/12/Problem%20C%20Game%20Map%20(dfs+%E5%89%AA%E6%9E%9D%EF%BC%89/" class="article-date">
+  <time datetime="2020-12-12T12:21:34.000Z" itemprop="datePublished">2020-12-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/12/Problem%20C%20Game%20Map%20(dfs+%E5%89%AA%E6%9E%9D%EF%BC%89/">Problem C Game Map (dfs+剪枝）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/411572#problem/C">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20201212201738782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"><br><img src="https://img-blog.csdnimg.cn/20201212201808517.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"><br><img src="https://img-blog.csdnimg.cn/20201212201829714.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70"></p>
+<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>让你找一条路，使得这条路上的点的度，严格递增，问你能找到路的最大长度。<br>例如第一个样例的路为：2 5 4 1，长度为4</p>
+<p>2 5 4 1的度分别为2 3 4 5（严格递增）</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>dfs搜索+剪枝，不剪枝的话会超时（亲身经历</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt;e[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ans[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>(ans[u]==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans[u]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;e[u].<span class="built_in">size</span>(); i++)</span><br><span class="line">            <span class="keyword">if</span>(e[e[u][i]].<span class="built_in">size</span>()&gt;e[u].<span class="built_in">size</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                ans[u]=<span class="built_in">max</span>(ans[u],<span class="built_in">dfs</span>(e[u][i])+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans[u];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,i,x,y,maxn=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x,&amp;y);</span><br><span class="line">        e[x].<span class="built_in">push_back</span>(y);</span><br><span class="line">        e[y].<span class="built_in">push_back</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ans[i]==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">dfs</span>(i);</span><br><span class="line">            maxn=<span class="built_in">max</span>(maxn,ans[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,maxn);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sun-dawn.github.io/2020/12/12/Problem%20C%20Game%20Map%20(dfs+%E5%89%AA%E6%9E%9D%EF%BC%89/" data-id="ckp9sq7r9003rostn2f7k3593" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-银行家算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/28/%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2020-11-28T09:54:24.000Z" itemprop="datePublished">2020-11-28</time>
+  <time datetime="2020-11-28T09:54:24.000Z" itemprop="datePublished">2020-11-28</time>
 </a>
     
   <div class="article-category">
@@ -89,13 +128,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/11/28/%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95/">银行家算法</a>
+      <a class="article-title" href="/2020/11/28/%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95/">银行家算法</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h2 id="非注释版："><a href="#非注释版：" class="headerlink" title="非注释版："></a>非注释版：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> avallable[<span class="number">100</span>],sum[<span class="number">100</span>],cha[<span class="number">100</span>],need[<span class="number">100</span>][<span class="number">100</span>],allocation[<span class="number">100</span>][<span class="number">100</span>],maxn[<span class="number">100</span>][<span class="number">100</span>],n,m,que[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(book,<span class="literal">true</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(book));</span><br><span class="line">    <span class="keyword">int</span> i,j,l,k=<span class="number">0</span>,ans;</span><br><span class="line">    i=<span class="number">0</span>;</span><br><span class="line">    ans=i;</span><br><span class="line">    <span class="keyword">while</span>(k&lt;n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;m; j++)</span><br><span class="line">            <span class="keyword">if</span>(cha[j]&lt;need[i][j]||book[i]==<span class="literal">false</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(j==m)</span><br><span class="line">        &#123;</span><br><span class="line">            que[k++]=i;</span><br><span class="line">            ans=i;</span><br><span class="line">            book[i]=<span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span>(l=<span class="number">0</span>; l&lt;m; l++)</span><br><span class="line">                cha[l]+=allocation[i][l];</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">        i%=n;</span><br><span class="line">        <span class="keyword">if</span>(i==ans)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">char</span> process[<span class="number">100</span>][<span class="number">5</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入进程个数n，以及资源类数m（资源默认为A，B，C，D……）\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;n=&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;m=&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入全部资源总量：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;avallable[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入在某时刻的资源分配情况表：\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;格式例如：P0 2 17 10 6-1 9 3 2(其中数字个数取决于输入的资源类数m)\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,process[i]);</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;m; j++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;maxn[i][j]);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;m; j++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;allocation[i][j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;1.此时系统中可利用的资源向量&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,<span class="number">65</span>+i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;为:\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;m; j++)</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">            sum[j]+=allocation[i][j];</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">        cha[i]=avallable[i]-sum[i];</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;m; j++)</span><br><span class="line">            need[i][j]=maxn[i][j]-allocation[i][j];</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c:%d\n&quot;</span>,i+<span class="number">65</span>,cha[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;2.利用银行家算法判断此时刻系统状态是否安全：\n&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">check</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;安全\n\n\n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;3.安全序列为：\n&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%s &quot;</span>,process[que[i]]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;不安全\n\n\n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;3.因为系统状态不安全，所以无法给出安全序列。\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -126,8 +165,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/11/28/%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95/" data-id="ckp9sq7ty00a5ostnetvkew01" data-title="银行家算法" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/11/28/%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95/" data-id="ckp9sq7ty00a5ostnetvkew01" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,12 +174,11 @@
 </article>
 
 
-
   
-    <article id="post-C&amp;C++中强大的库函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-C&amp;C++中强大的库函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/26/C&C++%E4%B8%AD%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%BA%93%E5%87%BD%E6%95%B0/" class="article-date">
-  <time class="dt-published" datetime="2020-11-26T07:25:01.000Z" itemprop="datePublished">2020-11-26</time>
+  <time datetime="2020-11-26T07:25:01.000Z" itemprop="datePublished">2020-11-26</time>
 </a>
     
   <div class="article-category">
@@ -156,13 +193,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/11/26/C&C++%E4%B8%AD%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%BA%93%E5%87%BD%E6%95%B0/">C&amp;C++中强大的库函数</a>
+      <a class="article-title" href="/2020/11/26/C&C++%E4%B8%AD%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%BA%93%E5%87%BD%E6%95%B0/">C&amp;C++中强大的库函数</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><p>sort（）//排序；<br>用法略</p>
 <hr>
@@ -269,8 +306,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/11/26/C&C++%E4%B8%AD%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%BA%93%E5%87%BD%E6%95%B0/" data-id="ckp9sq7pc0010ostn7tl81sq2" data-title="C&amp;C++中强大的库函数" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/11/26/C&C++%E4%B8%AD%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%BA%93%E5%87%BD%E6%95%B0/" data-id="ckp9sq7pc0010ostn7tl81sq2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -279,12 +315,11 @@
 </article>
 
 
-
   
-    <article id="post-G - Goodbye（素数综合运用）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-G - Goodbye（素数综合运用）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/11/G%20-%20Goodbye%EF%BC%88%E7%B4%A0%E6%95%B0%E7%BB%BC%E5%90%88%E8%BF%90%E7%94%A8%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2020-11-11T12:28:07.000Z" itemprop="datePublished">2020-11-11</time>
+  <time datetime="2020-11-11T12:28:07.000Z" itemprop="datePublished">2020-11-11</time>
 </a>
     
   <div class="article-category">
@@ -299,13 +334,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/11/11/G%20-%20Goodbye%EF%BC%88%E7%B4%A0%E6%95%B0%E7%BB%BC%E5%90%88%E8%BF%90%E7%94%A8%EF%BC%89/">G - Goodbye（素数综合运用）</a>
+      <a class="article-title" href="/2020/11/11/G%20-%20Goodbye%EF%BC%88%E7%B4%A0%E6%95%B0%E7%BB%BC%E5%90%88%E8%BF%90%E7%94%A8%EF%BC%89/">G - Goodbye（素数综合运用）</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/405629#problem/G">题目链接</a></h3><p>“Goodbye to the friends I’ve had, goodbye to my upstairs neighbor, goodbye to the kids downstairs, and anybody who lend me a favor.”</p>
 <p>“Or, goodbye to the positive proper divisor?”</p>
@@ -332,8 +367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/11/11/G%20-%20Goodbye%EF%BC%88%E7%B4%A0%E6%95%B0%E7%BB%BC%E5%90%88%E8%BF%90%E7%94%A8%EF%BC%89/" data-id="ckp9sq7pj001dostn6xyw48xu" data-title="G - Goodbye（素数综合运用）" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/11/11/G%20-%20Goodbye%EF%BC%88%E7%B4%A0%E6%95%B0%E7%BB%BC%E5%90%88%E8%BF%90%E7%94%A8%EF%BC%89/" data-id="ckp9sq7pj001dostn6xyw48xu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -342,12 +376,11 @@
 </article>
 
 
-
   
-    <article id="post-B - Bin Packing" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-B - Bin Packing" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/11/B%20-%20Bin%20Packing/" class="article-date">
-  <time class="dt-published" datetime="2020-11-11T11:59:12.000Z" itemprop="datePublished">2020-11-11</time>
+  <time datetime="2020-11-11T11:59:12.000Z" itemprop="datePublished">2020-11-11</time>
 </a>
     
   <div class="article-category">
@@ -362,13 +395,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/11/11/B%20-%20Bin%20Packing/">B - Bin Packing</a>
+      <a class="article-title" href="/2020/11/11/B%20-%20Bin%20Packing/">B - Bin Packing</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/406549#problem/B">题目链接</a></h3><p>Packing items into a bin is well known as packing problem, and Fish is studying it too. As a beginner, he starts with 2-dimension-version problem with 2</p>
 <p>rectangle-shape items. He just wants to find a convex polygon with the smallest area so that these two items can be well included in it. You should notice that these two items can not overlap each other and you can shift or rotate them in the plane if you like.</p>
@@ -386,8 +419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/11/11/B%20-%20Bin%20Packing/" data-id="ckp9sq7p9000vostndrvmdjcl" data-title="B - Bin Packing" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/11/11/B%20-%20Bin%20Packing/" data-id="ckp9sq7p9000vostndrvmdjcl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -396,12 +428,11 @@
 </article>
 
 
-
   
-    <article id="post-H - Hack a Contest" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-H - Hack a Contest" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/11/H%20-%20Hack%20a%20Contest/" class="article-date">
-  <time class="dt-published" datetime="2020-11-11T11:59:12.000Z" itemprop="datePublished">2020-11-11</time>
+  <time datetime="2020-11-11T11:59:12.000Z" itemprop="datePublished">2020-11-11</time>
 </a>
     
   <div class="article-category">
@@ -416,13 +447,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/11/11/H%20-%20Hack%20a%20Contest/">H - Hack a Contest</a>
+      <a class="article-title" href="/2020/11/11/H%20-%20Hack%20a%20Contest/">H - Hack a Contest</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/406549#problem/H">题目链接</a></h3><p>Fish just participated in a programming contest. Before the final standing being public, he hacks the database and wants to change his result!</p>
 <p>The database he accessed records the number of times he submitted for each problem and the result (AC or not) for each submission. Soon he finds out that even thought the time for each submission is stored in random order, he can not change it at all (neither the number of submissions for each problem). What he can modify is problem id and result for each submission. In order not to make things too strange, there should not be any submissions for a problem after he has already got an AC in this problem in the end.</p>
@@ -445,8 +476,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/11/11/H%20-%20Hack%20a%20Contest/" data-id="ckp9sq7pk001fostn27b3gl1s" data-title="H - Hack a Contest" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/11/11/H%20-%20Hack%20a%20Contest/" data-id="ckp9sq7pk001fostn27b3gl1s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -455,12 +485,11 @@
 </article>
 
 
-
   
-    <article id="post-A - AD 2020 Gym - 102770A" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-A - AD 2020 Gym - 102770A" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/02/A%20-%20AD%202020%20Gym%20-%20102770A/" class="article-date">
-  <time class="dt-published" datetime="2020-11-02T13:30:56.000Z" itemprop="datePublished">2020-11-02</time>
+  <time datetime="2020-11-02T13:30:56.000Z" itemprop="datePublished">2020-11-02</time>
 </a>
     
   <div class="article-category">
@@ -475,13 +504,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/11/02/A%20-%20AD%202020%20Gym%20-%20102770A/">A - AD 2020 Gym - 102770A</a>
+      <a class="article-title" href="/2020/11/02/A%20-%20AD%202020%20Gym%20-%20102770A/">A - AD 2020 Gym - 102770A</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/402565#problem/A">题目链接</a></h3><p>2020 is the current year and is a leap year starting on Wednesday of the Gregorian calendar, the 2020th year of the Common Era (CE) and Anno Domini (AD) designations, the 20th year of the 3rd millennium, the 20th year of the 21st century, and the 1st year of the 2020s decade.</p>
 <p>2020 has been designated as Year of the Nurse and Midwife by the World Health Organization. The United Nations has declared 2020 as the International Year of Plant Health. 2020 has been designated as International Year of Sound by the International Commission for Acoustics.</p>
@@ -501,8 +530,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/11/02/A%20-%20AD%202020%20Gym%20-%20102770A/" data-id="ckp9sq7p5000qostn6yfe519a" data-title="A - AD 2020 Gym - 102770A" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/11/02/A%20-%20AD%202020%20Gym%20-%20102770A/" data-id="ckp9sq7p5000qostn6yfe519a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -511,12 +539,11 @@
 </article>
 
 
-
   
-    <article id="post-回文日期" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-回文日期" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/02/%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/" class="article-date">
-  <time class="dt-published" datetime="2020-11-02T13:30:56.000Z" itemprop="datePublished">2020-11-02</time>
+  <time datetime="2020-11-02T13:30:56.000Z" itemprop="datePublished">2020-11-02</time>
 </a>
     
   <div class="article-category">
@@ -531,13 +558,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/11/02/%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/">回文日期</a>
+      <a class="article-title" href="/2020/11/02/%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/">回文日期</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/468/">题目链接</a></h3><p>在日常生活中，通过年、月、日这三个要素可以表示出一个唯一确定的日期。</p>
 <p>牛牛习惯用 8 位数字表示一个日期，其中，前 4 位代表年份，接下来 2 位代表月份，最后 2 位代表日期。</p>
@@ -566,8 +593,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/11/02/%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/" data-id="ckp9sq7s9004tostn93arb2d5" data-title="回文日期" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/11/02/%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/" data-id="ckp9sq7s9004tostn93arb2d5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -576,12 +602,11 @@
 </article>
 
 
-
   
-    <article id="post-1047 Student List for Course (25分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-1047 Student List for Course (25分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/28/1047%20Student%20List%20for%20Course%20(25%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2020-10-28T12:28:33.000Z" itemprop="datePublished">2020-10-28</time>
+  <time datetime="2020-10-28T12:28:33.000Z" itemprop="datePublished">2020-10-28</time>
 </a>
     
   <div class="article-category">
@@ -596,13 +621,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/10/28/1047%20Student%20List%20for%20Course%20(25%E5%88%86)/">1047 Student List for Course (25分)</a>
+      <a class="article-title" href="/2020/10/28/1047%20Student%20List%20for%20Course%20(25%E5%88%86)/">1047 Student List for Course (25分)</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/problems/994805433955368960">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20201028201852449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
 <h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> <span class="number">5</span></span><br><span class="line">ZOE1 <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">ANN0 <span class="number">3</span> <span class="number">5</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line">BOB5 <span class="number">5</span> <span class="number">3</span> <span class="number">4</span> <span class="number">2</span> <span class="number">1</span> <span class="number">5</span></span><br><span class="line">JOE4 <span class="number">1</span> <span class="number">2</span></span><br><span class="line">JAY9 <span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">5</span> <span class="number">4</span></span><br><span class="line">FRA8 <span class="number">3</span> <span class="number">4</span> <span class="number">2</span> <span class="number">5</span></span><br><span class="line">DON2 <span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">AMY7 <span class="number">1</span> <span class="number">5</span></span><br><span class="line">KAT3 <span class="number">3</span> <span class="number">5</span> <span class="number">4</span> <span class="number">2</span></span><br><span class="line">LOR6 <span class="number">4</span> <span class="number">2</span> <span class="number">4</span> <span class="number">1</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
@@ -615,8 +640,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/10/28/1047%20Student%20List%20for%20Course%20(25%E5%88%86)/" data-id="ckp9sq7ob0001ostngyscbk9f" data-title="1047 Student List for Course (25分)" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/10/28/1047%20Student%20List%20for%20Course%20(25%E5%88%86)/" data-id="ckp9sq7ob0001ostngyscbk9f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -625,12 +649,11 @@
 </article>
 
 
-
   
-    <article id="post-1039 Course List for Student (25 分)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-1039 Course List for Student (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/26/1039%20Course%20List%20for%20Student%20(25%20%E5%88%86)/" class="article-date">
-  <time class="dt-published" datetime="2020-10-26T13:25:10.000Z" itemprop="datePublished">2020-10-26</time>
+  <time datetime="2020-10-26T13:25:10.000Z" itemprop="datePublished">2020-10-26</time>
 </a>
     
   <div class="article-category">
@@ -645,13 +668,13 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/10/26/1039%20Course%20List%20for%20Student%20(25%20%E5%88%86)/">1039 Course List for Student (25 分)</a>
+      <a class="article-title" href="/2020/10/26/1039%20Course%20List%20for%20Student%20(25%20%E5%88%86)/">1039 Course List for Student (25 分)</a>
     </h1>
   
 
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/problems/994805447855292416">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20201026212105259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
 <h3 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span> <span class="number">5</span></span><br><span class="line"><span class="number">4</span> <span class="number">7</span></span><br><span class="line">BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1</span><br><span class="line"><span class="number">1</span> <span class="number">4</span></span><br><span class="line">ANN0 BOB5 JAY9 LOR6</span><br><span class="line"><span class="number">2</span> <span class="number">7</span></span><br><span class="line">ANN0 BOB5 FRA8 JAY9 JOE4 KAT3 LOR6</span><br><span class="line"><span class="number">3</span> <span class="number">1</span></span><br><span class="line">BOB5</span><br><span class="line"><span class="number">5</span> <span class="number">9</span></span><br><span class="line">AMY7 ANN0 BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1</span><br><span class="line">ZOE1 ANN0 BOB5 JOE4 JAY9 FRA8 DON2 AMY7 KAT3 LOR6 NON9</span><br></pre></td></tr></table></figure>
@@ -663,65 +686,13 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/10/26/1039%20Course%20List%20for%20Student%20(25%20%E5%88%86)/" data-id="ckp9sq7o20000ostng4y6end9" data-title="1039 Course List for Student (25 分)" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2020小米网络选拔赛I Walking Machine" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/10/26/2020%E5%B0%8F%E7%B1%B3%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9BI%20Walking%20Machine/" class="article-date">
-  <time class="dt-published" datetime="2020-10-26T12:07:07.000Z" itemprop="datePublished">2020-10-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/">搜索</a>►<a class="article-category-link" href="/categories/ACM/%E6%90%9C%E7%B4%A2/DFS/">DFS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/10/26/2020%E5%B0%8F%E7%B1%B3%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9BI%20Walking%20Machine/">2020小米网络选拔赛I Walking Machine</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/login?callBack=/acm/contest/7501/I?&headNav=acm">题目链接</a></h3><p><img src="https://img-blog.csdnimg.cn/20201026195529199.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MDM1NzIw,size_16,color_FFFFFF,t_70#pic_center"></p>
-<h3 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="number">4</span></span><br><span class="line">DDSD</span><br><span class="line">AWAA</span><br><span class="line">WASD</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出："><a href="#输出：" class="headerlink" title="输出："></a>输出：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>The 6 cells are (1,4),(2,1),(3,1),(3,2),(3,3),(3,4)respectively.</p>
-<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p>给出二维矩阵，让你找出能越界点的个数，WSAD分别代表上下左右，打fps游戏的兄弟应该都知道（滑稽</p>
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>我一开始想到的是dfs，遍历n*m个点，然后按照题目说的走（WSAD按规则dfs），但是超时了，后来我就想优化一下，因为这个题的路径是唯一的，这里说唯一的意思是如果你选定了一个点，那么你走的路是一定的，因为WSAD方向是一定的，你必须按照这个规则走，所以说我们可以记录一下哪些点是能出去的，哪些点是不能出去的，等到下次遍历到这个点我们就可以直接判断了不需要再dfs进去了（有点像递推和递归的区别）</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,sum=<span class="number">0</span>,flag,ans;<span class="comment">//flag作为可以出去点的开关，ans作为不能出去点的开关</span></span><br><span class="line"><span class="keyword">char</span> str[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line"><span class="keyword">bool</span> book[<span class="number">1010</span>][<span class="number">1010</span>],e[<span class="number">1010</span>][<span class="number">1010</span>],q[<span class="number">1010</span>][<span class="number">1010</span>];<span class="comment">//e数组记录可以越界点的坐标，q数组记录不能越界点的坐标</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;<span class="number">1</span>||x&gt;n||y&lt;<span class="number">1</span>||y&gt;m||e[x][y]==<span class="number">1</span>)<span class="comment">//如果越界了或者这个点被标记过说明能越界</span></span><br><span class="line">    &#123;</span><br><span class="line">        sum++;</span><br><span class="line">        flag=<span class="number">1</span>;<span class="comment">//打开开关，一会dfs回溯要用到</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(q[x][y]==<span class="number">1</span>)<span class="comment">//如果这个点不能越界</span></span><br><span class="line">    &#123;</span><br><span class="line">        ans=<span class="number">1</span>;<span class="comment">//打开开关</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(str[x][y]==<span class="string">&#x27;W&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(book[x][y]==<span class="number">0</span>)<span class="comment">//这个点没走过</span></span><br><span class="line">        &#123;</span><br><span class="line">            book[x][y]=<span class="number">1</span>;<span class="comment">//标记为走过</span></span><br><span class="line">            <span class="built_in">dfs</span>(x<span class="number">-1</span>,y);<span class="comment">//按规则dfs下一个点</span></span><br><span class="line">            book[x][y]=<span class="number">0</span>;<span class="comment">//回溯取消标记，可以省下在主函数里面的memset</span></span><br><span class="line">            <span class="keyword">if</span>(flag==<span class="number">1</span>)<span class="comment">//上一个点可以出去，那么这条路上所有的点都能出去</span></span><br><span class="line">                e[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(ans==<span class="number">1</span>)<span class="comment">//上一个点不可以出去，那么这条路上所有的点都能出去</span></span><br><span class="line">                q[x][y]=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//如果碰到一个已经被标记过的点（意味着进入循环了，例如上下左右）</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans=<span class="number">1</span>;<span class="comment">//打开开关</span></span><br><span class="line">            q[x][y]=<span class="number">1</span>;<span class="comment">//标记这个点出不去</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(str[x][y]==<span class="string">&#x27;S&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(book[x][y]==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            book[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="built_in">dfs</span>(x+<span class="number">1</span>,y);</span><br><span class="line">            book[x][y]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(flag==<span class="number">1</span>)</span><br><span class="line">                e[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(ans==<span class="number">1</span>)</span><br><span class="line">                q[x][y]=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans=<span class="number">1</span>;</span><br><span class="line">            q[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(str[x][y]==<span class="string">&#x27;D&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(book[x][y]==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            book[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="built_in">dfs</span>(x,y+<span class="number">1</span>);</span><br><span class="line">            book[x][y]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(flag==<span class="number">1</span>)</span><br><span class="line">                e[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(ans==<span class="number">1</span>)</span><br><span class="line">                q[x][y]=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans=<span class="number">1</span>;</span><br><span class="line">            q[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(str[x][y]==<span class="string">&#x27;A&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(book[x][y]==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            book[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="built_in">dfs</span>(x,y<span class="number">-1</span>);</span><br><span class="line">            book[x][y]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(flag==<span class="number">1</span>)</span><br><span class="line">                e[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(ans==<span class="number">1</span>)</span><br><span class="line">                q[x][y]=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans=<span class="number">1</span>;</span><br><span class="line">            q[x][y]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,str[i]+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=m; j++)</span><br><span class="line">        &#123;<span class="comment">//如果dfs函数里没写book[x][y]=0的话，这里就要memset(book,0,sizeof(book)); 因为没查找一个点之后都要清0，但是我们利用dfs的回溯给清0了  所以这里就不需要再用memset函数了，也省下了一些时间</span></span><br><span class="line">            flag=<span class="number">0</span>;<span class="comment">//记得开关清0</span></span><br><span class="line">            ans=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(q[i][j]==<span class="number">1</span>)<span class="comment">//这个点出不去直接找下一个点</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(e[i][j]==<span class="number">1</span>)<span class="comment">//能出去就直接加 不需要跑dfs</span></span><br><span class="line">                sum++;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">dfs</span>(i,j);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sun-dawn.github.io/2020/10/26/2020%E5%B0%8F%E7%B1%B3%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9BI%20Walking%20Machine/" data-id="ckp9sq7oe0002ostnemkx8qpo" data-title="2020小米网络选拔赛I Walking Machine" class="article-share-link">Share</a>
-      
+      <a data-url="https://sun-dawn.github.io/2020/10/26/1039%20Course%20List%20for%20Student%20(25%20%E5%88%86)/" data-id="ckp9sq7o20000ostng4y6end9" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
 </article>
-
 
 
   
@@ -729,7 +700,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -755,7 +726,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
     </div>
   </div>
 
@@ -766,6 +737,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/04/12/hello-world/">Hello World</a>
+          </li>
         
           <li>
             <a href="/2021/05/29/J%20-%20JOJO's%20Factory%20Gym%20-%20103107J%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%89/">J - JOJO&#39;s Factory Gym - 103107J（思维）</a>
@@ -783,10 +758,6 @@
             <a href="/2021/04/28/leeing%20Sunlight%20Gym%20-%20103061F/">leeing Sunlight Gym - 103061F</a>
           </li>
         
-          <li>
-            <a href="/2021/04/26/L2-040%20%E5%93%B2%E5%93%B2%E6%89%93%E6%B8%B8%E6%88%8F%20(25%20%E5%88%86)/">L2-040 哲哲打游戏 (25 分)</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -799,13 +770,11 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      
-      &copy; 2021 Sun-Dawn<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2023 Sun-Dawn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
-
     </div>
     <nav id="mobile-nav">
   
@@ -816,19 +785,19 @@
 </nav>
     
 
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
 <script src="/js/script.js"></script>
-
 
 
 
